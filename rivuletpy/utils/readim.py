@@ -1,39 +1,23 @@
 from rivuletpy.utils.io import *
 img=loadimg("1.tif")
-
 def cropimg(cropx,cropy,img):
     z,y,x=img.shape
     print(z,y,x)
-    #我们能取到多少个完整横边
-    xpiece=int(x/cropx)
-#x的每个边界在x轴上的坐标
-    xedges=[0]
-    a=0
-    while a<xpiece:
-        a=a+1
-        xedges.append(a*cropx)
-    print(xedges)
-    #剩下的x多长
-    xleave=x%cropx
-    #我们能取到多少个完整纵边
-    ypiece=int(y/cropy)
- #y的每个边界在y轴上的坐标
-    yedges=[0]
-    b=0
-    while b<ypiece:
-        b=b+1
-        yedges.append(b*cropy)
-
-    #剩下的y多长
-    yleave=y%cropy
-    i=0
-    #每一横条的输出
-    while i<len(yedges):
-        i=i+1
-        j=0
-        #每一个的输出
-        while j<len(xedges):
-            j=j+1
-            onewholepiece=img[3:4,yedges[i-1]:yedges[i],xedges[j-1]:xedges[j]]
-            print(onewholepiece)
-cropimg(2,2,img)
+    for i in range(0,y,cropy):
+        #每一横行的输出
+        for j in range(cropx,x,cropx):
+            print(img[3:4,i-cropy:i,j-cropx:j])
+        #每一横行如果有剩的最后一个输出
+        if(x%cropx!=0):
+            print(img[3:4,i-cropy:i,x-x%cropx:x])
+            print("one single line ended")
+    #最后一行开始
+    print("final line begins")
+    if(y%cropy!=0):
+        for k in range(cropx,x,cropx):
+            print(img[3:4,y-y%cropy:y,k-cropx:k])
+#行列均有剩的最后一个
+    print("lucky last one")
+    if((y%cropy!=0)and(x%cropx!=0)):
+        print(img[3:4,y-y%cropy:y,x-x%cropx:x])
+cropimg(20,20,img)
