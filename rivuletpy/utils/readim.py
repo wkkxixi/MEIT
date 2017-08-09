@@ -6,8 +6,8 @@ dirpath=inputpath.split(".")[0]
 os.mkdir(dirpath)
 savepath=dirpath+"/"
 def cropimg(cropx,cropy,img):
-    # x,y,z=img.shape
-    print(x,y,z)
+    x,y,z=img.shape
+    # print(x,y,z)
     for i in range(cropy,y,cropy):
         #每一横行的输出
         for j in range(cropx,x,cropx):
