@@ -235,6 +235,7 @@ class R2Tracer(Tracer):
             # Loop for 1 back-tracking iteration
             while True:
                 self._step(branch)
+                # print(branch.pts)
                 head = branch.pts[-1]
                 tt_head = self._tt[math.floor(head[0]), math.floor(head[1]), math.floor(head[2])]
 

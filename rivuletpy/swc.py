@@ -27,6 +27,7 @@ class SWC(object):
 
         for i in range(len(branch.pts)):
             p, r, c = branch.pts[i], branch.radius[i], branch.conf[i]
+            print("points",p)
             id = id_start + i
             # 3 for basal dendrite; 4 for apical dendrite;
             # However now we cannot differentiate them automatically

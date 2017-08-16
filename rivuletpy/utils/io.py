@@ -66,6 +66,7 @@ def loadswc(filepath):
 
 
 def saveswc(filepath, swc):
+    print('shape',swc.shape[1])
     if swc.shape[1] > 7:
         swc = swc[:, :7]
 
