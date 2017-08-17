@@ -2,11 +2,15 @@ from rivuletpy.utils.io import *
 from rivuletpy.trace import *
 import numpy as np
 import os, math
+# crop_region=np.shape()
 # inputpath="/home/vv/Desktop/new/1"
 # img=loadimg(inputpath)
 # import numpy as np
 # stack = []
-# sample1=np.arange(-1,-37,-1).reshape((3,4,3))
+# sample1=np.arange(-1,-17,-1).reshape(4,4)
+# print(sample1)
+# print(sample1[-1,-1])
+# print(sample1[-1,-2])
 # sample2=np.arange(1,37).reshape((3,4,3))
 # bis = sample1 > 3
 # x = np.array([1, 2, 3, 4])
@@ -87,43 +91,42 @@ import os, math
 #         return False
 # a=am_i_wrong('yes')
 # print(a)
-class getinfo:
-    def __init__(self,name,thresholdt,pctg,bi_matrix=None,thresholdbi=None,swc=None):
-        self.name=name
-        self.matrix_3d=None
-        self.pctg=pctg
-        self.bi_ratio=0
-        self.bi_matrix=None
-        self.threshodbi=0
-        self.thresholdt=thresholdt
-        self.tracelabel=False
-        self.swc = None
-    def get3d_mat(self):
-        self.matrix_3d=loadimg('/home/vv/Desktop/new/1/'+self.name+'.tif')
-        return self.matrix_3d
-    def cellsatisfied(self):
-        oneitem=loadimg('/home/vv/Desktop/new/1/'+self.name+'.tif')
-        self.bi_matrix=(oneitem>self.thresholdt).astype(int)
-        self.bi_ratio=float((oneitem > self.thresholdt).sum()/(oneitem.shape[0]*oneitem.shape[1]*oneitem.shape[2]))
-        return self.thresholdt, self.bi_matrix, self.bi_ratio
-    def traceornot(self):
-        if self.bi_ratio>self.pctg:
-            self.tracelabel=True
-        return self.tracelabel
-    def gettrace(self):
-        if self.tracelabel:
-            # Run rivulet2 for the first time
-            tracer = R2Tracer()
-            self.swc, soma = tracer.trace(self.matrix_3d, self.thresholdt)
-            self.swc.save('/home/vv/Desktop/new/1/'+self.name+'.swc')
-            tswc=self.swc._data.copy()
-            # print(self.swc._data.shape)
-                tswc[:, 2] += crop_region[0, 0]
-                tswc[:, 3] += crop_region[1, 0]
-                tswc[:, 4] += crop_region[2, 0]
-                self.swc._data = tswc
-            # saveswc('/home/vv/Desktop/new/1/'+self.name+'.swc',self.swc)
-        return self.swc._data
+# class getinfo:
+#     def __init__(self,name,thresholdt,pctg,crop_region=None,bi_matrix=None,thresholdbi=None,swc=None):
+#         self.name=name
+#         self.matrix_3d=None
+#         self.pctg=pctg
+#         self.bi_ratio=0
+#         self.bi_matrix=None
+#         self.threshodbi=0
+#         self.thresholdt=thresholdt
+#         self.tracelabel=False
+#         self.swc = None
+#     def get3d_mat(self):
+#         self.matrix_3d=loadimg('/home/vv/Desktop/new/1/'+self.name+'.tif')
+#         return self.matrix_3d
+#     def cellsatisfied(self):
+#         oneitem=loadimg('/home/vv/Desktop/new/1/'+self.name+'.tif')
+#         self.bi_matrix=(oneitem>self.thresholdt).astype(int)
+#         self.bi_ratio=float((oneitem > self.thresholdt).sum()/(oneitem.shape[0]*oneitem.shape[1]*oneitem.shape[2]))
+#         return self.thresholdt, self.bi_matrix, self.bi_ratio
+#     def traceornot(self):
+#         if self.bi_ratio>self.pctg:
+#             self.tracelabel=True
+#         return self.tracelabel
+#     def gettrace(self):
+#         if self.tracelabel:
+#             # Run rivulet2 for the first time
+#             tracer = R2Tracer()
+#             self.swc, soma = tracer.trace(self.matrix_3d, self.thresholdt)
+#
+#             tswc=self.swc._data.copy()
+#             # print(self.swc._data.shape)
+#             tswc[:, 2] += self.cropy  以2_3举例，横坐标加上cropx×截取的y-1（3），纵坐标加上cropy×截取的x-1(2）
+#             tswc[:, 3] +=
+#             self.swc._data = tswc
+#             self.swc.save('/home/vv/Desktop/new/1/'+self.name+'.swc')
+#         return self.swc._data
 #     # def doall(self):
 #
 #
@@ -132,7 +135,7 @@ class getinfo:
 #
 #
 #
-# xxx = getinfo('1_1',10,0.000000005)
+# xxx = getinfo('1_1_40_50',10,0.000000005)
 # print(xxx.get3d_mat())
 # print(xxx.cellsatisfied())
 # print(xxx.traceornot())
@@ -154,9 +157,21 @@ class getinfo:
 #     tswc[:, 3] += crop_region[1, 0]
 #     tswc[:, 4] += crop_region[2, 0]
 #     self._data = tswc
-a=loadswc('/home/vv/Desktop/new/1.r2.swc')
-b=loadswc('/home/vv/Desktop/new/1/1_1.swc')
-print(a.shape)
-# print(a[1333,0:5]) 从1333开始出现断点,把所有小的swc文件拼合在一起数量大于大文件的行数
-print(b.shape)
-# print(b[44:66,2:5])
+# a=loadswc('/home/vv/Desktop/new/1.r2.swc')
+# b=loadswc('/home/vv/Desktop/new/1/1_1.swc')
+# print(a.shape)
+# # print(a[1333,0:5]) 从1333开始出现断点,把所有小的swc文件拼合在一起数量大于大文件的行数
+# print(b.shape)
+# # print(b[44:66,2:5])
+
+# all = os.listdir('/home/vv/Desktop/new/1_100_90')
+# for a in all:
+#     if "_" in a:
+#         print(a)
+# print(all)
+
+file=open('/home/vv/Desktop/new/1_100_90/txt/100_90.txt','r')
+for line in file:
+    if "_" in line:
+        print(line)
+
