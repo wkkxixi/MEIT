@@ -12,34 +12,34 @@ def cropimg(cropx,cropy,threshold,img):
     os.mkdir(savepath + "txt")
     locinfo=""
     locfile = open(savepath + "txt/"+str(cropx)+"_"+str(cropy)+".txt", "w")
-    x,y,z=img.shape
-    # print(x,y,z)
-    for i in range(cropy,y,cropy):
-        #The output of every line
-        for j in range(cropx,x,cropx):
+    shapex,shapey,shapez=img.shape
+    # print(shapex,shapey,shapez)
+    for i in range(cropy,shapey,cropy):
+        #The output of every item which matches the size(cropx*cropy) perfectly.
+        for j in range(cropx,shapex,cropx):
             oneitem=img[j-cropx:j,i-cropy:i,:]
             loc=str(int(i/cropy))+"_"+str(int(j/cropx))
             locinfo=locinfo+"\n"+loc
             writetiff3d(savepath+loc+".tif", oneitem)
-        #if there is one left at the end of the line, here it is
-        if(x%cropx!=0):
-            linelast=img[x-x%cropx:x,i-cropy:i,:]
+        #if shapex has a remainder (rx)of cropx, the item with the size(rx*cropy) appears at the end of a line.
+        if(shapex%cropx!=0):
+            linelast=img[shapex-shapex%cropx:shapex,i-cropy:i,:]
             loc=str(int(i/cropy)) +"_"+ str(int(j/cropx+1))
             locinfo=locinfo+"\n"+loc
             writetiff3d(savepath + loc +
                         ".tif", linelast)
-    # if y%cropy!=0, then final line begins
-    if(y%cropy!=0):
-        for k in range(cropx,x,cropx):
-            lastline=img[k-cropx:k,y-y%cropy:y,:]
+    # if cropy cannot be perfectly divided by shapey,then this remainder(ry) is the y coordinate of the last line
+    if(shapey%cropy!=0):
+        for k in range(cropx,shapex,cropx):
+            lastline=img[k-cropx:k,shapey-shapey%cropy:shapey,:]
             loc=str(int(i/cropy+1)) + "_"+str(int(k/cropx))
             locinfo = locinfo+"\n"+loc
             writetiff3d(savepath + loc +
                         ".tif", lastline)
-    #if x%cropx!=0 and y%cropy!=0,the following one are shown
+    #if both shapex and shapey have their remainders(rx,ry),the lastone with size(rx*ry) is shown
     # print("lucky last one")
-    if((y%cropy!=0)and(x%cropx!=0)):
-        lastone=(img[x-x%cropx:x,y-y%cropy:y,:])
+    if((y%cropy!=0)and(shapex%cropx!=0)):
+        lastone=(img[shapex-shapex%cropx:shapex,shapey-shapey%cropy:shapey,:])
         loc=str(int(i/cropy+1)) +"_"+ str(int(j/cropx+1))
         locinfo = locinfo+"\n"+loc
         writetiff3d(savepath + loc
