@@ -42,8 +42,9 @@ class getinfo:
             y=int(self.name.split("_")[0])-1
             tswc[:, 2] += 100*x  #以2_3举例，横坐标加上cropx×截取的y-1（3），纵坐标加上cropy×截取的x-1(2）
             tswc[:, 3] +=90*y
-            self.swc._data = tswc
-            self.swc.save('/home/vv/Desktop/new/1_100_90/'+self.name+'.swc')
+            saveswc('/home/vv/Desktop/new/1_100_90/'+self.name+'.swc', tswc)
+            # self.swc._data = tswc
+            # self.swc.save('/home/vv/Desktop/new/1_100_90/'+self.name+'.swc')
         else:
             tswc=None
         return tswc

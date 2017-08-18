@@ -6,45 +6,46 @@ dirpath=inputpath.split(".")[0]
 
 
 def cropimg(cropx,cropy,threshold,img):
+    #The savefile consists of cropx_cropy eg: 2_3.tif
     savepath = dirpath + "_"+str(cropx)+"_"+str(cropy)+"/"
     os.mkdir(savepath)
     os.mkdir(savepath + "txt")
-    ratio=""
-    ratiofile = open(savepath + "txt/"+str(cropx)+"_"+str(cropy)+".txt", "w")
+    locinfo=""
+    locfile = open(savepath + "txt/"+str(cropx)+"_"+str(cropy)+".txt", "w")
     x,y,z=img.shape
     # print(x,y,z)
     for i in range(cropy,y,cropy):
-        #每一横行的输出
+        #The output of every line
         for j in range(cropx,x,cropx):
             oneitem=img[j-cropx:j,i-cropy:i,:]
             loc=str(int(i/cropy))+"_"+str(int(j/cropx))
-            ratio=ratio+"\n"+loc
+            locinfo=locinfo+"\n"+loc
             writetiff3d(savepath+loc+".tif", oneitem)
-        #每一横行如果有剩的最后一个输出
+        #if there is one left at the end of the line, here it is
         if(x%cropx!=0):
             linelast=img[x-x%cropx:x,i-cropy:i,:]
             loc=str(int(i/cropy)) +"_"+ str(int(j/cropx+1))
-            ratio=ratio+"\n"+loc
+            locinfo=locinfo+"\n"+loc
             writetiff3d(savepath + loc +
                         ".tif", linelast)
-    # print("final line begins")
+    # if y%cropy!=0, then final line begins
     if(y%cropy!=0):
         for k in range(cropx,x,cropx):
             lastline=img[k-cropx:k,y-y%cropy:y,:]
             loc=str(int(i/cropy+1)) + "_"+str(int(k/cropx))
-            ratio = ratio+"\n"+loc
+            locinfo = locinfo+"\n"+loc
             writetiff3d(savepath + loc +
                         ".tif", lastline)
-    #行列均有剩的最后一个
+    #if x%cropx!=0 and y%cropy!=0,the following one are shown
     # print("lucky last one")
     if((y%cropy!=0)and(x%cropx!=0)):
         lastone=(img[x-x%cropx:x,y-y%cropy:y,:])
         loc=str(int(i/cropy+1)) +"_"+ str(int(j/cropx+1))
-        ratio = ratio+"\n"+loc
+        locinfo = locinfo+"\n"+loc
         writetiff3d(savepath + loc
                     +".tif", lastone)
-    ratiofile.write(ratio)
-    ratiofile.close()
+    locfile.write(locinfo)
+    locfile.close()
 
 def combined(directory):
     list = os.listdir(directory)  # dir is your directory path
