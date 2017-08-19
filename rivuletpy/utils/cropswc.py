@@ -11,7 +11,8 @@ class getinfo:
     # when using this class, we define the name as filename.
     # thresholdt as the permitted standard of value in np element.
     # pctg as the percentage standard of whether a image should be traced or not
-    def __init__(self, name, thresholdt, pctg):
+    def __init__(self,dir, name, thresholdt, pctg):
+        self.folder=dir+'/'
         self.name = name
         self.cropx = int(name.split("_")[-2])
         self.cropy = int(name.split("_")[-1])
@@ -25,11 +26,11 @@ class getinfo:
         self.swc = None
 
     def get3d_mat(self):
-        self.matrix_3d = loadimg('/home/vv/Desktop/new/1_100_90/' + self.name + '.tif')
+        self.matrix_3d = loadimg(self.folder + self.name + '.tif')
         return self.matrix_3d
 
     def tsatisfied(self):  # check every element in np meeting the standard of thresholdt or not
-        oneitem = loadimg('/home/vv/Desktop/new/1_100_90/' + self.name + '.tif')
+        oneitem = loadimg(self.folder + self.name + '.tif')
         self.bi_matrix = (oneitem > self.thresholdt).astype(
             int)  # get all the satisfied np value as 1, unsatisfied as 0
         # bi_ratio is the ratio of number of the item value 1  /The number of the whole np elements
@@ -51,9 +52,9 @@ class getinfo:
             tswc = self.swc._data.copy()
             x = int(self.name.split("_")[1]) - 1
             y = int(self.name.split("_")[0]) - 1
-            tswc[:, 2] += 100 * x  # 100 is the cropx we define when croping
-            tswc[:, 3] += 90 * y  # 90 is the cropy we define when croping
-            saveswc('/home/vv/Desktop/new/1_100_90/' + self.name + '.swc', tswc)
+            tswc[:, 2] += self.cropx * x  # 100 is the cropx we define when croping
+            tswc[:, 3] += self.cropy * y  # 90 is the cropy we define when croping
+            saveswc(self.folder + self.name + '.swc', tswc)
         else:
             tswc = None
         return tswc
