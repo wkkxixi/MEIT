@@ -1,17 +1,14 @@
 from rivuletpy.utils.io import *
 import os, math
-inputpath="/home/vv/Desktop/new/1.tif"
-img=loadimg(inputpath)
-dirpath=inputpath.split(".")[0]
 
-
-def cropimg(cropx,cropy,threshold,img):
+def cropimg(cropx,cropy,origintif):
     #The savefile consists of cropx_cropy eg: 2_3.tif
-    savepath = dirpath + "_"+str(cropx)+"_"+str(cropy)+"/"
+    img=loadimg(origintif)
+    savepath = origintif.split(".")[0] + "_"+str(cropx)+"_"+str(cropy)+"/"
     os.mkdir(savepath)
     os.mkdir(savepath + "txt")
     locinfo=""
-    locfile = open(savepath + "txt/"+str(cropx)+"_"+str(cropy)+".txt", "w")
+    locfile = open(savepath + "txt/"+"nameinfo.txt", "w")
     shapex,shapey,shapez=img.shape
     # print(shapex,shapey,shapez)
     for i in range(cropy,shapey,cropy):
@@ -38,7 +35,7 @@ def cropimg(cropx,cropy,threshold,img):
                         ".tif", lastline)
     #if both shapex and shapey have their remainders(rx,ry),the lastone with size(rx*ry) is shown
     # print("lucky last one")
-    if((y%cropy!=0)and(shapex%cropx!=0)):
+    if((shapey%cropy!=0)and(shapex%cropx!=0)):
         lastone=(img[shapex-shapex%cropx:shapex,shapey-shapey%cropy:shapey,:])
         loc=str(int(i/cropy+1)) +"_"+ str(int(j/cropx+1))
         locinfo = locinfo+"\n"+loc
@@ -77,6 +74,5 @@ def combined(directory):
         else:
             wholepart = np.concatenate((wholepart, liney), axis=0)
     writetiff3d(directory + "/wholepart.tif",wholepart)
-cropimg(100,90,10,img)
-combined("/home/vv/Desktop/new/1_100_90")
+
 
