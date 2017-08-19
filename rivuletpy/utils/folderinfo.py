@@ -1,5 +1,6 @@
 from rivuletpy.utils.io import *
 import os, math
+#This is for croping origin tif into pieces of size(cropx*cropy*z)
 
 def cropimg(cropx,cropy,origintif):
     #The savefile consists of cropx_cropy eg: 2_3.tif

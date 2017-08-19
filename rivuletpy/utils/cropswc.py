@@ -4,7 +4,7 @@ import numpy as np
 import os, math
 
 
-# inputpath="/home/vv/Desktop/new/1"
+# This class is used to transform small tif into swc.
 
 
 class getinfo:
@@ -48,7 +48,6 @@ class getinfo:
             # Run rivulet2 for the first time
             tracer = R2Tracer()
             self.swc, soma = tracer.trace(self.matrix_3d, self.thresholdt)
-
             tswc = self.swc._data.copy()
             x = int(self.name.split("_")[1]) - 1
             y = int(self.name.split("_")[0]) - 1
