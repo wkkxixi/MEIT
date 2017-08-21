@@ -14,8 +14,8 @@ class getinfo:
     def __init__(self,dir, name, thresholdt, pctg):
         self.folder=dir+'/'
         self.name = name
-        self.cropx = int(name.split("_")[-2])
-        self.cropy = int(name.split("_")[-1])
+        self.cropx = int(dir.split("_")[-2])
+        self.cropy = int(dir.split("_")[-1])
         self.matrix_3d = None
         self.pctg = pctg
         self.bi_ratio = 0
