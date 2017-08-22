@@ -252,22 +252,22 @@ import os, math
 # for swc in glob.glob(os.path.join("/home/vv/Desktop/new/1_80_70", '*.swc')):
 #     a=loadswc(swc)
 #     print(a.shape)
-# int(''.split("_")[-2])
-a=loadswc("/home/vv/Desktop/new/1_80_70/1_1.swc")
-counta=a.shape[0]
-b=loadswc("/home/vv/Desktop/new/1_80_70/6_3.swc")
-b[:, 0] += counta  # change the order
-b[1:, -1] += counta
-saveswc('/home/vv/Desktop/1_1.swc',a)
-saveswc('/home/vv/Desktop/6_3.swc',b)
-print(min(a[:,0]),max(a[:,0]))
-print(min(a[1:,-1]),max(a[1:,-1]))
-print(min(b[:,0]),max(b[:,0]))
-print(min(b[1:,-1]),max(b[1:,-1]))
+# # int(''.split("_")[-2])
+# a=loadswc("/home/vv/Desktop/new/1_80_70/1_1.swc")
+# counta=a.shape[0]
+# b=loadswc("/home/vv/Desktop/new/1_80_70/6_3.swc")
+# b[:, 0] += counta  # change the order
+# b[1:, -1] += counta
+# saveswc('/home/vv/Desktop/1_1.swc',a)
+# saveswc('/home/vv/Desktop/6_3.swc',b)
+# print(min(a[:,0]),max(a[:,0]))
+# print(min(a[1:,-1]),max(a[1:,-1]))
+# print(min(b[:,0]),max(b[:,0]))
+# print(min(b[1:,-1]),max(b[1:,-1]))
 # c=np.vstack((a,b))
-# saveswc('/home/vv/Desktop/1_1-6_3.swc',c)
-
-
+path='/home/vv/Desktop/1_1-6_3.swc'
+print(os.path.join(path, os.pardir))
+savepath=os.path.abspath(os.path.join(path, os.pardir))
 
 
 

@@ -1,5 +1,5 @@
 from rivuletpy.utils.io import *
-import os, math
+import os, glob
 #This is for croping origin tif into pieces of size(cropx*cropy*z)
 
 def cropimg(cropx,cropy,origintif):
@@ -61,7 +61,6 @@ def combined(directory):
     ys.sort()
     xmax = xs[-1]#find the maxmum x
     ymax = ys[-1]#find the maxmum y
-    print("xmax:" + str(xmax)+"ymax:" + str(ymax))
     for ylocation in range(1, ymax + 1):
         # every same x in y direction combined
         liney = loadimg(directory + "/1_" + str(ylocation) + rest)
@@ -75,5 +74,24 @@ def combined(directory):
         else:
             wholepart = np.concatenate((wholepart, liney), axis=0)
     writetiff3d(directory + "/wholepart.tif",wholepart)
+
+def combinedswc(path):
+    savepath = os.path.abspath(os.path.join(path, os.pardir))
+    count = 0
+    container = np.zeros(shape=(1, 7))#Initialize the default container
+    for swc in glob.glob(os.path.join(path, '*.swc')):
+        a = loadswc(swc)
+        tswc = a.copy()
+        tswc[:, 0] += count  # change the order
+        tswc[:, -1] += count
+        count = a.shape[0] + count + 2
+        # saveswc(swc.split('.')[0]+'copy.swc',tswc)
+        # print(swc,tswc[0, 0],tswc[0,-1])
+        # print(swc,tswc[-1,0],tswc[-1,-1])
+        if container[0, 2] == 0:
+            container = tswc
+        else:
+            container = np.vstack((container, tswc))
+    saveswc(savepath+'/combined.swc', container)
 
 

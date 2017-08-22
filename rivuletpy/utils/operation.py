@@ -19,3 +19,4 @@ for line in file:
         line.tsatisfied()
         line.traceornot()
         line.gettrace()
+combinedswc(folder)
