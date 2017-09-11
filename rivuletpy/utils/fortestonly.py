@@ -2,6 +2,7 @@ from rivuletpy.utils.io import *
 from rivuletpy.trace import *
 import numpy as np
 import os, math
+
 # crop_region=np.shape()
 # inputpath="/home/vv/Desktop/new/1"
 # img=loadimg(inputpath)
@@ -265,11 +266,56 @@ import os, math
 # print(min(b[:,0]),max(b[:,0]))
 # print(min(b[1:,-1]),max(b[1:,-1]))
 # c=np.vstack((a,b))
-path='/home/vv/Desktop/1_1-6_3.swc'
-print(os.path.join(path, os.pardir))
-savepath=os.path.abspath(os.path.join(path, os.pardir))
+# np.full()
+# path='/home/vv/Desktop/1_1-6_3.swc'
+# print(os.path.join(path, os.pardir))
+# savepath=os.path.abspath(os.path.join(path, os.pardir))
+# from numpy import *
+# import numpy
+# sample1=np.arange(-1,-5,-1).reshape(1,4)
+# sample2=np.arange(1,5,1).reshape(4,1)
+# sample3=np.arange(1,5,1).reshape(1,4)
+# print((sample1*sample3).sum())
+# a1=mat(sample1);
+# a2=mat(sample2);
+# a3=a1*a2;
+# print(a3)
+# import threading
+# def thread_job():
+#     print('THis is an added Thread, number is %s' % threading.current_thread())
+# def main():
+#     add_thread=threading.Thread(target=thread_job)
+#
+#
+#     add_thread.start()
+#     print(threading.active_count())
+#     print(threading.enumerate())
+#     print(threading.current_thread())
+# if __name__=='__main__':
+#     main()
+from rivuletpy.utils.cropswc import *
+import threading
+from queue import Queue
+def job(l,q):
+    for i in range(len(l)):
+        for j in range(100000000):
+            l[i]=l[i]+2
+    q.put(l)
 
+def multithreading():
+    q=Queue()
+    threads=[]
+    data=[[1,2,3],[3,4,5],[4,4,4],[5,5,5]]
+    for i in range(4):
+        t=threading.Thread(target=getinfo,args=(data[i],q))
+        t.start()
+        threads.append(t)
+    for thread in threads:
+        thread.join()
+    results=[]
+    for _ in range(4):
+        results.append(q.get())
+    print(results)
 
-
-
-
+if __name__=='__main__':
+    multithreading()

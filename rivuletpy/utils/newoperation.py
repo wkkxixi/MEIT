@@ -1,7 +1,6 @@
 from rivuletpy.utils.io import *
 from rivuletpy.utils.folderinfo import *
 from rivuletpy.utils.cropswc import *
-import threading
 import time
 
 origintif="/home/vv/Desktop/new/1.tif"
@@ -14,30 +13,18 @@ cropimg(cropx,cropy,origintif)
 combined(folder)
 
 file = open(folder+"/txt/"+"nameinfo.txt", 'r')
-threads=[]
-
-
-def operationcombine(folder, line, thresholdt, percentage):
+start_time=time.time()
+for line in file:
     if "_" in line:
         print(line, "is on processing")
         line = line.split('\n')[0]
-        line = getinfo(folder, line, thresholdt, percentage)
+        line = getinfo(folder,line,thresholdt, percentage)
         line.get3d_mat()
         line.tsatisfied()
         line.traceornot()
         line.gettrace()
-begin_time=time.time()
-print(time.ctime())
-
-for line in file:
-    t = threading.Thread(target=operationcombine, args=(folder, line, thresholdt, percentage))
-    t.start()
-    # threads.append(t)
-# for thread in threads:
-#     thread.join()
-print(time.ctime())
-end_time=time.time()
-print(end_time-begin_time)
 print('small swcs are being combined')
-# combinedswc(folder)
+end_time=time.time()
+print(end_time-start_time)
+combinedswc(folder)
 print('combined successfully!')

@@ -25,7 +25,7 @@ class Tracer(object):
 
 class R2Tracer(Tracer):
 
-    def __init__(self, quality=False, silent=False, speed='dt', clean=False):
+    def __init__(self, quality=False, silent=True, speed='dt', clean=False):
         self._quality = quality
         self._bimg = None
         self._dilated_bimg = None

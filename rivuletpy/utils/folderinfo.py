@@ -70,7 +70,7 @@ def combined(directory):
         #every x direction combined to get the final one part
         if (ylocation == 1):
             wholepart = liney
-            print(wholepart)
+            # print(wholepart)
         else:
             wholepart = np.concatenate((wholepart, liney), axis=0)
     writetiff3d(directory + "/wholepart.tif",wholepart)
@@ -84,7 +84,7 @@ def combinedswc(path):
         tswc = a.copy()
         tswc[:, 0] += count  # change the order
         tswc[:, -1] += count
-        count = a.shape[0] + count + 2
+        count = a.shape[0] + count + 2#The follow three lines are for checking errors
         # saveswc(swc.split('.')[0]+'copy.swc',tswc)
         # print(swc,tswc[0, 0],tswc[0,-1])
         # print(swc,tswc[-1,0],tswc[-1,-1])
