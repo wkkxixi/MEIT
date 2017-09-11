@@ -1,7 +1,7 @@
 from rivuletpy.utils.io import *
 from rivuletpy.utils.folderinfo import *
 from rivuletpy.utils.cropswc import *
-import threading
+import multiprocessing as mp
 import time
 
 origintif="/home/vv/Desktop/new/1.tif"
@@ -14,7 +14,6 @@ cropimg(cropx,cropy,origintif)
 combined(folder)
 
 file = open(folder+"/txt/"+"nameinfo.txt", 'r')
-threads=[]
 
 
 def operationcombine(folder, line, thresholdt, percentage):
@@ -28,10 +27,13 @@ def operationcombine(folder, line, thresholdt, percentage):
         line.gettrace()
 begin_time=time.time()
 print(time.ctime())
-
+pool=mp.Pool()
 for line in file:
-    t = threading.Thread(target=operationcombine, args=(folder, line, thresholdt, percentage))
-    t.start()
+    pool.apply_async(operationcombine, args=(folder, line, thresholdt, percentage))
+pool.close()
+pool.join()
+    # t = threading.Thread(target=operationcombine, args=(folder, line, thresholdt, percentage))
+    # t.start()
     # threads.append(t)
 # for thread in threads:
 #     thread.join()
