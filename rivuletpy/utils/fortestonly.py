@@ -293,29 +293,44 @@ import os, math
 #     print(threading.current_thread())
 # if __name__=='__main__':
 #     main()
-from rivuletpy.utils.cropswc import *
-import threading
-from queue import Queue
-def job(l,q):
-    for i in range(len(l)):
-        for j in range(100000000):
-            l[i]=l[i]+2
-    q.put(l)
+# from rivuletpy.utils.cropswc import *
+# import threading
+# from queue import Queue
+# def job(l,q):
+#     for i in range(len(l)):
+#         for j in range(100000000):
+#             l[i]=l[i]+2
+#     q.put(l)
+#
+# def multithreading():
+#     q=Queue()
+#     threads=[]
+#     data=[[1,2,3],[3,4,5],[4,4,4],[5,5,5]]
+#     for i in range(4):
+#         t=threading.Thread(target=getinfo,args=(data[i],q))
+#         t.start()
+#         threads.append(t)
+#     for thread in threads:
+#         thread.join()
+#     results=[]
+#     for _ in range(4):
+#         results.append(q.get())
+#     print(results)
+#
+# if __name__=='__main__':
+#     multithreading()
+import json
+from pprint import pprint
+jsonfilepath='/home/vv/Desktop/Gold166-JSON/fruitflylarvae.json'
+jsonfile=jsonfilepath.split('/')[-1]
+jsonfilename=jsonfile.split('.')[0]
+with open(jsonfilepath) as data_file:
+    data = json.load(data_file)
+front=data['data'][jsonfilename]
+keys=front.keys()
+for key in keys:
+    filename=front[key]['imagepath']
+    threshold=front[key]['misc']['threshold']
+    print(filename)
+    print(threshold)
 
-def multithreading():
-    q=Queue()
-    threads=[]
-    data=[[1,2,3],[3,4,5],[4,4,4],[5,5,5]]
-    for i in range(4):
-        t=threading.Thread(target=getinfo,args=(data[i],q))
-        t.start()
-        threads.append(t)
-    for thread in threads:
-        thread.join()
-    results=[]
-    for _ in range(4):
-        results.append(q.get())
-    print(results)
-
-if __name__=='__main__':
-    multithreading()
