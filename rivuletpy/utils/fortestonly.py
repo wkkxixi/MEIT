@@ -321,16 +321,28 @@ import os, math
 #     multithreading()
 import json
 from pprint import pprint
-jsonfilepath='/home/vv/Desktop/Gold166-JSON/fruitflylarvae.json'
-jsonfile=jsonfilepath.split('/')[-1]
-jsonfilename=jsonfile.split('.')[0]
-with open(jsonfilepath) as data_file:
-    data = json.load(data_file)
-front=data['data'][jsonfilename]
-keys=front.keys()
-for key in keys:
-    filename=front[key]['imagepath']
-    threshold=front[key]['misc']['threshold']
-    print(filename)
-    print(threshold)
+from rivuletpy.utils.io import *
+jsonfilepath='/home/rong/Documents/Gold166-JSON/'
+os.mkdir(jsonfilepath + "jsoninfo")
+container='filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'
+list = os.listdir(jsonfilepath)
+for l in list:
+    if l.split(".")[-1]=='json':
+        if l.split(".")[-2]!='pp':
+            with open(jsonfilepath+l) as data_file:
+                data = json.load(data_file)
+            Keys=data['data'].keys()
+            for Key in Keys:
+                keys=data['data'][Key].keys()
+            for key in keys:
+                filename=data['data'][Key][key]['imagepath']
+                threshold=data['data'][Key][key]['misc']['threshold']
+                # print(jsonfilepath+filename)
+                img = loadimg(jsonfilepath+filename)
+                x,y,z=img.shape
+                print(img.shape)
+                container=container+'\n'+filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)+'\t'+str(x*y*z)
+outputfile = open(jsonfilepath + "jsoninfo/"+"detailedinfo.txt", "w")
+outputfile.write(container)
+outputfile.close()
 
