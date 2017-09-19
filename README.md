@@ -66,6 +66,7 @@ Pull requests are definitely welcomed! Before you make a pull requests, please k
 
 ## Installation
 note: 3B means the option B for the third step
+
 Before 0A, you should firstly install Anaconda or virtuaulenv on your computer
 ### 0A. Setup the Anaconda environment (Easy)
 ```
