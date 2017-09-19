@@ -320,11 +320,13 @@ import os, math
 # if __name__=='__main__':
 #     multithreading()
 import json
+import operator
 from pprint import pprint
 from rivuletpy.utils.io import *
 jsonfilepath='/home/rong/Documents/Gold166-JSON/'
 os.mkdir(jsonfilepath + "jsoninfo")
 container='filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'
+d={}
 list = os.listdir(jsonfilepath)
 for l in list:
     if l.split(".")[-1]=='json':
@@ -341,7 +343,10 @@ for l in list:
                 img = loadimg(jsonfilepath+filename)
                 x,y,z=img.shape
                 print(img.shape)
-                container=container+'\n'+filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)+'\t'+str(x*y*z)
+                d[filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)]=x*y*z
+
+                # container=container+'\n'+filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)+'\t'+str(x*y*z)
+sorteditem = sorted(d.items(), key=operator.itemgetter(1))
 outputfile = open(jsonfilepath + "jsoninfo/"+"detailedinfo.txt", "w")
 outputfile.write(container)
 outputfile.close()
