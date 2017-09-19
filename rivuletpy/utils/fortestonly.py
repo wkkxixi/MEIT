@@ -316,42 +316,97 @@ import os, math
 #     for _ in range(4):
 #         results.append(q.get())
 #     print(results)
-#
 # if __name__=='__main__':
 #     multithreading()
-import json
-import operator
-from collections import defaultdict
-import multiprocessing as mp
-from pprint import pprint
+# import json
+# import operator
+# from collections import defaultdict
+# import multiprocessing as mp
+# from pprint import pprint
+# from rivuletpy.utils.io import *
+# jsonfilepath='/home/rong/Documents/Gold166-JSON/'
+# # os.mkdir(jsonfilepath + "jsoninfo")
+# container='filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'
+# d=defaultdict(int)
+# list = os.listdir(jsonfilepath)
+# def readtif(l):
+#     if l.split(".")[-1]=='json':
+#         if l.split(".")[-2]!='pp':
+#             print(file)
+#             with open(jsonfilepath+l) as data_file:
+#                 data = json.load(data_file)
+#             Keys=data['data'].keys()
+#             for Key in Keys:
+#                 keys=data['data'][Key].keys()
+#             for key in keys:
+#                 filename=data['data'][Key][key]['imagepath']
+#                 threshold=data['data'][Key][key]['misc']['threshold']
+#                 # print(jsonfilepath+filename)
+#                 img = loadimg(jsonfilepath+filename)
+#                 x,y,z=img.shape
+#                 print(img.shape)
+#                 d[filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)]=x*y*z
+# # pool=mp.Pool(5)
+# # for file in list:
+# #     pool.apply_async(readtif, file)
+# # pool.close()
+# # pool.join()
+# p=mp.Pool(5)
+# for file in list:
+#     p.apply_async(readtif,file)
+# p.close()
+# p.join()
+# for item in sorted(d,key=d.get,reverse=True):
+#     container=container+'\n'+item+"\t"+str(d[item])
+# outputfile = open(jsonfilepath + "jsoninfo/"+"detailedinfo.txt", "w")
+# print(container)
+# outputfile.write(container)
+# outputfile.close()
 from rivuletpy.utils.io import *
-jsonfilepath='/home/rong/Documents/Gold166-JSON/'
-# os.mkdir(jsonfilepath + "jsoninfo")
-container='filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'
-d=defaultdict(int)
-list = os.listdir(jsonfilepath)
-def readtif(l):
-    if l.split(".")[-1]=='json':
-        if l.split(".")[-2]!='pp':
-            with open(jsonfilepath+l) as data_file:
-                data = json.load(data_file)
-            Keys=data['data'].keys()
-            for Key in Keys:
-                keys=data['data'][Key].keys()
-            for key in keys:
-                filename=data['data'][Key][key]['imagepath']
-                threshold=data['data'][Key][key]['misc']['threshold']
-                # print(jsonfilepath+filename)
-                img = loadimg(jsonfilepath+filename)
-                x,y,z=img.shape
-                print(img.shape)
-                d[filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)]=x*y*z
-# pool=mp.Pool()
-for file in list:
-    readtif(file)
-for item in sorted(d,key=d.get,reverse=True):
-    container=container+'\n'+item+"\t"+str(d[item])
-outputfile = open(jsonfilepath + "jsoninfo/"+"detailedinfo.txt", "w")
-outputfile.write(container)
-outputfile.close()
+from rivuletpy.utils.folderinfo import *
+from rivuletpy.utils.cropswc import *
+import multiprocessing as mp
+import time
+folderpath='/home/rong/Documents/Gold166-JSON/'
+
+with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
+    lines = f.readlines()
+    for line in lines:
+        if line.__contains__('.'):
+            filename=line.split('\t')[0]
+            threshold=line.split('\t')[1]
+            origintif=folderpath+filename
+            cropx=100
+            cropy=100
+            thresholdt=threshold
+            percentage=0.00005
+            folder=origintif.split('.')[0]+'_'+str(cropx)+'_'+str(cropy)
+            cropimg(cropx,cropy,origintif)
+            # combined(folder)
+
+            file = open(folder+"/txt/"+"nameinfo.txt", 'r')
+
+
+            def operationcombine(folder, line, thresholdt, percentage):
+                if "_" in line:
+                    print(line, "is on processing")
+                    line = line.split('\n')[0]
+                    line = getinfo(folder, line, thresholdt, percentage)
+                    line.get3d_mat()
+                    line.tsatisfied()
+                    line.traceornot()
+                    line.gettrace()
+            begin_time=time.time()
+            print(time.ctime())
+            pool=mp.Pool()
+            for line in file:
+                pool.apply_async(operationcombine, args=(folder, line, thresholdt, percentage))
+            pool.close()
+            pool.join()
+            print(time.ctime())
+            end_time=time.time()
+            print(end_time-begin_time)
+            print('small swcs are being combined')
+            combinedswc(folder)
+            print('combined successfully!')
 

@@ -11,7 +11,7 @@ thresholdt=40
 percentage=0.00005
 folder=origintif.split('.')[0]+'_'+str(cropx)+'_'+str(cropy)
 cropimg(cropx,cropy,origintif)
-combined(folder)
+# combined(folder)
 
 file = open(folder+"/txt/"+"nameinfo.txt", 'r')
 
@@ -41,5 +41,5 @@ print(time.ctime())
 end_time=time.time()
 print(end_time-begin_time)
 print('small swcs are being combined')
-# combinedswc(folder)
+combinedswc(folder)
 print('combined successfully!')

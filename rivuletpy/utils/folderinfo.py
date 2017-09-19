@@ -1,12 +1,15 @@
 from rivuletpy.utils.io import *
 import os, glob
+import shutil
 #This is for croping origin tif into pieces of size(cropx*cropy*z)
 
 def cropimg(cropx,cropy,origintif):
     #The savefile consists of cropx_cropy eg: 2_3.tif
     img=loadimg(origintif)
     savepath = origintif.split(".")[0] + "_"+str(cropx)+"_"+str(cropy)+"/"
-    os.mkdir(savepath)
+    if os.path.exists(savepath):
+        shutil.rmtree(savepath)
+    os.makedirs(savepath)
     os.mkdir(savepath + "txt")
     locinfo=""
     locfile = open(savepath + "txt/"+"nameinfo.txt", "w")
@@ -77,6 +80,7 @@ def combined(directory):
 
 def combinedswc(path):
     savepath = os.path.abspath(os.path.join(path, os.pardir))
+    swcname=path.split('/')[-1]
     count = 0
     container = np.zeros(shape=(1, 7))#Initialize the default container
     for swc in glob.glob(os.path.join(path, '*.swc')):
@@ -92,6 +96,6 @@ def combinedswc(path):
             container = tswc
         else:
             container = np.vstack((container, tswc))
-    saveswc(savepath+'/combined.swc', container)
+    saveswc(savepath+'/'+swcname+'.swc', container)
 
 
