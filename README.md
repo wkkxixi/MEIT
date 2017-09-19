@@ -66,7 +66,7 @@ Pull requests are definitely welcomed! Before you make a pull requests, please k
 
 ## Installation
 note: 3B means the option B for the third step
-
+Before 0A, you should firstly install Anaconda or virtuaulenv on your computer
 ### 0A. Setup the Anaconda environment (Easy)
 ```
 $ conda create -n riv python=python3.5 anaconda
@@ -92,7 +92,8 @@ To install rivuletpy with pip, you need to install the following packages manual
 
 ```
 (riv)$ pip install --upgrade pip
-(riv)$ pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@a379e330d013cf5f7cec8e9460d1d5e03b543444#egg=tqdm git+https://github.com/pearu/pylibtiff.git@e56519a5c2d594102f3ca82c3c14f222d71e0f92#egg=libtiff
+(riv)$ pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+(riv)$ conda install -c anaconda scikit-fmm
 ```
 
 
