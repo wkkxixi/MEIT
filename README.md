@@ -97,18 +97,7 @@ To install rivuletpy with pip, you need to install the following packages manual
 (riv)$ conda install -c anaconda scikit-fmm
 ```
 
-
-### 2A. Install Rivuletpy from the Pypi (Recommended)
-
-```
-(riv)$ pip3 install rivuletpy
-```
-If you are using Anaconda
-```
-(riv)$ pip install rivuletpy # The pip should be correspnded to python3
-```
-
-### 2B. Install Rivuletpy from source (Optional)
+### 2A. Install Rivuletpy from source (Recommended)
 Optionally you can install Rivuletpy from the source files
 
 ```
@@ -121,6 +110,17 @@ Optionally you can install Rivuletpy from the source files
 This installs `Rivuletpy` into your `virtualenv` in "editable" mode. That means changes
 made to the source code are seen by the installation. To install in read-only mode, omit
 the `-e`.
+
+
+### 2B. Install Rivuletpy from the Pypi (Optional)
+
+```
+(riv)$ pip3 install rivuletpy
+```
+If you are using Anaconda
+```
+(riv)$ pip install rivuletpy # The pip should be correspnded to python3
+```
 
 ## Test Installation
 In ./rivuletpy/
