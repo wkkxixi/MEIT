@@ -70,7 +70,7 @@ note: 3B means the option B for the third step
 Before 0A, you should firstly install Anaconda or virtuaulenv on your computer
 ### 0A. Setup the Anaconda environment (Easy)
 ```
-$ conda create -n riv python=python3.5 anaconda
+$ conda create -n riv python=python3.5
 $ source activate riv
 ```
 ### 0B. Setup the virtualenv (Alternative)
