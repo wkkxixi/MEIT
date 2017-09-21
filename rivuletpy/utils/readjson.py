@@ -1,12 +1,15 @@
 import json
 from collections import defaultdict
 import multiprocessing as mp
-from pprint import pprint
+import shutil
 from rivuletpy.utils.io import *
 jsonfilepath='/home/rong/Documents/Gold166-JSON/'
-# os.mkdir(jsonfilepath + "jsoninfo")
+if os.path.exists(jsonfilepath + "jsoninfo"):
+    shutil.rmtree(jsonfilepath + "jsoninfo")
+os.makedirs(jsonfilepath + "jsoninfo")
+
 container='filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'
-d=defaultdict(int)
+d=defaultdict(int)#set original dictionary
 list = os.listdir(jsonfilepath)
 def readtif(l):
     if l.split(".")[-1]=='json':
