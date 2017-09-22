@@ -56,7 +56,7 @@ def precision_recall(swc1, swc2, dist1=4, dist2=4):
 
     return (precision, recall, f1), swc_compare
 
-content='Precision\tRecall\tF1'
+content='Path\tPrecision\tRecall\tF1'
 datapath = '/home/rong/Documents/Gold166-JSON/'
 list=glob(datapath+"*/")
 for folder in list:
@@ -64,11 +64,14 @@ for folder in list:
         if l.split(".")[-1]=='swc':
             if len(l.split("."))==2:
                 if '_' not in l:
-                    swc1 = loadswc(join(folder, l))
-                    swc2 = loadswc(join(folder, l.split('.')[-2]+'_100_100.swc'))
-                    precision_recall(swc1,swc2)
-                    prf, swc_compare = precision_recall(swc1, swc2)
-                    content=content+'\n%.2f\t%.2f\t%.2f' % prf
+                    try:
+                        swc1 = loadswc(join(folder, l))
+                        swc2 = loadswc(join(folder, l.split('.')[-2]+'_100_100.swc'))
+                        precision_recall(swc1,swc2)
+                        prf, swc_compare = precision_recall(swc1, swc2)
+                        content=content+'\n'+folder+l+'\t%.2f\t%.2f\t%.2f' % prf
+                    except (IOError):
+                        pass
 lines=content.split('\n')
 
 with open( datapath+'gao_compare.csv', "w") as csv_file:

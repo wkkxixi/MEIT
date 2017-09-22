@@ -411,63 +411,8 @@ from collections import deque
 import numpy as np
 from scipy.spatial.distance import cdist
 from rivuletpy.utils.io import *
-# datapath='/home/rong/Documents/Gold166-JSON/cambridgemouse/'
-# swc1=loadswc(datapath+'2.swc')
-# swc2=loadswc(datapath+'2_100_100.swc')
-#
-#
-# def precision_recall(swc1, swc2, dist1=4, dist2=4):
-#     '''
-#     Calculate the precision, recall and F1 score between swc1 and swc2 (ground truth)
-#     It generates a new swc file with node types indicating the agreement between two input swc files
-#     In the output swc file: node type - 1. the node is in both swc1 agree with swc2
-#                                                         - 2. the node is in swc1, not in swc2 (over-traced)
-#                                                         - 3. the node is in swc2, not in swc1 (under-traced)
-#     target: The swc from the tracing method
-#     gt: The swc from the ground truth
-#     dist1: The distance to consider for precision
-#     dist2: The distance to consider for recall
-#     '''
-#
-#     TPCOLOUR, FPCOLOUR, FNCOLOUR  = 3, 2, 180 # COLOUR is the SWC node type defined for visualising in V3D
-#     swc1lines=swc1.shape[0]
-#     swc2lines=swc2.shape[0]
-#     mindist1list=[]
-#     mindist2list=[]
-#     for line in range(swc1lines):
-#         d = cdist(swc1[line:line+1, 2:5], swc2[:, 2:5])
-#         smindist1 = d.min(axis=1)
-#         mindist1list.append(smindist1)
-#     for line2 in range(swc2lines):
-#         d2=cdist(swc1[:, 2:5], swc2[line2:line2+1, 2:5])
-#         smindist2 = d2.min(axis=0)
-#         mindist2list.append(smindist2)
-#     mindist1s=np.array(mindist1list)#no squeeze numpy
-#     mindist2s=np.array(mindist2list)#no squeeze numpy
-#     mindist1=np.squeeze(mindist1s)
-#     mindist2=np.squeeze(mindist2s)
-#     tp = (mindist1 < dist1).sum()
-#     fp = swc1.shape[0] - tp
-#     fn = (mindist2 > dist2).sum()
-#     precision = tp / (tp + fp)
-#     recall = tp / (tp + fn)
-#     f1 = 2 * precision * recall / (precision + recall)
-#
-#     # Make the swc for visual comparison
-#     swc1[mindist1 <= dist1, 1] = TPCOLOUR
-#     swc1[mindist1 > dist1, 1] = FPCOLOUR
-#     swc2_fn = swc2[mindist2 > dist2, :]
-#     swc2_fn[:, 0] = swc2_fn[:, 0] + 100000
-#     swc2_fn[:, -1] = swc2_fn[:, -1] + 100000
-#     swc2_fn[:, 1] = FNCOLOUR
-#     swc_compare = np.vstack((swc1, swc2_fn))
-#     swc_compare[:, -2]  = 1
-#
-#     return (precision, recall, f1), swc_compare
-#
-# precision_recall(swc1,swc2)
-# prf, swc_compare = precision_recall(swc1, swc2)
-# print('Precision: %.2f\tRecall: %.2f\tF1: %.2f\t' % prf)
+
+
 # from rivuletpy.utils.metrics import *
 from collections import deque
 import numpy as np
@@ -476,75 +421,72 @@ from rivuletpy.utils.io import *
 from os.path import join
 import csv
 from glob import glob
+datapath='/home/rong/Documents/Gold166-JSON/cambridgemouse/'
+swc1=loadswc(datapath+'2.swc')
+swc2=loadswc(datapath+'2_100_100.swc')
+def upsample_swc(swc):
 
-def precision_recall(swc1, swc2, dist1=4, dist2=4):
-    '''
-    Calculate the precision, recall and F1 score between swc1 and swc2 (ground truth)
-    It generates a new swc file with node types indicating the agreement between two input swc files
-    In the output swc file: node type - 1. the node is in both swc1 agree with swc2
-                                                        - 2. the node is in swc1, not in swc2 (over-traced)
-                                                        - 3. the node is in swc2, not in swc1 (under-traced)
-    target: The swc from the tracing method
-    gt: The swc from the ground truth
-    dist1: The distance to consider for precision
-    dist2: The distance to consider for recall
-    '''
+    tswc = swc.copy()
 
-    TPCOLOUR, FPCOLOUR, FNCOLOUR  = 3, 2, 180 # COLOUR is the SWC node type defined for visualising in V3D
-    swc1lines=swc1.shape[0]
-    swc2lines=swc2.shape[0]
-    mindist1list=[]
-    mindist2list=[]
+    id_idx = {}
+    # Build a nodeid->idx hash table
+    for nodeidx in range(tswc.shape[0]):
+        id_idx[tswc[nodeidx, 0]] = nodeidx
+
+    newid = tswc[:,0].max() + 1
+    newnodes = []
+    for nodeidx in range(tswc.shape[0]):
+        pid = tswc[nodeidx, -1] # parent id
+
+        if pid not in id_idx:
+            # raise Exception('Parent with id %d not found' % pid)
+            continue
+
+        nodepos = tswc[nodeidx, 2:5]
+        parentpos = tswc[id_idx[pid], 2:5]
+
+        if np.linalg.norm(nodepos - parentpos) > 1.: # Add a node in the middle if too far
+            mid_pos = nodepos + 0.5 * (parentpos - nodepos)
+            newnodes.append( np.asarray([newid, 2, mid_pos[0], mid_pos[1], mid_pos[2], 1, pid]) )
+            newid += 1
+            tswc[nodeidx, -1] = newid
+
+    # Stack the new nodes to the end of the swc file
+    newnodes = np.vstack(newnodes)
+    tswc = np.vstack((tswc, newnodes))
+    return tswc
+def gaussian_distance(swc1, swc2, sigma=2.):
+    '''
+    The geometric metrics of NetMets. The gaussian distances between the closest neighbours
+    returns : (M1, M2) where M1 is the gaussian distances from the nodes in swc1 to their closest neighbour in swc2;
+    vise versa for M2
+
+    D. Mayerich, C. Bjornsson, J. Taylor, and B. Roysam,
+    “NetMets: software for quantifying and visualizing errors in biological network segmentation.,”
+    BMC Bioinformatics, vol. 13 Suppl 8, no. Suppl 8, p. S7, 2012.
+    '''
+    swc1 = upsample_swc(swc1)
+    swc2 = upsample_swc(swc2)
+    swc1lines = swc1.shape[0]
+    swc2lines = swc2.shape[0]
+    mindist1list = []
+    mindist2list = []
     for line in range(swc1lines):
-        d = cdist(swc1[line:line+1, 2:5], swc2[:, 2:5])
+        d = cdist(swc1[line:line + 1, 2:5], swc2[:, 2:5])
         smindist1 = d.min(axis=1)
         mindist1list.append(smindist1)
     for line2 in range(swc2lines):
-        d2=cdist(swc1[:, 2:5], swc2[line2:line2+1, 2:5])
+        d2 = cdist(swc1[:, 2:5], swc2[line2:line2 + 1, 2:5])
         smindist2 = d2.min(axis=0)
         mindist2list.append(smindist2)
-    mindist1s=np.array(mindist1list)#no squeeze numpy
-    mindist2s=np.array(mindist2list)#no squeeze numpy
-    mindist1=np.squeeze(mindist1s)
-    mindist2=np.squeeze(mindist2s)
-    tp = (mindist1 < dist1).sum()
-    fp = swc1.shape[0] - tp
-    fn = (mindist2 > dist2).sum()
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
-    f1 = 2 * precision * recall / (precision + recall)
+    mindist1s = np.array(mindist1list)  # no squeeze numpy
+    mindist2s = np.array(mindist2list)  # no squeeze numpy
+    mindist1 = np.squeeze(mindist1s)
+    mindist2 = np.squeeze(mindist2s)
+    M1 = 1 - np.exp(mindist1 ** 2  / (2 * sigma ** 2))
+    M2 = 1 - np.exp(mindist2 ** 2  / (2 * sigma ** 2))
+    return M1, M2
 
-    # Make the swc for visual comparison
-    swc1[mindist1 <= dist1, 1] = TPCOLOUR
-    swc1[mindist1 > dist1, 1] = FPCOLOUR
-    swc2_fn = swc2[mindist2 > dist2, :]
-    swc2_fn[:, 0] = swc2_fn[:, 0] + 100000
-    swc2_fn[:, -1] = swc2_fn[:, -1] + 100000
-    swc2_fn[:, 1] = FNCOLOUR
-    swc_compare = np.vstack((swc1, swc2_fn))
-    swc_compare[:, -2]  = 1
+M1, M2 = gaussian_distance(swc1, swc2, 3.0)
+print('M1 MEAN: %.2f\tM2 MEAN: %.2f' % (M1.mean(), M2.mean()))
 
-    return (precision, recall, f1), swc_compare
-
-content='Path\tPrecision\tRecall\tF1'
-datapath = '/home/rong/Documents/Gold166-JSON/'
-list=glob(datapath+"*/")
-for folder in list:
-    for l in os.listdir(folder):
-        if l.split(".")[-1]=='swc':
-            if len(l.split("."))==2:
-                if '_' not in l:
-                    try:
-                        swc1 = loadswc(join(folder, l))
-                        swc2 = loadswc(join(folder, l.split('.')[-2]+'_100_100.swc'))
-                        precision_recall(swc1,swc2)
-                        prf, swc_compare = precision_recall(swc1, swc2)
-                        content=content+'\n'+folder+l+'%.2f\t%.2f\t%.2f' % prf
-                    except (IOError):
-                        pass
-lines=content.split('\n')
-
-with open( datapath+'gao_compare.csv', "w") as csv_file:
-    writer = csv.writer(csv_file)
-    for line in lines:
-        writer.writerow([line])
