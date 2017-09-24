@@ -53,7 +53,7 @@ class getinfo:
             x = int(self.name.split("_")[1]) - 1
             y = int(self.name.split("_")[0]) - 1
             tswc[:, 2] += self.cropx * x  # 100 is the cropx we define when croping
-            tswc[:, 3] += self.cropy * y  # 90 is the cropy we define when croping
+            tswc[:, 3] += self.cropy * y  # 100 is the cropy we define when croping
             saveswc(self.folder + self.name + '.swc', tswc)
         else:
             tswc = None

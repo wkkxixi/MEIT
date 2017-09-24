@@ -1,4 +1,5 @@
 from rivuletpy.utils.io import *
+from rivuletpy.utils.outputSmallSwc import *
 import os, glob
 import shutil
 #This is for croping origin tif into pieces of size(cropx*cropy*z)
@@ -14,37 +15,65 @@ def cropimg(cropx,cropy,origintif):
     locinfo=""
     locfile = open(savepath + "txt/"+"nameinfo.txt", "w")
     shapex,shapey,shapez=img.shape
+    # if(shapex<cropx or shapey<cropy):
+    #     smallswc(img,threshold,savepath+'.swc')
+
     # print(shapex,shapey,shapez)
-    for i in range(cropy,shapey,cropy):
-        #The output of every item which matches the size(cropx*cropy) perfectly.
+    if shapey< cropy:
         for j in range(cropx,shapex,cropx):
-            oneitem=img[j-cropx:j,i-cropy:i,:]
-            loc=str(int(i/cropy))+"_"+str(int(j/cropx))
+            oneitem=img[j-cropx:j,:,:]
+            loc="1_"+str(int(j/cropx))
             locinfo=locinfo+"\n"+loc
             writetiff3d(savepath+loc+".tif", oneitem)
-        #if shapex has a remainder (rx)of cropx, the item with the size(rx*cropy) appears at the end of a line.
-        if(shapex%cropx!=0):
-            linelast=img[shapex-shapex%cropx:shapex,i-cropy:i,:]
-            loc=str(int(i/cropy)) +"_"+ str(int(j/cropx+1))
-            locinfo=locinfo+"\n"+loc
+        if (shapex % cropx != 0):
+            linelast = img[shapex - shapex % cropx:shapex, :, :]
+            loc = "1_" + str(int(shapex / cropx+1))
+            locinfo = locinfo + "\n" + loc
             writetiff3d(savepath + loc +
                         ".tif", linelast)
-    # if cropy cannot be perfectly divided by shapey,then this remainder(ry) is the y coordinate of the last line
-    if(shapey%cropy!=0):
-        for k in range(cropx,shapex,cropx):
-            lastline=img[k-cropx:k,shapey-shapey%cropy:shapey,:]
-            loc=str(int(i/cropy+1)) + "_"+str(int(k/cropx))
+    if shapex<cropx:
+        for i in range(cropy,shapey,cropy):
+            columns=img[:,i-cropy:i,:]
+            loc = str(int(i / cropy)) + "_1"
+            locinfo = locinfo + "\n" + loc
+            writetiff3d(savepath + loc + ".tif", columns)
+        if(shapey%cropy !=0):
+            lastone=img[:,shapey-shapey%cropy:shapey,:]
+            loc = str(int(shapey / cropy+1)) + "_1"
+            locinfo = locinfo + "\n" + loc
+            writetiff3d(savepath + loc + ".tif", lastone)
+
+    if (shapex>cropx and shapey>cropy):
+        for i in range(cropy,shapey,cropy):
+            #The output of every item which matches the size(cropx*cropy) perfectly.
+            for j in range(cropx,shapex,cropx):
+                oneitem=img[j-cropx:j,i-cropy:i,:]
+                loc=str(int(i/cropy))+"_"+str(int(j/cropx))
+                locinfo=locinfo+"\n"+loc
+                writetiff3d(savepath+loc+".tif", oneitem)
+            #if shapex has a remainder (rx)of cropx, the item with the size(rx*cropy) appears at the end of a line.
+            if(shapex%cropx!=0):
+                linelast=img[shapex-shapex%cropx:shapex,i-cropy:i,:]
+                loc=str(int(i/cropy)) +"_"+ str(int(j/cropx+1))
+                locinfo=locinfo+"\n"+loc
+                writetiff3d(savepath + loc +
+                            ".tif", linelast)
+        # if cropy cannot be perfectly divided by shapey,then this remainder(ry) is the y coordinate of the last line
+        if(shapey%cropy!=0):
+            for k in range(cropx,shapex,cropx):
+                lastline=img[k-cropx:k,shapey-shapey%cropy:shapey,:]
+                loc=str(int(i/cropy+1)) + "_"+str(int(k/cropx))
+                locinfo = locinfo+"\n"+loc
+                writetiff3d(savepath + loc +
+                            ".tif", lastline)
+        #if both shapex and shapey have their remainders(rx,ry),the lastone with size(rx*ry) is shown
+        # print("lucky last one")
+        if((shapey%cropy!=0)and(shapex%cropx!=0)):
+            lastone=(img[shapex-shapex%cropx:shapex,shapey-shapey%cropy:shapey,:])
+            loc=str(int(i/cropy+1)) +"_"+ str(int(j/cropx+1))
             locinfo = locinfo+"\n"+loc
-            writetiff3d(savepath + loc +
-                        ".tif", lastline)
-    #if both shapex and shapey have their remainders(rx,ry),the lastone with size(rx*ry) is shown
-    # print("lucky last one")
-    if((shapey%cropy!=0)and(shapex%cropx!=0)):
-        lastone=(img[shapex-shapex%cropx:shapex,shapey-shapey%cropy:shapey,:])
-        loc=str(int(i/cropy+1)) +"_"+ str(int(j/cropx+1))
-        locinfo = locinfo+"\n"+loc
-        writetiff3d(savepath + loc
-                    +".tif", lastone)
+            writetiff3d(savepath + loc
+                        +".tif", lastone)
     locfile.write(locinfo)
     locfile.close()
 
