@@ -45,4 +45,3 @@ def readtif(jsonfilepath):
         lines = container.split('\n')
         for line in lines:
             writer.writerow([line])
-readtif(jsonfilepath)

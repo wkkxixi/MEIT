@@ -17,7 +17,8 @@ def operationcombine(folder, line, thresholdt, percentage):
         line.traceornot()
         line.gettrace()
 
-# readtif(folderpath)#read json files to get location information
+readtif(folderpath)#read json files to get location information
+content = 'Path\tPrecision\tRecall\tF1'#content format of the compareswc
 with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
     lines = f.readlines()#read every line
     for item in lines:
@@ -32,7 +33,6 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
             cropy=100#the crop size of y dimension
             percentage=0.00005#only when (the color value / whole background value)>percentage, it will be recorded, otherwise, it will be discarded when producing swc
             folder=origintif.split('.')[0]+'_'+str(cropx)+'_'+str(cropy)#name of the folder and swc
-            content = 'Path\tPrecision\tRecall\tF1'#content format of the compareswc
             if(shapex<cropx and shapey<cropy):#if the size of tif is too small to be croped, it will be processed in smallswc function
                 smallswc(origintif,threshold,folder)
             else:
