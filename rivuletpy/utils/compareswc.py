@@ -6,7 +6,7 @@ from rivuletpy.utils.io import *
 from os.path import join
 import csv
 from glob import glob
-folderpath='/home/rong/Desktop/Gold166-JSON/'
+# folderpath='/home/rong/Desktop/Gold166-JSON/'
 def precision_recall(swc1, swc2, dist1=4, dist2=4):
     '''
     Calculate the precision, recall and F1 score between swc1 and swc2 (ground truth)
@@ -56,31 +56,31 @@ def precision_recall(swc1, swc2, dist1=4, dist2=4):
 
     return (precision, recall, f1), swc_compare
 
-with open(folderpath + 'jsoninfo/detailedinfo.txt') as f:
-    content='Path\tPrecision\tRecall\tF1'
-    lines = f.readlines()  # read every line
-    for item in lines:
-        if item.__contains__('.'):  # escape the first line and recognize the path
-            # print(item)
-            filename = item.split('\t')[0]
-            threshold = int(item.split('\t')[1])
-            shapex = int(item.split('\t')[2])
-            shapey = int(item.split('\t')[3])
-            origintif = folderpath + filename
-            try:
-                swc1=loadswc(origintif.split('.')[0]+'.swc')
-                swc2=loadswc(origintif.split('.')[0]+'_100_100.swc')# name of the folder and swc
-                precision_recall(swc1, swc2)
-                prf, swc_compare = precision_recall(swc1, swc2)
-                content=content+'\n'+origintif+'\t%.2f\t%.2f\t%.2f' % prf
-            except (Exception):
-                print(origintif)
-lines=content.split('\n')
-
-with open( folderpath+'gao_compare.csv', "w") as csv_file:
-    writer = csv.writer(csv_file)
-    for line in lines:
-        writer.writerow([line])
+# with open(folderpath + 'jsoninfo/detailedinfo.txt') as f:
+#     content='Path\tPrecision\tRecall\tF1'
+#     lines = f.readlines()  # read every line
+#     for item in lines:
+#         if item.__contains__('.'):  # escape the first line and recognize the path
+#             # print(item)
+#             filename = item.split('\t')[0]
+#             threshold = int(item.split('\t')[1])
+#             shapex = int(item.split('\t')[2])
+#             shapey = int(item.split('\t')[3])
+#             origintif = folderpath + filename
+#             try:
+#                 swc1=loadswc(origintif.split('.')[0]+'.swc')
+#                 swc2=loadswc(origintif.split('.')[0]+'_100_100.swc')# name of the folder and swc
+#                 precision_recall(swc1, swc2)
+#                 prf, swc_compare = precision_recall(swc1, swc2)
+#                 content=content+'\n'+origintif+'\t%.2f\t%.2f\t%.2f' % prf
+#             except (Exception):
+#                 print(origintif)
+# lines=content.split('\n')
+#
+# with open( folderpath+'gao_compare.csv', "w") as csv_file:
+#     writer = csv.writer(csv_file)
+#     for line in lines:
+#         writer.writerow([line])
 # content='Path\tPrecision\tRecall\tF1'
 # datapath = '/home/rong/Desktop/Gold166-JSON/'
 # list=glob(datapath+"*/")

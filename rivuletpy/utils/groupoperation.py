@@ -32,11 +32,12 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
             cropy=100#the crop size of y dimension
             percentage=0.00005#only when (the color value / whole background value)>percentage, it will be recorded, otherwise, it will be discarded when producing swc
             folder=origintif.split('.')[0]+'_'+str(cropx)+'_'+str(cropy)#name of the folder and swc
+            content = 'Path\tPrecision\tRecall\tF1'#content format of the compareswc
             if(shapex<cropx and shapey<cropy):#if the size of tif is too small to be croped, it will be processed in smallswc function
                 smallswc(origintif,threshold,folder)
             else:
                 cropimg(cropx,cropy,origintif)
-                print("Now it is in cropimg processing")
+                print(item,"Now it is in cropimg processing")
                 # combined(folder)
 
                 file = open(folder+"/txt/"+"nameinfo.txt", 'r')
