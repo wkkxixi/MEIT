@@ -205,6 +205,10 @@ The `compareswc` command outputs five numbers which are in order:
 
 precision, recall, f1-score, No. connection error type A, No. connection error type B
 
+$ groupoperation the operation of croping large tif into small tifs by cropimg,
+--Gao Rong Code Usage:
+$python groupoperation.py
+
 ## FAQ
 ### What if I see ```...version `GLIBCXX_3.4.21' not found...``` when I run `rtrace` under Anaconda?
 Try
