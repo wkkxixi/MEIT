@@ -53,8 +53,10 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
                 combinedswc(folder)
                 print('small swcs are combined successfully!')
             try:
+
                 swc1 = loadswc(origintif.split('.')[0] + '.swc')
-                swc2 = loadswc(origintif.split('.')[0] + '_'+cropx+'_'+cropy+'.swc')  # name of the folder and swc
+                swc2 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')
+                print(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')# name of the folder and swc
                 precision_recall(swc1, swc2)
                 prf, swc_compare = precision_recall(swc1, swc2)
                 saveswc(origintif.split('.')[0] + '_gao_compare.swc', swc_compare)
@@ -67,24 +69,3 @@ with open(folderpath + 'gao_compare.csv', "w") as csv_file:
     writer = csv.writer(csv_file)
     for line in lines:
         writer.writerow([line])
-# content='Path\tPrecision\tRecall\tF1'
-# list=glob(folderpath+"*/")
-# for folder in list:
-#     for l in os.listdir(folder):
-#         if l.split(".")[-1]=='tif':
-#             if len(l.split("."))==2:
-#                 if '_' not in l:
-#                     try:
-#                         swc1 = loadswc(join(folder, l.split('.')[-2]+'.swc'))
-#                         swc2 = loadswc(join(folder, l.split('.')[-2]+'_'+'100'+'_'+'100'+'.swc'))
-#                         precision_recall(swc1,swc2)
-#                         prf, swc_compare = precision_recall(swc1, swc2)
-#                         content=content+'\n'+folder+l+'\t%.2f\t%.2f\t%.2f' % prf
-#                     except (Exception):
-#                         print(folder+l)
-# lines=content.split('\n')
-#
-# with open( folderpath+'gao_compare.csv', "w") as csv_file:
-#     writer = csv.writer(csv_file)
-#     for line in lines:
-#         writer.writerow([line])
