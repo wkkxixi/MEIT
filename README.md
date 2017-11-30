@@ -68,10 +68,19 @@ Pull requests are definitely welcomed! Before you make a pull requests, please k
 note: 3B means the option B for the third step
 
 Before 0A, you should firstly install Anaconda or virtuaulenv on your computer
-### 0. Setup the Anaconda environment (Mac)
+### 0A. Setup the Anaconda environment (Easy)
 ```
-$ conda create -n riv python=python3.5
+$ conda create -n riv python=python3.5 anaconda
 $ source activate riv
+```
+### 0B. Setup the virtualenv (Alternative)
+It is recommended that you use [`pip`](https://pip.pypa.io/en/stable/) to install
+`Rivuletpy` into a [`virtualenv`](https://virtualenv.pypa.io/en/stable/). The following
+assumes a `virtualenv` named `riv` has been set up and
+activated. We will see three ways to install `Rivuletpy`
+```
+$ virtualenv -p python3 riv
+$ . riv/bin/activate
 ```
 
 ### 1. Setup the dependencies
@@ -84,12 +93,21 @@ To install rivuletpy with pip, you need to install the following packages manual
 
 ```
 (riv)$ pip install --upgrade pip
-(riv)$ pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+(riv)$ pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@a379e330d013cf5f7cec8e9460d1d5e03b543444#egg=tqdm git+https://github.com/pearu/pylibtiff.git@e56519a5c2d594102f3ca82c3c14f222d71e0f92#egg=libtiff
 (riv)$ conda install tifffile -c conda-forge
 (riv)$ conda install -c pranathi scikit-fmm #for python3.4
 ```
+### 2A. Install Rivuletpy from the Pypi (Recommended)
 
-### 2. Install Rivuletpy from source (Recommended)
+```
+(riv)$ pip3 install rivuletpy
+```
+If you are using Anaconda
+```
+(riv)$ pip install rivuletpy # The pip should be correspnded to python3
+```
+
+### 2B. Install Rivuletpy from source (Optional)
 Optionally you can install Rivuletpy from the source files
 
 ```
@@ -102,6 +120,7 @@ Optionally you can install Rivuletpy from the source files
 This installs `Rivuletpy` into your `virtualenv` in "editable" mode. That means changes
 made to the source code are seen by the installation. To install in read-only mode, omit
 the `-e`.
+
 
 
 
