@@ -23,13 +23,18 @@ def loadimg(file):
 
 def loadtiff3d(filepath):
     """Load a tiff file into 3D numpy array"""
-    from libtiff import TIFF
-    tiff = TIFF.open(filepath, mode='r')
+    # from libtiff import TIFF
+    # tiff = TIFF.open(filepath, mode='r')
+
+    import tifffile as tiff
+    a = tiff.imread(filepath)
+
     stack = []
-    for sample in tiff.iter_images():
+    for sample in a:
         stack.append(np.rot90(np.fliplr(np.flipud(sample))))
     out = np.dstack(stack)
-    tiff.close()
+    #a.close()
+
     return out
 
 
@@ -66,7 +71,6 @@ def loadswc(filepath):
 
 
 def saveswc(filepath, swc):
-    # print('shape',swc.shape[1])
     if swc.shape[1] > 7:
         swc = swc[:, :7]
 
