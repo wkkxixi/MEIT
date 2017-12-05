@@ -3,6 +3,7 @@ from tqdm import tqdm
 import numpy as np
 import skfmm
 import msfm
+import Image
 from scipy.interpolate import RegularGridInterpolator
 from scipy.ndimage.morphology import binary_dilation
 from filtering.morphology import ssm
@@ -47,6 +48,7 @@ class R2Tracer(Tracer):
         # Whether the unconnected branches will be discarded
         self._clean = clean
         self._eps = 1e-5
+        print("ccccc")
 
 
     def trace(self, img, threshold):
@@ -54,14 +56,17 @@ class R2Tracer(Tracer):
         The main entry for Rivulet2
         '''
         self._bimg = (img > threshold).astype('int')  # Segment image
-        if not self._silent: print('(1) -- Detecting Soma...', end='')
+        print('self._bimg is:')
+        print(self._bimg)
+
+        if not self._silent: print('(1) --Detecting Soma...', end='')
         self._soma = Soma()
         self._soma.detect(self._bimg, not self._quality, self._silent)
         self._prep()
 
         # Iterative Back Tracking with Erasing
         if not self._silent:
-            print('(5) --Start Backtracking...')
+            print('(5) --!Start Backtracking...')
         swc = self._iterative_backtrack()
 
         if self._clean:
@@ -85,6 +90,8 @@ class R2Tracer(Tracer):
         if not self._silent:
             print('(4) --Compute Gradients...')
         self._make_grad()
+        print('self._grad is:')
+        print(self._grad)
 
         # Make copy of the timemap
         self._tt = self._t.copy()
@@ -95,6 +102,7 @@ class R2Tracer(Tracer):
 
         # For making a large tube to contain the last traced branch
         self._bb = np.zeros(shape=self._tt.shape)
+        print(self._tt.shape)
 
     def _update_coverage(self):
         self._cover_ctr_new = np.logical_and(self._tt < 0, self._bimg > 0).sum()
@@ -134,10 +142,10 @@ class R2Tracer(Tracer):
         speed = self._make_speed(self._dt)
         # # Fast Marching
         if self._quality:
-            # if not self._silent: print('--MSFM...')
+            #if not self._silent: print('--MSFM...')
             self._t = msfm.run(speed, self._bimg.copy().astype('int64'), self._soma.centroid, True, True)
         else:
-            # if not self._silent: print('--FM...')
+            #if not self._silent: print('--FM...')
             marchmap = np.ones(self._bimg.shape)
             marchmap[self._soma.centroid[0], self._soma.centroid[1], self._soma.centroid[2]] = -1
             self._t = skfmm.travel_time(marchmap, speed, dx=5e-3)

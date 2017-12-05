@@ -87,6 +87,7 @@ class Soma(object):
         # the shape of somapos is (3,)
         # somapos is array-like
         somapos = np.asarray(np.unravel_index(dt.argmax(), dt.shape))
+        print(somapos)
 
         # Soma detection is required
         if not simple:

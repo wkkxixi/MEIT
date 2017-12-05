@@ -8,6 +8,7 @@ from rivuletpy.trace import R2Tracer
 from rivuletpy.utils.io import loadimg, writetiff3d, crop
 from filtering.thresholding import rescale
 from scipy.ndimage.interpolation import zoom
+import tifffile as tiff
 
 def show_logo():
     s = "====================Welcome to Rivulet2=================================="
@@ -108,26 +109,33 @@ if __name__ == '__main__':
     # Modify the crop function so that it can crop somamask as well
     img, crop_region = crop(img, args.threshold)  # Crop by default
 
+    tiff.imsave('cropped.tif', img)
+    print('shape of cropped img: ' + str(img.shape))
+    print('cropped region: ' + str(crop_region))
+
+
     if args.zoom_factor != 1.:
         if not args.silent:
             print('-- Zooming image to %.2f of original size' % args.zoom_factor)
         img = zoom(img, args.zoom_factor)
 
     # Run rivulet2 for the first time
+    #false, false, 'dt', True
+
     tracer = R2Tracer(quality=args.quality, silent=args.silent, speed=args.speed, clean=args.clean)
     swc, soma = tracer.trace(img, args.threshold)
     swc.reset(crop_region, args.zoom_factor)
     outpath = args.out if args.out else os.path.splitext(args.file)[0] + '.r2.swc'
     swc.save(outpath)
 
-    # Save the soma mask if required
+    # Save the soma mask if required (args.save_soma is False
     if args.save_soma:
         soma.pad(crop_region)
         soma.save((os.path.splitext(outswcfile)[0] + 'soma.tif'))
 
     print('-- Finshed: %.2f sec.' % (time.time() - starttime))
 
-    if args.view:
+    if not args.view:  #True
         from rivuletpy.utils.io import loadswc
         from rivuletpy.swc import SWC
         if os.path.exists(outpath):
