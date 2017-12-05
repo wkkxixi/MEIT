@@ -48,7 +48,6 @@ class R2Tracer(Tracer):
         # Whether the unconnected branches will be discarded
         self._clean = clean
         self._eps = 1e-5
-        print("ccccc")
 
 
     def trace(self, img, threshold):
@@ -59,14 +58,14 @@ class R2Tracer(Tracer):
         print('self._bimg is:')
         print(self._bimg)
 
-        if not self._silent: print('(1) --Detecting Soma...', end='')
+        if not self._silent: print('(1) --!!!Detecting Soma...', end='')
         self._soma = Soma()
         self._soma.detect(self._bimg, not self._quality, self._silent)
         self._prep()
 
         # Iterative Back Tracking with Erasing
         if not self._silent:
-            print('(5) --!Start Backtracking...')
+            print('(5) --Start Backtracking...')
         swc = self._iterative_backtrack()
 
         if self._clean:
