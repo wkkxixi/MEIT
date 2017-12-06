@@ -39,18 +39,22 @@ def loadtiff3d(filepath):
 
 
 def writetiff3d(filepath, block):
-    from libtiff import TIFF
+    # from libtiff import TIFF
+    import tifffile as tiff
     try:
         os.remove(filepath)
     except OSError:
         pass
 
-    tiff = TIFF.open(filepath, mode='w')
-    block = np.swapaxes(block, 0, 1)
+    # tiff = TIFF.open(filepath, mode='w')
+    # block = np.swapaxes(block, 0, 1)
+    with tiff.TiffWriter(filepath, bigtiff=True) as tif:
+        for z in range(block.shape[0]):
+            tif.save(block[z], compress = 6)
 
-    for z in range(block.shape[2]):
-        tiff.write_image(np.flipud(block[:, :, z]), compression=None)
-    tiff.close()
+    # for z in range(block.shape[2]):
+    #     tiff.write_image(np.flipud(block[:, :, z]), compression=None)
+    # tiff.close()
 
 
 def loadswc(filepath):
