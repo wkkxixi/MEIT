@@ -2,8 +2,8 @@ import math
 from tqdm import tqdm
 import numpy as np
 import skfmm
-import msfm
-import Image
+#import msfm
+#import Image
 from scipy.interpolate import RegularGridInterpolator
 from scipy.ndimage.morphology import binary_dilation
 from filtering.morphology import ssm
@@ -55,10 +55,8 @@ class R2Tracer(Tracer):
         The main entry for Rivulet2
         '''
         self._bimg = (img > threshold).astype('int')  # Segment image
-        print('self._bimg is:')
-        print(self._bimg)
 
-        if not self._silent: print('(1) --!!!Detecting Soma...', end='')
+        if not self._silent: print('(1) --Detecting Soma...', end='')
         self._soma = Soma()
         self._soma.detect(self._bimg, not self._quality, self._silent)
         self._prep()
@@ -68,7 +66,8 @@ class R2Tracer(Tracer):
             print('(5) --Start Backtracking...')
         swc = self._iterative_backtrack()
 
-        if self._clean:
+
+        if self._clean: # True
             swc.prune()
 
         return swc, self._soma
@@ -89,8 +88,6 @@ class R2Tracer(Tracer):
         if not self._silent:
             print('(4) --Compute Gradients...')
         self._make_grad()
-        print('self._grad is:')
-        print(self._grad)
 
         # Make copy of the timemap
         self._tt = self._t.copy()
@@ -101,7 +98,7 @@ class R2Tracer(Tracer):
 
         # For making a large tube to contain the last traced branch
         self._bb = np.zeros(shape=self._tt.shape)
-        print(self._tt.shape)
+
 
     def _update_coverage(self):
         self._cover_ctr_new = np.logical_and(self._tt < 0, self._bimg > 0).sum()
@@ -126,7 +123,6 @@ class R2Tracer(Tracer):
         Make the distance transform according to the speed type
         '''
         self._dt = skfmm.distance(self._bimg, dx=5e-2)  # Boundary DT
-
         if self._speed == 'ssm':
             if not self._silence:
                 print('--SSM with GVF...')
@@ -217,11 +213,18 @@ class R2Tracer(Tracer):
 
         # Initialise swc with the soma centroid
         swc = SWC(self._soma)
-        swc.add(np.reshape(
-            np.asarray([
-                0, 1, self._soma.centroid[0], self._soma.centroid[1], self._soma.centroid[2],
-                self._soma.radius, -1, 1.
-            ]), (1, 8)))
+        # print("before-----")
+        # print(swc._data)
+        # swc.add(np.reshape(
+        #     np.asarray([
+        #         0, 1, self._soma.centroid[0], self._soma.centroid[1], self._soma.centroid[2],
+        #         self._soma.radius, -1, 1.
+        #     ]), (1, 8)))
+        
+        # print("after-----")
+        # print(swc._data)
+        
+        # swc.size() now is just 1
         
 
         if not self._silent:
@@ -232,6 +235,7 @@ class R2Tracer(Tracer):
             self._update_coverage()
             # Find the geodesic furthest point on foreground time-crossing-map
             srcpt = np.asarray(np.unravel_index(self._tt.argmax(), self._tt.shape)).astype('float64')
+            #print('srcpt: ' + str(srcpt))
             branch = R2Branch()
             branch.add(srcpt, 1., 1.)
 
@@ -355,7 +359,7 @@ class R2Branch(Branch):
         self.stepsz = np.linalg.norm(velocity)
         self.branchlen += self.stepsz
         b = dilated_bimg[math.floor(pt[0]), math.floor(pt[1]), math.floor(pt[2])]
-        if b > 0:
+        if b > 0: #???
             self.gap += self.stepsz
         
         self.online_voxsum += b

@@ -109,9 +109,9 @@ if __name__ == '__main__':
     # Modify the crop function so that it can crop somamask as well
     img, crop_region = crop(img, args.threshold)  # Crop by default
 
-    tiff.imsave('cropped.tif', img)
-    print('shape of cropped img: ' + str(img.shape))
-    print('cropped region: ' + str(crop_region))
+    # tiff.imsave('cropped.tif', img)
+    # print('shape of cropped img: ' + str(img.shape))
+    # print('cropped region: ' + str(crop_region))
 
 
     if args.zoom_factor != 1.:

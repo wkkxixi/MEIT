@@ -6,7 +6,7 @@ from rivuletpy.utils.outputSmallSwc import *
 from rivuletpy.utils.compareswc import *
 import multiprocessing as mp
 import time
-folderpath='/home/rong/Desktop/Gold166-JSON/'
+folderpath = '/Users/wonh/Gold166-JSON/'
 def operationcombine(folder, line, thresholdt, percentage):
     if "_" in line:
         # print(line, "is on processing")
@@ -57,7 +57,7 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
                 swc1 = loadswc(origintif.split('.')[0] + '.swc')
                 swc2 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')
                 print(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')# name of the folder and swc
-                precision_recall(swc1, swc2)
+                # precision_recall(swc1, swc2)
                 prf, swc_compare = precision_recall(swc1, swc2)
                 saveswc(origintif.split('.')[0] + '_gao_compare.swc', swc_compare)
                 content = content + '\n' + origintif + '\t%.2f\t%.2f\t%.2f' % prf

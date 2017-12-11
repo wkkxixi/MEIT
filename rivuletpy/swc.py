@@ -11,8 +11,8 @@ class SWC(object):
         if soma:
             self._data[0, :] = np.asarray([0, 1, soma.centroid[0], soma.centroid[1], soma.centroid[2], soma.radius, -1, 1])
 
-    def add(self, swc_nodes):
-        np.vstack((self._data, swc_nodes))
+    # def add(self, swc_nodes):
+    #     self._data = np.vstack((self._data, swc_nodes))
 
     def add_branch(self, branch, pidx=None, random_color=True):
         '''

@@ -74,7 +74,9 @@ class Soma(object):
         # The type of iterations is int
         iterations = -1
         bimg = bimg.astype('int')  # Segment
-        dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT
+        # Return the signed distance from the zero contour of the array bimg
+        # the voxel in the center has greater value => soma
+        dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT 
 
         # somaradius : the approximate value of
         # soma radius estimated from distance transform
@@ -87,7 +89,9 @@ class Soma(object):
         # the shape of somapos is (3,)
         # somapos is array-like
         somapos = np.asarray(np.unravel_index(dt.argmax(), dt.shape))
+        print('soma position is:')
         print(somapos)
+        print('soma radius is: ' + str(somaradius))
 
         # Soma detection is required
         if not simple:

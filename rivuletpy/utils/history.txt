@@ -1,0 +1,1929 @@
+    1  LS
+    2  ls
+    3  sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    4  ls
+    5  cd fonts
+    6  git clone https://github.com/powerline/fonts.git --depth=1
+    7  cd fonts
+    8  ./install.sh
+    9  ls
+   10  ..
+   11  rm -rf fonts
+   12  bash
+   13  ls
+   14  download
+   15  downloads
+   16  src
+   17  ls
+   18  cd y2s2
+   19  ls
+   20  comp2007
+   21  ls
+   22  assignments
+   23  ls
+   24  mkdir assignment4
+   25  atom assignment4
+   26  cd assignment4
+   27  ls
+   28  clang A1.c -o A1
+   29  ./A1
+   30  ./A1 < test1.in
+   31  ./A1 < test2.in
+   32  ./A1 < test3.in
+   33  ./A1 < test4.in
+   34  ./A1 < test5.in
+   35  clang A1.c -o A1
+   36  ./A1 < test5.in
+   37  clang A1.c -o A1
+   38  ./A1 < test5.in
+   39  clang A1.c -o A1
+   40  ./A1 | python3 ford-fulkerson.py
+   41  ls
+   42  y2s2
+   43  ls
+   44  atom acm
+   45  cd acm
+   46  ls
+   47  javac A1.java A1
+   48  ls
+   49  g++ pie.cpp pie
+   50  ls
+   51  g++ pie.cpp -o pie
+   52  ./pie
+   53  g++ pie.cpp -o pie
+   54  ./pie
+   55  g++ pie.cpp -o pie
+   56  ./pie
+   57  g++ pie.cpp -o pie
+   58  ./pie
+   59  g++ pie.cpp -o pie
+   60  ./pie
+   61  g++ pie.cpp -o pie
+   62  ./pie
+   63  g++ pie.cpp -o pie
+   64  ./pie
+   65  g++ pie.cpp -o pie
+   66  ./pie
+   67  cd ..
+   68  ls
+   69  cd ..
+   70  ls
+   71  cd desktop
+   72  ls
+   73  g++ pie.cpp -o pie
+   74  g++ poj3122.cpp -o poj3122
+   75  ./poj3122
+   76  g++ poj3122.cpp -o poj3122
+   77  ./poj3122
+   78  cd y2s2
+   79  ls
+   80  cd ..
+   81  ls
+   82  cd y2s2
+   83  ls
+   84  cd acm
+   85  g++ pie.cpp -o pie
+   86  ./pie
+   87  g++ answer.cpp -o answer
+   88  ./anser
+   89  ./answer
+   90  g++ answer.cpp -o answer
+   91  ./anser
+   92  ./answer
+   93  g++ answer.cpp -o answer
+   94  ./answer
+   95  g++ answer.cpp -o answer
+   96  ./answer
+   97  g++ answer.cpp -o answer
+   98  ./answer
+   99  g++ answer.cpp -o answer
+  100  ./answer
+  101  g++ pie.cpp -o pie.cpp
+  102  g++ pie.cpp -o pie
+  103  g++ answer.cpp -o answer
+  104  g++ pie.cpp -o pie
+  105  g++ answer.cpp -o answer
+  106  g++ pie.cpp -o pie
+  107  ./pie
+  108  g++ pie.cpp -o pie
+  109  ./pie
+  110  g++ pie.cpp -o pie
+  111  ./pie
+  112  g++ pie.cpp -o pie
+  113  ./pie
+  114  g++ pie.cpp -o pie
+  115  ./pie
+  116  g++ pie.cpp -o pie
+  117  ./pie
+  118  g++ pie2.cpp -o pie2
+  119  ./pie2
+  120  g++ pie2.cpp -o pie2
+  121  ./pie2
+  122  ls
+  123  g++ paints.cpp paints
+  124  g++ paints.cpp -o paints
+  125  ./paints
+  126  g++ paints.cpp -o paints
+  127  ./paints
+  128  g++ paints.cpp -o paints
+  129  ./paints
+  130  g++ paints.cpp -o paints
+  131  ./paints
+  132  g++ paints.cpp -o paints
+  133  ./paints
+  134  g++ paints.cpp -o paints
+  135  ./paints
+  136  g++ paints.cpp -o paints
+  137  ./paints
+  138  g++ paints.cpp -o paints
+  139  ./paints
+  140  #include <cstdlib>
+  141  #include <cstdio>
+  142  #include <cstring>
+  143  #include <cmath>
+  144  #include <algorithm>
+  145  using namespace std;
+  146  int arr[12];
+  147  int ans[1000];
+  148  bool cmp(int a,int b)
+  149  {\n  return a >b;\n}
+  150  int main() {\n    int count = 0;\n\n    while(true){\n        //printf("Round %d \n", count);\n        int K = 0;\n        int N = 0;\n        cin >> N;\n        if(N == 0) break;\n        for(int i = 0; i < N; i++){
+  151  cd y2s2
+  152  ls
+  153  cd acm
+  154  ls
+  155  g++ paints.cpp -o paints
+  156  ./paints
+  157  ls
+  158  g++ game01.cpp -o game01
+  159  ./game01
+  160  g++ game01.cpp -o game01
+  161  ./game01
+  162  g++ game01.cpp -o game01
+  163  ./game01
+  164  g++ game01.cpp -o game01
+  165  ./game01
+  166  g++ game01.cpp -o game01
+  167  ./game01
+  168  g++ game01.cpp -o game01
+  169  ./game01
+  170  g++ game01.cpp -o game01
+  171  ./game01
+  172  g++ game01.cpp -o game01
+  173  ./game01
+  174  cd y2s2
+  175  cd comp2121
+  176  ls
+  177  atom skeleton
+  178  cd skeleton
+  179  ls
+  180  cd ..
+  181  ls
+  182  atom p2p_code
+  183  y2s2
+  184  comp2121
+  185  ls
+  186  assignment3
+  187  ls
+  188  A3
+  189  ls
+  190  javac -d bin src/*.java
+  191  java -cp bin BlockchainServer 8322 localhost 8333
+  192  y2s2
+  193  ls
+  194  comp2121
+  195  ls
+  196  assignment3
+  197  ls
+  198  A3
+  199  ls
+  200  y2s2
+  201  comp2121
+  202  ls
+  203  assignment3
+  204  ls
+  205  A3
+  206  ls
+  207  javac -d bin src/*.java
+  208  y2s2
+  209  comp2121
+  210  assignment3
+  211  A3
+  212  ls
+  213  javac -d bin src/*.java
+  214  java -cp bin BlockchainServer 8333 127.0.0.1 8444
+  215  java -cp bin BlockchainServer 8444 127.0.0.1 8333
+  216  java -cp bin BlockchainServer 8333 127.0.0.1 8444
+  217  java -cp bin BlockchainServer 8444 127.0.0.1 8333
+  218  javac -d bin src/*.java
+  219  java -cp bin BlockchainServer 8333 127.0.0.1 8444
+  220  java -cp bin BlockchainServer 8444 127.0.0.1 8333
+  221  comp2121
+  222  y2s2
+  223  comp2121
+  224  assignment3
+  225  ls
+  226  A3
+  227  ls
+  228  javac -d bin src/*.java
+  229  java -cp bin BlockchainServer 8222 127.0.0.1 8333
+  230  javac -d bin src/*.java
+  231  java -cp bin BlockchainServer 8333 127.0.0.1 8444
+  232  java -cp bin BlockchainServer 8444 127.0.0.1 8333
+  233  java -cp bin BlockchainServer 8222 127.0.0.1 8333
+  234  javac -d bin src/*.java
+  235  y2s2
+  236  comp2121
+  237  assignment3
+  238  A3
+  239  ls
+  240  javac -d bin src/*.java
+  241  java -cp bin CustomizedServer 8111 &
+  242  java -cp bin BlockchainServer 8444 127.0.0.1 8111 
+  243  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  244  java -cp bin BlockchainServer 8222 127.0.0.1 8333
+  245  y2s2
+  246  comp2121
+  247  ls
+  248  assignment3
+  249  ls
+  250  A3
+  251  ls
+  252  javac -cp bin src/*.java
+  253  java -d bin CustomizedServer 8111 &
+  254  java -cp bin CustomizedServer 8111 &
+  255  javac -d bin src/*.java
+  256  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  257  javac -d bin src/*.java
+  258  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  259  y2s
+  260  y2s2
+  261  comp2121
+  262  assignment3
+  263  A3
+  264  ls
+  265  javac -d bin src/*.java
+  266  java -cp bin CustomizedServer 8111 &
+  267  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  268  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  269  java -cp bin BlockchainServer 8222 127.0.0.1 8333
+  270  comp2121
+  271  y2s2
+  272  comp2121
+  273  assignment3
+  274  A3
+  275  javac -d bin src/*.java
+  276  comp2121
+  277  assignment3
+  278  A3
+  279  javac -d bin src/*.java
+  280  y2s2
+  281  comp2121
+  282  assignment3
+  283  A3
+  284  javac -d bin src/*.java
+  285  y2s2
+  286  comp2121
+  287  assignment2
+  288  assignment3
+  289  A3
+  290  javac -d bin src/*.java
+  291  java -cp bin CustomizedServer 8111 &
+  292  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  293  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  294  y2s2
+  295  comp2121
+  296  assignment3
+  297  A3
+  298  javac -d bin CustomizedServer 8111 &
+  299  javac -d bin src/*.java 
+  300  y2s2
+  301  comp2121
+  302  assignment3
+  303  A3
+  304  javac -d bin src/*.java
+  305  y2s2
+  306  comp2121
+  307  assignment3
+  308  A3
+  309  javac -d bin src/*.java
+  310  y2s2
+  311  comp2121
+  312  assignment
+  313  assignment3
+  314  A3
+  315  javac -d bin src/*.java
+  316  java -cp bin CustomizedServer 8111 &
+  317  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  318  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  319  y2s2
+  320  comp2121
+  321  assignment3
+  322  A3
+  323  javac -d bin src/*.java
+  324  y2s2
+  325  comp2121
+  326  assignment3
+  327  A3
+  328  javac -d bin src/*.java
+  329  y2s2
+  330  comp2121
+  331  assignment3
+  332  A3
+  333  javac -d bin src/*.java
+  334  java -cp bin CustomizedServer 8111
+  335  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  336  java -cp bin BlockchianServer 8444 127.0.0.1 8111
+  337  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  338  javac -d bin src/*.java
+  339  java -cp bin CustomizedServer 8111 &
+  340  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  341  java -cp bin BlockchainServer 8444 127.0.0.1 8111
+  342  java -cp bin BlockchainServer 8222 127.0.0.1 8333
+  343  javac -d bin src/*.java
+  344  java -cp bin CustomizedServer 8111 &
+  345  java -cp bin BlockchainServer 8333 127.0.0.1 8111
+  346  ls
+  347  acm
+  348  y2s2
+  349  ls
+  350  acm
+  351  cd ..
+  352  atom acm
+  353  cd acm
+  354  ls
+  355  g++ am.cpp -o am
+  356  g++ am.c -o am
+  357  g++ am.cpp -o am
+  358  ./am
+  359  g++ am.cpp -o am
+  360  ./am
+  361  g++ am.cpp -o am
+  362  ./am
+  363  g++ am.cpp -o am
+  364  ./am
+  365  g++ am.cpp -o am
+  366  ./am
+  367  g++ am.cpp -o am
+  368  ./am
+  369  g++ am.cpp -o am
+  370  ./am
+  371  g++ am.cpp -o am
+  372  ./am
+  373  g++ am.cpp -o am
+  374  ./am
+  375  g++ am.cpp -o am
+  376  ./am
+  377  g++ am.cpp -o am
+  378  ./am
+  379  g++ 680.cpp
+  380  g++ 680.cpp -o 680
+  381  ./680
+  382  g++ 680.cpp -o 680
+  383  ./680
+  384  g++ 680.cpp -o 680
+  385  ./680
+  386  g++ 680.cpp -o 680
+  387  ./680
+  388  g++ 680.cpp -o 680
+  389  ./680
+  390  g++ 680.cpp -o 680
+  391  ./680
+  392  g++ 680.cpp -o 680
+  393  ./680
+  394  g++ 680.cpp -o 680
+  395  ./680
+  396  g++ 680.cpp -o 680
+  397  ./680
+  398  g++ 680.cpp -o 680
+  399  ./680
+  400  g++ 680.cpp -o 680
+  401  ./680
+  402  g++ uva173.cpp -o uva173
+  403  ./uva173
+  404  g++ uva173.cpp -o uva173
+  405  ./uva173
+  406  g++ uva173.cpp -o uva173
+  407  ./uva173
+  408  g++ uva173.cpp -o uva173
+  409  ./uva173
+  410  g++ uva173.cpp -o uva173
+  411  ./uva173
+  412  g++ uva173.cpp -o uva173
+  413  ./uva173
+  414  g++ uva173.cpp -o uva173
+  415  ./uva173
+  416  g++ uva173.cpp -o uva173
+  417  ./uva173
+  418  g++ uva173.cpp -o uva173
+  419  ./uva173
+  420  g++ uva173.cpp -o uva173
+  421  ./uva173
+  422  g++ uva173.cpp -o uva173
+  423  ./uva173
+  424  g++ uva173.cpp -o uva173
+  425  ./uva173
+  426  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/4BbupH --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  427  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/qAbmBx --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  428  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/E2TM00 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  429  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/k7Whvl --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  430  g++ uva173.cpp -o uva173
+  431  ./uva173
+  432  g++ uva173.cpp -o uva173
+  433  ./uva173
+  434  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/EzdsGE --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  435  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/2EX3qX --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  436  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/R4ifBn --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  437  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/frG15h --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  438  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/yisRKp --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  439  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/bm0w7c --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  440  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/Qf8ve8 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  441  g++ uva173.cpp -o uva173
+  442  ./uva173
+  443  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/K1jOmJ --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  444  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/4UnFqz --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  445  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/uofycm --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  446  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/g5fNmq --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  447  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/3lZcy1 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  448  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/XYhR15 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  449  g++ uva173.cpp -o uva173
+  450  ./uva173
+  451  g++ uva173.cpp -o uva173
+  452  ./uva173
+  453  g++ uva173.cpp -o uva173
+  454  ./uva173
+  455  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/fxLbgO --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  456  ./uva173
+  457  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/fHA73O --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  458  g++ uva173.cpp -o uva173
+  459  ./uva173
+  460  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/nWgyE0 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  461  g++ uva173.cpp -o uva173
+  462  ./uva173
+  463  g++ uva173.cpp -o uva173
+  464  ./uva173
+  465  g++ uva173.cpp -o uva173
+  466  ./uva173
+  467  g++ uva173.cpp -o uva173
+  468  ./uva173
+  469  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/9xSC6C --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  470  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/7SeLgh --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  471  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/cfovUC --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  472  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/pbUqB5 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  473  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/oBABMG --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  474  g++ uva173.cpp -o uva173
+  475  ./uva173
+  476  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/4r27i3 --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  477  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/lO77Sy --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+  478  cd y2s2
+  479  cd info2110
+  480  cd hellpga[
+  481  cd hellogap
+  482  ls
+  483  assets
+  484  ls
+  485  atom www
+  486  y2s2
+  487  comp2121
+  488  assignment3
+  489  A3
+  490  ls
+  491  src
+  492  ls
+  493  javac -d bin src/*.java
+  494  ls
+  495  javac -d bin src/*.java
+  496  ls
+  497  cd ..
+  498  ls
+  499  javac -d bin src/*.java
+  500  java -cp bin CustomizedServer 8000 &
+  501  java -cp bin BlockchainServer 8333 127.0.0.1 8000
+  502  y2s2
+  503  comp2121
+  504  assignment3
+  505  A3
+  506  ls
+  507  javac -d bin src/*.java
+  508  y2s2
+  509  comp2121
+  510  assignment3
+  511  A3
+  512  javac -d bin src/*.java
+  513  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  514  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  515  y2s2
+  516  comp2121
+  517  assignment3
+  518  a3
+  519  ls
+  520  javac -d bin src/*.java
+  521  java -cp bin BlockchainClient 8111
+  522  java -cp bin BlockchainClient 127.0.0.1 8111
+  523  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  524  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  525  java -cp bin BlockchainClient 127.0.0.1 8111
+  526  javac -d bin src/*.java
+  527  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  528  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  529  java -cp bin BlockchainClient 8111
+  530  java -cp bin BlockchainClient 127.0.0.1 8111
+  531  javac -d bin src/*.java
+  532  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  533  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  534  javac -d bin src/*.java
+  535  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  536  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  537  javac -d bin src/*.java
+  538  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  539  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  540  javac -d bin src/*.java
+  541  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  542  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  543  javac -d bin src/*.java
+  544  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  545  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  546  javac -d bin src/*.java
+  547  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  548  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  549  javac -d bin src/*.java
+  550  java -cp bin BlockchainClient 127.0.0.1 8111
+  551  javac -d bin src/*.java
+  552  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  553  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  554  java -cp bin BlockchainClient 127.0.0.1 8111
+  555  javac -d bin src/*.java
+  556  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  557  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  558  java -cp bin BlockchainClient 127.0.0.1 8111
+  559  javac -d bin src/*.java
+  560  javac -d bin src/*.java 
+  561  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  562  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  563  java -cp bin BlockchainClient 127.0.0.1 8111
+  564  javac -d bin src/*.java 
+  565  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  566  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  567  java -cp bin BlockchainClient 127.0.0.1 8111
+  568  javac -d bin src/*.java 
+  569  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  570  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  571  java -cp bin BlockchainClient 127.0.0.1 8111
+  572  javac -d bin src/*.java 
+  573  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  574  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  575  java -cp bin BlockchainClient 127.0.0.1 8111
+  576  javac -d bin src/*.java 
+  577  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  578  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  579  java -cp bin BlockchainClient 127.0.0.1 8111
+  580  javac -d bin src/*.java 
+  581  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  582  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  583  java -cp bin BlockchainClient 127.0.0.1 8111
+  584  javac -d bin src/*.java 
+  585  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  586  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  587  java -cp bin BlockchainClient 127.0.0.1 8111
+  588  javac -d bin src/*.java 
+  589  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  590  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  591  java -cp bin BlockchainClient 127.0.0.1 8111
+  592  javac -d bin src/*.java 
+  593  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  594  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  595  java -cp bin BlockchainClient 127.0.0.1 8111
+  596  javac -d bin src/*.java 
+  597  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  598  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  599  java -cp bin BlockchainClient 127.0.0.1 8111
+  600  javac -d bin src/*.java 
+  601  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  602  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  603  java -cp bin BlockchainClient 127.0.0.1 8111
+  604  javac -d bin src/*.java 
+  605  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  606  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  607  java -cp bin BlockchainClient 127.0.0.1 8111
+  608  javac -d bin src/*.java 
+  609  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  610  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  611  java -cp bin BlockchainClient 127.0.0.1 8111
+  612  y2s2
+  613  comp2121
+  614  ls
+  615  assignment3
+  616  ls
+  617  A3
+  618  ls
+  619  javac -d bin src/*.java
+  620  y2s2
+  621  comp2121
+  622  assignment3
+  623  a3
+  624  javac -d bin src/*.java
+  625  y2s2
+  626  comp2121
+  627  assignment3
+  628  a3
+  629  javac -d bin src/*.java
+  630  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  631  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  632  java -cp bin BlockchainClient 8111 127.0.0.1
+  633  java -cp bin BlockchainClient 8111
+  634  java -cp bin BlockchainClient 127.0.0.1 8111
+  635  javac -d bin src/*.java
+  636  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  637  javac -d bin src/*.java
+  638  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  639  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  640  java -cp bin BlockchainClient 8111 127.0.0.1
+  641  java -cp bin BlockchainClient 127.0.0.1 8111
+  642  javac -d bin src/*.java
+  643  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  644  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  645  javac -d bin src/*.java
+  646  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  647  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  648  javac -d bin src/*.java
+  649  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  650  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  651  java -cp bin BlockchainClient 127.0.0.1 8111
+  652  javac -d bin src/*.java
+  653  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  654  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  655  javac -d bin src/*.java
+  656  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  657  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  658  java -cp bin BlockchainClient 127.0.0.1 8111
+  659  javac -d bin src/*.java
+  660  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  661  java -cp bin BlockchainClient 127.0.0.1 8111
+  662  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  663  javac -d bin src/*.java
+  664  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  665  java -cp bin BlockchainClient 127.0.0.1 8111
+  666  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  667  javac -d bin src/*.java
+  668  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  669  java -cp bin BlockchainClient 127.0.0.1 8111
+  670  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  671  javac -d bin src/*.java
+  672  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  673  java -cp bin BlockchainClient 127.0.0.1 8111
+  674  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  675  javac -d bin src/*.java
+  676  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  677  java -cp bin BlockchainClient 127.0.0.1 8111
+  678  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  679  javac -d bin src/*.java
+  680  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  681  java -cp bin BlockchainClient 127.0.0.1 8111
+  682  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  683  javac -d bin src/*.java
+  684  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  685  java -cp bin BlockchainClient 127.0.0.1 8111
+  686  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  687  javac -d bin src/*.java
+  688  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  689  java -cp bin BlockchainClient 127.0.0.1 8111
+  690  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  691  javac -d bin src/*.java
+  692  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  693  java -cp bin BlockchainClient 127.0.0.1 8111
+  694  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  695  javac -d bin src/*.java
+  696  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  697  java -cp bin BlockchainClient 127.0.0.1 8111
+  698  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  699  javac -d bin src/*.java
+  700  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  701  java -cp bin BlockchainClient 127.0.0.1 8111
+  702  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  703  javac -d bin src/*.java
+  704  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  705  java -cp bin BlockchainClient 127.0.0.1 8111
+  706  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  707  javac -d bin src/*.java
+  708  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  709  java -cp bin BlockchainClient 127.0.0.1 8111
+  710  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  711  javac -d bin src/*.java
+  712  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  713  java -cp bin BlockchainClient 127.0.0.1 8111
+  714  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  715  javac -d bin src/*.java
+  716  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  717  java -cp bin BlockchainClient 127.0.0.1 8111
+  718  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  719  javac -d bin src/*.java
+  720  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  721  java -cp bin BlockchainClient 127.0.0.1 8111
+  722  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  723  javac -d bin src/*.java
+  724  java -cp bin BlockchainClient 127.0.0.1 8111
+  725  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  726  java -cp bin BlockchainClient 127.0.0.1 8111
+  727  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  728  javac -d bin src/*.java
+  729  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  730  java -cp bin BlockchainClient 127.0.0.1 8111
+  731  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  732  y2s2
+  733  comp2121
+  734  assignment3
+  735  a3
+  736  javac -d bin src/*.java
+  737  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  738  java -cp bin BlockchainClient 127.0.0.1 8111
+  739  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  740  java -cp bin BlockchainClient 127.0.0.1 8111
+  741  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  742  javac -d bin src/*.java
+  743  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  744  java -cp bin BlockchainClient 127.0.0.1 8111
+  745  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  746  javac -d bin src/*.java
+  747  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  748  java -cp bin BlockchainClient 127.0.0.1 8111
+  749  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  750  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  751  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  752  javac -d bin src/*.java
+  753  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  754  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  755  javac -d bin src/*.java
+  756  java -cp bin BlockchainClient 127.0.0.1 8111
+  757  javac -d bin src/*.java
+  758  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  759  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  760  java -cp bin BlockchainClient 127.0.0.1 8111
+  761  javac -d bin src/*.java
+  762  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  763  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  764  java -cp bin BlockchainClient 127.0.0.1 8111
+  765  javac -d bin src/*.java
+  766  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  767  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  768  java -cp bin BlockchainClient 127.0.0.1 8111
+  769  y2s2
+  770  ls
+  771  info2110
+  772  ls
+  773  hellogap
+  774  ls
+  775  assets
+  776  ls
+  777  atom www
+  778  y2s2
+  779  comp2121
+  780  assignment3
+  781  ls
+  782  a3
+  783  ls
+  784  javac -d bin src/*.java
+  785  y2s2
+  786  comp2121
+  787  assignment3
+  788  a3
+  789  javac -d bin src/*.java
+  790  y2s2
+  791  comp2121
+  792  assignment3
+  793  a3
+  794  javac -d bin src/*.java
+  795  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  796  java -cp bin BlockchainClient 127.0.0.1 8111
+  797  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  798  y2s2
+  799  comp2121
+  800  assignment3
+  801  a3
+  802  javac -d bin src/*.java
+  803  java -cp bin BlockchainClient 8333 127.0.0.1 8222
+  804  java -cp bin BlockchainServer 8333 127.0.0.1 8222
+  805  javac -d bin src/*.java
+  806  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  807  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  808  java -cp bin BlockchainServer 8333 127.0.0.1 8222
+  809  javac -d bin src/*.java
+  810  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  811  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  812  java -cp bin BlockchainServer 8333 127.0.0.1 8222
+  813  javac -d bin src/*.java
+  814  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  815  java -cp bin BlockchainClient 127.0.0.1 8111
+  816  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  817  java -cp bin BlockchainServer 8333 127.0.0.1 8222
+  818  java -cp bin BlockchainClient 127.0.0.1 8333
+  819  y2s2
+  820  comp2121
+  821  ls
+  822  assignment3
+  823  ls
+  824  Pan
+  825  ls
+  826  javac -d bin src/*.java
+  827  y2s2
+  828  comp2112
+  829  comp2121
+  830  ls
+  831  assignment3
+  832  ls
+  833  pan
+  834  ls
+  835  javac -d bin src/*.java
+  836  y2s2
+  837  comp2121
+  838  assignment3
+  839  pan
+  840  ls
+  841  javac -d bin src/*.java
+  842  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  843  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  844  java -cp bin BlockchainClient 127.0.0.1 8111
+  845  javac -d bin src/*.java
+  846  ls
+  847  cd pan
+  848  ls
+  849  cd ..
+  850  pan
+  851  ls
+  852  javac -d bin src/*.java
+  853  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  854  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  855  java -cp bin BlockchainClient 127.0.0.1 8111
+  856  javac -d bin src/*.java
+  857  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  858  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  859  java -cp bin BlockchainClient 127.0.0.1 8111
+  860  javac -d bin src/*.java
+  861  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  862  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  863  java -cp bin BlockchainClient 127.0.0.1 8111
+  864  javac -d bin src/*.java
+  865  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  866  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  867  java -cp bin BlockchainClient 127.0.0.1 8111
+  868  javac -d bin src/*.java
+  869  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  870  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  871  java -cp bin BlockchainClient 127.0.0.1 8111
+  872  javac -d bin src/*.java
+  873  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  874  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  875  java -cp bin BlockchainClient 127.0.0.1 8111
+  876  javac -d bin src/*.java
+  877  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  878  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  879  java -cp bin BlockchainClient 127.0.0.1 8111
+  880  javac -d bin src/*.java
+  881  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  882  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  883  java -cp bin BlockchainClient 127.0.0.1 8111
+  884  javac -d bin src/*.java
+  885  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  886  java -cp bin BlockchainServer 8222 127.0.0.1 8111
+  887  java -cp bin BlockchainClient 127.0.0.1 8111
+  888  y2s2
+  889  comp2121
+  890  assignment3
+  891  a3
+  892  javac -d bin src/*.java
+  893  y2s2
+  894  comp2121
+  895  assignment3
+  896  a3
+  897  javac -d bin src/*.java
+  898  y2s2
+  899  comp2121
+  900  assignemnt3
+  901  assignment3
+  902  a3
+  903  javac -d bin src/*.java
+  904  y2s2
+  905  comp2121
+  906  assignment3
+  907  a3
+  908  javac -d bin src/*.java
+  909  java -cp bin BlockchainServer 8111 10.19.226.93 8334
+  910  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  911  java -cp BlockchainClient 8111 127.0.0.1
+  912  java -cp BlockchainClient 127.0.0.1 8111
+  913  y2s2
+  914  comp2121
+  915  assignment3
+  916  a3
+  917  javac -d bin src/*.java
+  918  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  919  java BlockchainClient 127.0.0.1 8111
+  920  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  921  java -cp bin BlockchainClient 127.0.0.1 8111
+  922  talnet localhost 8111
+  923  java BlockchainClient 127.0.0.1 8111
+  924  ls
+  925  java -cp bin BlockchainClient 127.0.0.1 8111
+  926  java -cp bin BlockchainClient localhost 8111
+  927  telent localhost 8111
+  928  telnet localhost 8111
+  929  java -cp bin BlockchainServer 8111 127.0.0.1 8222
+  930  telnet localhost 8111
+  931  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  932  telnet localhost 8111
+  933  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  934  telnet localhost 8111
+  935  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  936  telnet localhost 8111
+  937  javac -d bin src/*.java
+  938  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  939  telnet localhost 8111
+  940  java -cp bin BlockchainServer 8111 10.19.226.93 8333
+  941  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  942  telnet localhost 8111
+  943  javac -d bin src/*.java
+  944  java -cp bin BlockchainServer 8111 10.16.108.105 8334
+  945  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  946  telnet localhost 8111
+  947  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  948  telnet localhost 8111
+  949  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  950  telnet localhost 8111
+  951  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  952  telnet localhost 8111
+  953  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  954  java -cp bin BlockchainServer 8111 10.19.226.93 9111
+  955  telnet localhost 9111
+  956  telnet localhost 8111
+  957  y2s2
+  958  comp2121
+  959  assignment3
+  960  a3
+  961  y2s2
+  962  comp2121
+  963  assignment3
+  964  a3
+  965  javac -d bin src/*.java
+  966  java -cp bin BlockchainServer 8111 10.16.69.255 8667
+  967  telnet localhost 8111
+  968  java -cp bin BlockchainServer 8111 10.16.69.255 8667
+  969  telnet localhost 8111
+  970  java -cp bin BlockchainServer 8111 10.16.108.105 9000
+  971  telnet localhost 8111
+  972  java -cp bin BlockchainServer 8111 10.19.226.93 9111
+  973  telnet localhost 8111
+  974  y2s2
+  975  comp2121
+  976  assignment3
+  977  a3
+  978  javac -d bin src/*.java
+  979  java BlockchainServer 8000 127.0.0.1 8111
+  980  java -cp bin BlockchainServer 8000 127.0.0.1 8111
+  981  java -cp bin BlockchainServer 8111 127.0.0.1 8000
+  982  javac -d bin src/*.java
+  983  java -cp bin BlockchainServer 8222 127.0.0.1 8000
+  984  java -cp bin BlockchainServer 8000 127.0.0.1 8222
+  985  javac -d bin src/*.java
+  986  java -cp bin BlockchainServer 8000 127.0.0.1 8222
+  987  java -cp bin BlockchainServer 8222 127.0.0.1 8000
+  988  telnet localhost 8000
+  989  javac -d bin src/*.java
+  990  java -cp bin BlockchainServer 8000 127.0.0.1 8222
+  991  java -cp bin BlockchainServer 8222 127.0.0.1 8000
+  992  telnet localhost 8000
+  993  java -cp bin BlockchainServer 8222 127.0.0.1 8000
+  994  java -cp bin BlockchainServer 8000 127.0.0.1 8222
+  995  y2s2
+  996  comp2007
+  997  ls
+  998  assignments
+  999  ls
+ 1000  mkdir assignment5
+ 1001  cd assignment5
+ 1002  ls
+ 1003  touch A5.java
+ 1004  ls
+ 1005  VS A5.java
+ 1006  ls
+ 1007  cd ..
+ 1008  ls
+ 1009  atom assignment5
+ 1010  assignment5
+ 1011  ls
+ 1012  javac A5.java
+ 1013  java A5
+ 1014  javac A5.java
+ 1015  java A5
+ 1016  javac A5.java
+ 1017  java A5
+ 1018  javac A5.java
+ 1019  java A5
+ 1020  javac A5.java
+ 1021  java A5
+ 1022  javac A5.java
+ 1023  java A5 < c_fair_test1.in | knapsack.py
+ 1024  ls
+ 1025  java A5 | knapsack.py
+ 1026  javac A5.java
+ 1027  java A5 < c_fair_test1.in
+ 1028  javac A5.java
+ 1029  java A5 < c_fair_test1.in
+ 1030  javac A5.java
+ 1031  java A5 < c_fair_test1.in
+ 1032  java A5 < fairpair_test1.in
+ 1033  y2s2
+ 1034  comp2121
+ 1035  ls
+ 1036  cd ..
+ 1037  comp2007
+ 1038  assignment3
+ 1039  assignments
+ 1040  ls
+ 1041  atom assignment5
+ 1042  acm
+ 1043  y2s2
+ 1044  acm
+ 1045  ls
+ 1046  mkdir 002
+ 1047  touch test.cpp
+ 1048  ls
+ 1049  cd 002
+ 1050  touch test.cpp
+ 1051  y2s2
+ 1052  comp2121
+ 1053  assignment3
+ 1054  ls
+ 1055  a3
+ 1056  ls
+ 1057  javac -d bin src/*.java
+ 1058  y2s2
+ 1059  comp2121
+ 1060  assignment3
+ 1061  a3
+ 1062  javac -d bin src/*.java
+ 1063  java -cp bin BlockchainServer 8111 127.0.0.1 8000
+ 1064  java -cp bin BlockchainServer 8000 127.0.0.1 8111
+ 1065  telnet 127.0.0.1 8111
+ 1066  ls
+ 1067  g++ test.cpp -o test
+ 1068  ./test
+ 1069  g++ test.cpp -o test
+ 1070  ./test
+ 1071  g++ test.cpp -o test
+ 1072  ./test
+ 1073  g++ test.cpp -o test
+ 1074  ./test
+ 1075  g++ test.cpp -o test
+ 1076  ./test
+ 1077  g++ test.cpp -o test
+ 1078  ./test
+ 1079  g++ test.cpp -o test
+ 1080  ./test
+ 1081  g++ test.cpp -o test
+ 1082  ./test
+ 1083  g++ test.cpp -o test
+ 1084  ./test
+ 1085  g++ test.cpp -o test
+ 1086  ./test
+ 1087  g++ test.cpp -o test
+ 1088  ./test
+ 1089  g++ test.cpp -o test
+ 1090  ./test
+ 1091  g++ test.cpp -o test
+ 1092  ./test
+ 1093  g++ test.cpp -o test
+ 1094  ./test
+ 1095  g++ test.cpp -o test
+ 1096  ./test
+ 1097  g++ test.cpp -o test
+ 1098  ./test
+ 1099  g++ test.cpp -o test
+ 1100  ./test
+ 1101  g++ test.cpp -o test
+ 1102  ./test
+ 1103  g++ test.cpp -o test
+ 1104  ./test
+ 1105  g++ test.cpp -o test
+ 1106  ./test
+ 1107  g++ test.cpp -o test
+ 1108  ./test
+ 1109  g++ test.cpp -o test
+ 1110  ./test
+ 1111  g++ test.cpp -o test
+ 1112  ./test
+ 1113  cd "/Users/wonh/y2s2/acm/002/" && g++ test.cpp -o test && "/Users/wonh/y2s2/acm/002/"test
+ 1114  cd "/Users/wonh/y2s2/acm/002/" && g++ test.cpp -o a.out && "/Users/wonh/y2s2/acm/002/"a.out
+ 1115  cd "/Users/wonh/y2s2/acm/002/" && g++ poj1002.cpp -o a.out && "/Users/wonh/y2s2/acm/002/"a.out
+ 1116  cd "/Users/wonh/y2s2/acm/002/" && g++ tempCodeRunnerFile.cpp -o a.out && "/Users/wonh/y2s2/acm/002/"a.out
+ 1117  cd "/Users/wonh/y2s2/acm/002/" && g++ poj1002.cpp -o a.out && "/Users/wonh/y2s2/acm/002/"a.out
+ 1118  #include <map>
+ 1119  #include <string>
+ 1120  using namespace std;
+ 1121  map<int, int> mark;
+ 1122  map<int, int>::iterator it;
+ 1123  {\n    switch(c){\n        case 'A':\n        case 'B':
+ 1124  int main(){\n\n   int n;\n   cin >> n;\n   \n    string tmp;\n   for(int i = 0; i < n; i++){
+ 1125  cd "/Users/wonh/y2s2/acm/002/" && g++ poj1002.cpp -o a.out && "/Users/wonh/y2s2/acm/002/"a.out
+ 1126  cd y2s2
+ 1127  cd acm
+ 1128  ls
+ 1129  cd "/Users/wonh/y2s2/acm/001-string-process/" && g++ parenthesis.cpp -o a.out && "/Users/wonh/y2s2/acm/001-string-process/"a.out
+ 1130  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/sdlMqb --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1131  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/adHsjP --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1132  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/7YFacH --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1133  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/m1cU0P --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1134  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/9x9RZX --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1135  cd "/Users/wonh/y2s2/acm/001-string-process/" && g++ parenthesis.cpp -o a.out && "/Users/wonh/y2s2/acm/001-string-process/"a.out
+ 1136  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ poj1064.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1137  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ tempCodeRunnerFile.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1138  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ poj1064.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1139  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ tempCodeRunnerFile.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1140  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ poj1064.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1141  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ tempCodeRunnerFile.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1142  cd "/Users/wonh/y2s2/acm/binary_search/" && g++ poj1064.cpp -o a.out && "/Users/wonh/y2s2/acm/binary_search/"a.out
+ 1143  y2s2
+ 1144  comp2121
+ 1145  ls
+ 1146  assignment3
+ 1147  ls
+ 1148  a3
+ 1149  ls
+ 1150  java -cp bin BlockchainServer 8000 10.16.156.180 8111
+ 1151  y2s2
+ 1152  comp2121
+ 1153  assignment3
+ 1154  a3
+ 1155  ls
+ 1156  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1157  java -cp bin BlockchainServer localhost 9123
+ 1158  telnet localhost 9123
+ 1159  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1160  telnet localhost 9123
+ 1161  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1162  telnet localhost 9123
+ 1163  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1164  telnet localhost 9123
+ 1165  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1166  telnet localhost 9123
+ 1167  java -cp bin BlockchainServer 9123 10.16.156.180 8111
+ 1168  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1169  cursize
+ 1170  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1171  5 6 3 3 2 1 1 1
+ 1172  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1173  cd "/Users/wonh/y2s2/acm/" && g++ poj1020_ans.cpp -o a.out && "/Users/wonh/y2s2/acm/"a.out
+ 1174  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1175  cd "/Users/wonh/y2s2/acm/" && g++ poj1020_ans.cpp -o a.out && "/Users/wonh/y2s2/acm/"a.out
+ 1176  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1177  cd "/Users/wonh/y2s2/acm/" && g++ poj1020_ans.cpp -o a.out && "/Users/wonh/y2s2/acm/"a.out
+ 1178  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1020.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1179  cd "/Users/wonh/y2s2/acm/003/" && g++ poj2387.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1180  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1251.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1181  A 2 B 10 C 40
+ 1182  B 1 C 20
+ 1183  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1251.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1184  A 2 B 10 C 40
+ 1185  B 1 C 20
+ 1186  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1251.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1187  3
+ 1188  A 2 B 10 C 40
+ 1189  B 1 C 20
+ 1190  0cd "/Users/wonh/y2s2/acm/003/" && g++ poj1251.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1191  cd "/Users/wonh/y2s2/acm/003/" && g++ poj1251.cpp -o a.out && "/Users/wonh/y2s2/acm/003/"a.out
+ 1192  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/f8RrpV --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1193  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/UJuEcn --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1194  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/t5KJBE --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1195  arch -arch x86_64 '/Users/wonh/.vscode/extensions/ms-vscode.cpptools-0.14.0/debugAdapters/lldb/bin/lldb-launcher' --unix-socket=/tmp/cMCLoF --arch=x86_64 --working-dir '/Users/wonh/y2s2/acm' --disable-aslr --  '/Users/wonh/y2s2/acm/a.out' ; echo Process exited with status $? ; exit
+ 1196  acm
+ 1197  ls
+ 1198  y2s2
+ 1199  acm
+ 1200  003
+ 1201  ls
+ 1202  g++ poj1251.cpp -o poj1251
+ 1203  ./poj1251
+ 1204  g++ poj1251.cpp -o poj1251
+ 1205  ./poj1251
+ 1206  g++ poj1251.cpp -o poj1251
+ 1207  ./poj1251
+ 1208  g++ poj1251.cpp -o poj1251
+ 1209  ./poj1251
+ 1210  g++ poj1251.cpp -o poj1251
+ 1211  ./poj1251
+ 1212  g++ poj1251.cpp -o poj1251
+ 1213  ./poj1251
+ 1214  g++ poj1251.cpp -o poj1251
+ 1215  ./poj1251
+ 1216  g++ poj1251.cpp -o poj1251
+ 1217  ./poj1251
+ 1218  g++ poj1251.cpp -o poj1251
+ 1219  ./poj1251
+ 1220  g++ poj1251.cpp -o poj1251
+ 1221  ./poj1251
+ 1222  ./poj1251 | OUT.TXT
+ 1223  ./poj1251 > OUT.TXT
+ 1224  CODE OUT.TXT
+ 1225  g++ poj1251.cpp -o poj1251
+ 1226  ./poj1251 > OUT.TXT
+ 1227  CODE OUT.TXT
+ 1228  ssh emily@39.108.219.197
+ 1229  git --version
+ 1230  $ echo "export PATH=/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:$PATH" >> ~/.bash_profile
+ 1231  echo "export PATH=/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:$PATH" >> ~/.bash_profile
+ 1232  source ~/.bash_profile
+ 1233  git --version
+ 1234  git config --global user.name wkkxixi
+ 1235  git config --global user.email emilywang9147@gmail.com
+ 1236  git credential-osxkeychain
+ 1237  cd ~/.ssh
+ 1238  mkdir key_backup
+ 1239  cp id_rsa* key_backup
+ 1240  ls
+ 1241  cd known_hosts
+ 1242  cp known_hosts key_backup
+ 1243  ls
+ 1244  rm known_hosts
+ 1245  ls
+ 1246  ssh-keygen -t rsa -C emilywang9147@gmail.com
+ 1247  pbcopy < ~/.ssh/id_rsa.pub
+ 1248  ssh -T git@github.com
+ 1249  git clone git@github.com:wkkxixi/afraid-to-commit.git
+ 1250  git clone git@github.com:emilywang9147@gmail.com/afraid-to-commit.git
+ 1251  git clone git@github.com:wkkxixi/python.git
+ 1252  git add test.txt
+ 1253  ls
+ 1254  git init test
+ 1255  ls
+ 1256  python
+ 1257  python 3.1
+ 1258  python3.1
+ 1259  /usr/bin/python
+ 1260  ~/Library/Frameworks/Python.framework/Versions/3.4/bin/python3
+ 1261  ls
+ 1262  cd library
+ 1263  ls
+ 1264  cd 
+ 1265  ls
+ 1266  python3
+ 1267  ls
+ 1268  mkdir research
+ 1269  cd research
+ 1270  ls
+ 1271  git clone git@github.com:wkkxixi/python.git
+ 1272  git status
+ 1273  cd python
+ 1274  git status
+ 1275  git add test.txt
+ 1276  touch test.txt
+ 1277  git status
+ 1278  git add test.txt
+ 1279  git status
+ 1280  git commit -m "test0000"
+ 1281  git status
+ 1282  git push
+ 1283  git status
+ 1284  ls
+ 1285  mkdir hello
+ 1286  cd hello
+ 1287  code .
+ 1288  /usr/local/opt/python/bin/python2.7 -m pip install pylint
+ 1289  python3 hello.py
+ 1290  python "/Users/wonh/research/python/hello/hello.py"
+ 1291  python hello.py
+ 1292  python
+ 1293  python3
+ 1294  /usr/local/opt/python/bin/python2.7 -m pip install autopep8
+ 1295  python "/Users/wonh/research/python/hello/hello.py"
+ 1296  ls
+ 1297  cd research
+ 1298  ls
+ 1299  cd python
+ 1300  git status
+ 1301  ls
+ 1302  git pull
+ 1303  git status
+ 1304  ls
+ 1305  python "/Users/wonh/research/python/hello/elif.py"
+ 1306  git status
+ 1307  ls
+ 1308  git status
+ 1309  git rm test.txt
+ 1310  git status
+ 1311  git add practice
+ 1312  git status
+ 1313  git commit -m "if statement"
+ 1314  git push
+ 1315  git status
+ 1316  git branch
+ 1317  code .
+ 1318  python "/Users/wonh/research/python/practice/range.py"
+ 1319  python "/Users/wonh/research/python/practice/dictionary.py"
+ 1320  python "/Users/wonh/research/python/practice/function.py"
+ 1321  python "/Users/wonh/research/python/practice/file.py"
+ 1322  git status
+ 1323  git commit -a -m "more practice"
+ 1324  git status
+ 1325  git add .
+ 1326  git status
+ 1327  git commit -a -m "more prac"
+ 1328  git status
+ 1329  git push
+ 1330  pip install beautifulsoup4
+ 1331  ls
+ 1332  python "/Users/wonh/research/python/practice/crawler.py"
+ 1333  pip install requests
+ 1334  python "/Users/wonh/research/python/practice/crawler.py"
+ 1335  git add .
+ 1336  git status
+ 1337  git commit -a -m "first try crawler"
+ 1338  git push
+ 1339  conda install -c anaconda python
+ 1340  conda create -n riv python=python3.5
+ 1341  brew install wget
+ 1342  wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+ 1343  bash Miniconda3-latest-MacOSX-x86_64.sh
+ 1344  conda create -n riv python=python3.5
+ 1345  conda update --all
+ 1346  conda info
+ 1347  exec bash
+ 1348  source ~/.zshrc
+ 1349  ls
+ 1350  home
+ 1351  Users
+ 1352  ls
+ 1353  export PATH="/users/wonh/anaconda3/bin:$PATH"
+ 1354  conda info
+ 1355  conda create -n riv python3.5
+ 1356  conda create -n riv python3.6
+ 1357  conda update --all
+ 1358  conda create -n riv python3.6
+ 1359  conda create -n riv python=python3.5
+ 1360  conda create -n riv python=python3.6
+ 1361  conda -V
+ 1362  python -V
+ 1363  conda update conda
+ 1364  conda update anaconda
+ 1365  source activate riv
+ 1366  conda create -n riv python=python3.6
+ 1367  conda info --envs
+ 1368  conda create --help
+ 1369  conda create -n riv python=python3.6
+ 1370  conda create -n riv python=python3.5
+ 1371  conda info --envs
+ 1372  conda search python
+ 1373  conda search --full-name python
+ 1374  conda create -n py36 python=3.6 anaconda
+ 1375  conda create -n riv python=3.6 anaconda
+ 1376  source activate riv
+ 1377  pip install --upgrade pip
+ 1378  pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1379  conda install -c anaconda scikit-fmm
+ 1380  conda search scikit-fmm
+ 1381  conda install -c anaconda scikit-fmm 
+ 1382  conda install -c jmargeta scikit-fmm 
+ 1383  conda install -c anaconda scikit-fmm
+ 1384  conda install -c pranathi scikit-fmm
+ 1385  conda info python
+ 1386  conda install -c jakirkham/label/dev scikit-fmm 
+ 1387  conda install -c pranathi scikit-fmm
+ 1388  conda create -n riv python=python3.4 anaconda
+ 1389  source deactivate
+ 1390  conda create -n riv python=python3.4 anaconda
+ 1391  conda create -n riv python=python3.4
+ 1392  conda create -n riv python=python3.4 anaconda
+ 1393  conda create -n riv python=3.4
+ 1394  source activate riv
+ 1395  pip install --upgrade pip
+ 1396  pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1397  pip3 install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1398  /private/var/folders
+ 1399  ls
+ 1400  05
+ 1401  ls
+ 1402  9hrc52zx51v8ny973sp0fvn40000gn
+ 1403  ls
+ 1404  T
+ 1405  pip-build-1v_l396d
+ 1406  LS
+ 1407  cd ..
+ 1408  ls
+ 1409  home
+ 1410  ls
+ 1411  cd ..
+ 1412  users
+ 1413  ls
+ 1414  users
+ 1415  ls
+ 1416  cd users
+ 1417  ls
+ 1418  cd wonh
+ 1419  ls
+ 1420  conda install -c pranathi scikit-fmm 
+ 1421  pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1422  git clone https://github.com/RivuletStudio/rivuletpy.git
+ 1423  cd rivuletpy
+ 1424  python setup.py develop
+ 1425  python3 setup.py develop
+ 1426  pip3 install -e
+ 1427  sh quicktest.sh
+ 1428  ls
+ 1429  anaconda3
+ 1430  source activate riv
+ 1431  ls
+ 1432  envs
+ 1433  ls
+ 1434  source activate riv
+ 1435  riv
+ 1436  ls
+ 1437  source activate riv
+ 1438  conda create -n riv python=python3.4
+ 1439  source deactivate
+ 1440  deactivate
+ 1441  source activate riv
+ 1442  conda info
+ 1443  history
+ 1444  export PATH="/users/wonh/anaconda3/bin:$PATH"
+ 1445  conda info
+ 1446  atom ~/.bashrc
+ 1447  atom ~/.zshrc
+ 1448  gedit ~/.zshrc
+ 1449  nano ~/.zshrc
+ 1450  atom /Users/wonh/
+ 1451  ls
+ 1452  atom bin
+ 1453  ls
+ 1454  cd ..
+ 1455  ls
+ 1456  atom wonh
+ 1457  ls
+ 1458  cd wonh
+ 1459  ls
+ 1460  ls -lst
+ 1461  atom Miniconda3-latest-MacOSX-x86_64.sh
+ 1462  ls
+ 1463  vim ~/.zshrc
+ 1464  history
+ 1465  source ~/.zshrc
+ 1466  conda info
+ 1467  source activate riv
+ 1468  pip install --upgrade pip
+ 1469  pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@master#egg=tqdm
+ 1470  pip installgit+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1471  pip install git+https://github.com/pearu/pylibtiff.git@master#egg=libtiff
+ 1472  python
+ 1473  which python
+ 1474  conda install tifffile -c conda-forge
+ 1475  python
+ 1476  cd rivuletpy
+ 1477  python setup.py develop
+ 1478  pwd
+ 1479  python setup.py develop
+ 1480  sh quicktest.sh
+ 1481  python
+ 1482  pip install scikit-fmm
+ 1483  pip uninstall scikit-fmm
+ 1484  pip install scikit-fmm
+ 1485  which pip
+ 1486  python
+ 1487  sh quicktest.sh
+ 1488  pip install skimage
+ 1489  pip install scikit-image
+ 1490  sh quicktest.sh
+ 1491  pip install libtiff
+ 1492  sh quicktest.sh
+ 1493  python --version
+ 1494  research
+ 1495  ls
+ 1496  code python
+ 1497  python "/Users/wonh/research/python/practice/func.py"
+ 1498  sh quicktest.sh
+ 1499  python
+ 1500  install msfm
+ 1501  history
+ 1502  pip install msfm
+ 1503  sh quicktest.sh
+ 1504  code python
+ 1505  python "/Users/wonh/research/python/practice/class.py"
+ 1506  history
+ 1507  source activate riv
+ 1508  source deactivate riv
+ 1509  ls
+ 1510  cd ..
+ 1511  ls
+ 1512  cd research
+ 1513  ls
+ 1514  git status
+ 1515  git clone git@github.com:wkkxixi/python.git
+ 1516  git config --global user.name "wkkxixi"
+ 1517  git config --global user.email "emilywang9147@gmail.com"
+ 1518  git status
+ 1519  git config --global credential.helper wincred
+ 1520  git init
+ 1521  ls
+ 1522  git status
+ 1523  cd python
+ 1524  ls
+ 1525  git status
+ 1526  cd practice
+ 1527  ls
+ 1528  git status
+ 1529  git add .
+ 1530  git status
+ 1531  git commit -m "python practice"
+ 1532  git status
+ 1533  git push
+ 1534  research
+ 1535  ls
+ 1536  code python
+ 1537  python "/Users/wonh/research/python/practice/np.py"
+ 1538  source activate riv
+ 1539  python "/Users/wonh/research/python/practice/np.py"
+ 1540  python "/Users/wonh/research/python/practice/scipy.py"
+ 1541  pip install scipy
+ 1542  pip install scipy.misc
+ 1543  python "/Users/wonh/research/python/practice/scipy.py"
+ 1544  pip install imread
+ 1545  python
+ 1546  python "/Users/wonh/research/python/practice/scipy.py"
+ 1547  pip3 install Pillow
+ 1548  python "/Users/wonh/research/python/practice/scipy.py"
+ 1549  pip3 install scipy.misc
+ 1550  pip install --upgrade pip
+ 1551  pip3 install scipy.misc
+ 1552  pip3 install scipy
+ 1553  python "/Users/wonh/research/python/practice/scipy.py"
+ 1554  python "/Users/wonh/research/python/practice/scipy_01.py"
+ 1555  ls
+ 1556  cd python
+ 1557  ls
+ 1558  practice
+ 1559  ls
+ 1560  assets
+ 1561  ls
+ 1562  pwd cat.jpg
+ 1563  which cat.jpg
+ 1564  ls
+ 1565  cd ..
+ 1566  ls
+ 1567  which assets
+ 1568  pwd
+ 1569  assets
+ 1570  pwd
+ 1571  ls
+ 1572  python "/Users/wonh/research/python/practice/scipy_01.py"
+ 1573  python "/Users/wonh/research/python/practice/scipy_02.py"
+ 1574  python "/Users/wonh/research/python/practice/plot.py"
+ 1575  python "/Users/wonh/research/python/practice/sbplt.py"
+ 1576  python "/Users/wonh/research/python/practice/images.py"
+ 1577  cd .
+ 1578  cd ..
+ 1579  ls
+ 1580  cd ..
+ 1581  ls
+ 1582  cd ..
+ 1583  ls
+ 1584  git status
+ 1585  cd python
+ 1586  ls
+ 1587  cd practice
+ 1588  git status
+ 1589  git add .
+ 1590  git commit -m "numpy practice"
+ 1591  git push
+ 1592  git status
+ 1593  rtrace --help
+ 1594  conda install libgcc
+ 1595  conda install nomkl numpy scipy scikit-learn numexpr
+ 1596  conda remove mkl mkl-service
+ 1597  history
+ 1598  ls
+ 1599  research
+ 1600  ls
+ 1601  cd ..
+ 1602  ls
+ 1603  cd anaconda3
+ 1604  ls
+ 1605  source activate riv
+ 1606  ls
+ 1607  cd ..
+ 1608  ls
+ 1609  rivuletpy
+ 1610  sh quicktest.sh
+ 1611  git status
+ 1612  which python
+ 1613  which python3
+ 1614  sudo 
+ 1615  chmod
+ 1616  python "/Users/wonh/research/python/practice/images.py"
+ 1617  cd ..
+ 1618  ls
+ 1619  research
+ 1620  ls
+ 1621  python
+ 1622  ls
+ 1623  cd python
+ 1624  ls
+ 1625  practice
+ 1626  ls
+ 1627  python images.py
+ 1628  python3 images.py
+ 1629  pythonw images.py
+ 1630  ls
+ 1631  cd ..
+ 1632  ls
+ 1633  cd ..
+ 1634  ls
+ 1635  git status
+ 1636  history
+ 1637  git clone git@github.com:wkkxixi/rivuletpy.git
+ 1638  ls
+ 1639  git status
+ 1640  rivuletpy
+ 1641  ls
+ 1642  git status
+ 1643  history
+ 1644  ls
+ 1645  cd ..
+ 1646  ls
+ 1647  cd rivuletpy
+ 1648  sh quicktest.sh
+ 1649  ls
+ 1650  git status
+ 1651  add .
+ 1652  git add .
+ 1653  git commit -m "modified README file"
+ 1654  git push
+ 1655  ls
+ 1656  git status
+ 1657  git add .
+ 1658  git commit -m "Update README.md"
+ 1659  git push
+ 1660  pwd rivulet2.py
+ 1661  python
+ 1662  ls
+ 1663  sh quicktest.sh
+ 1664  python
+ 1665  ls
+ 1666  sh quicktest.sh
+ 1667  ls
+ 1668  research
+ 1669  ls
+ 1670  rivuletpy
+ 1671  sh quicktest.sh
+ 1672  ls
+ 1673  cd ..
+ 1674  ls
+ 1675  rivuletpy
+ 1676  ls
+ 1677  sh quicktest.sh
+ 1678  ls
+ 1679  cd ..
+ 1680  ls
+ 1681  cd ..
+ 1682  ls
+ 1683  rivuletpy
+ 1684  ls
+ 1685  git status
+ 1686  sh quicktest.sh
+ 1687  cd ..
+ 1688  ls
+ 1689  research
+ 1690  ls
+ 1691  git status
+ 1692  git pull
+ 1693  git pull origin master
+ 1694  ls
+ 1695  rivuletpy
+ 1696  ls
+ 1697  git status
+ 1698  git pull
+ 1699  git status
+ 1700  sh quicktest.sh
+ 1701  pwd
+ 1702  cd ..
+ 1703  ls
+ 1704  source activate riv
+ 1705  ls
+ 1706  rivuletpy
+ 1707  sh quicktest.sh
+ 1708  git status
+ 1709  git add rivuletpy/utils/io.py
+ 1710  git status
+ 1711  git commit -m "modified io.py"
+ 1712  git status
+ 1713  git push
+ 1714  git status
+ 1715  ls
+ 1716  cd ..
+ 1717  ls
+ 1718  git clone git@github.com:wkkxixi/rivuletpy.git
+ 1719  ls
+ 1720  rivuletpy
+ 1721  ls
+ 1722  git status
+ 1723  git add rivuletpy/utils/io.py
+ 1724  git status
+ 1725  git commit -m "modified io.py"
+ 1726  git push
+ 1727  git status
+ 1728  ls
+ 1729  sh quicktest.sh
+ 1730  man mkdir
+ 1731  ls
+ 1732  cd ..
+ 1733  ls
+ 1734  code python
+ 1735  /Users/wonh/anaconda3/envs/riv/bin/python -m pip install pylint
+ 1736  python "/Users/wonh/research/python/practice/tempCodeRunnerFile.py"
+ 1737  python "/Users/wonh/research/python/practice/argparser.py"
+ 1738  python3 argparser.py -h
+ 1739  ls
+ 1740  cd pracitce
+ 1741  cd practice
+ 1742  ls
+ 1743  python3 argparser.py -h
+ 1744  python "/Users/wonh/research/python/practice/argparser.py"
+ 1745  sh quicktest.sh
+ 1746  python "/Users/wonh/research/python/practice/argparser.py"
+ 1747  sh quicktest.sh
+ 1748  python
+ 1749  ls
+ 1750  code python
+ 1751  python "/Users/wonh/research/python/practice/argparser.py"
+ 1752  sh quicktest.sh
+ 1753  ls
+ 1754  cd ..
+ 1755  ls
+ 1756  cd rivuletpy
+ 1757  sh quicktest.sh
+ 1758  ls
+ 1759  cd ..
+ 1760  ls
+ 1761  git clone https://github.com/rgao0313/rivuletpy.git
+ 1762  rivuletpy
+ 1763  sh quicktest.sh
+ 1764  cd ..
+ 1765  ls
+ 1766  rivuletpy
+ 1767  sh quicktest.sh
+ 1768  cd ..
+ 1769  ls
+ 1770  cd research
+ 1771  ls
+ 1772  rivuletpy
+ 1773  sh quicktest.sh
+ 1774  /Users/wonh/rivuletpy/apps/rtrace ; exit;
+ 1775  sh quicktest.sh
+ 1776  python "/Users/wonh/research/python/practice/argparser.py"
+ 1777  source activate riv
+ 1778  python "/Users/wonh/research/python/practice/argparser.py"
+ 1779  LS
+ 1780  cd ..
+ 1781  ls
+ 1782  rivuletpy
+ 1783  git rm .swc
+ 1784  ls
+ 1785  rivuletpy
+ 1786  ls
+ 1787  cd ..
+ 1788  ls
+ 1789  tests
+ 1790  ls
+ 1791  data
+ 1792  ls
+ 1793  cd ..
+ 1794  ls
+ 1795  test_data
+ 1796  ls
+ 1797  git rm .swc
+ 1798  git rm .tif
+ 1799  pwd .swc
+ 1800  git rm test.tif.r2.swc
+ 1801  git status
+ 1802  git add test.tif.r2.swc
+ 1803  git rm test.tif.r2.swc
+ 1804  git rm test.tif
+ 1805  ls
+ 1806  git commit -m "to remove .swc"
+ 1807  git rm test.tif.r2.swc
+ 1808  sh quicktest.sh
+ 1809  ls
+ 1810  cd ..
+ 1811  ls
+ 1812  git add cropped.tif
+ 1813  git commit -m "save cropped img"
+ 1814  git status
+ 1815  git push
+ 1816  git pull
+ 1817  git push
+ 1818  git status
+ 1819  sh quicktest.sh
+ 1820  ls
+ 1821  sh quicktest.sh
+ 1822  git add .
+ 1823  git commit -m "update"
+ 1824  git push
+ 1825  git status
+ 1826  ls
+ 1827  cd ..
+ 1828  ls
+ 1829  code rivuletpy
+ 1830  python "/Users/wonh/research/rivuletpy/rivuletpy/trace.py"
+ 1831  sh quicktest.sh
+ 1832  ls
+ 1833  source activate riv
+ 1834  sh quicktest.sh
+ 1835  ls
+ 1836  rivuletpy
+ 1837  git status
+ 1838  git add .
+ 1839  git commit
+ 1840  git commit -m "update"
+ 1841  git push
+ 1842  sh quicktest.sh
+ 1843  git rm *.tif
+ 1844  sh quicktest.sh
+ 1845  source activate riv
+ 1846  sh quicktest.sh
+ 1847  source activate riv
+ 1848  research
+ 1849  rivuletpy
+ 1850  sh quicktest.sh
+ 1851  git pull
+ 1852  sh quicktest.sh
+ 1853  cd ..
+ 1854  ls
+ 1855  cd ..
+ 1856  ls
+ 1857  git clone git@github.com:wkkxixi/rivuletpy.git
+ 1858  ls
+ 1859  cd revuletpy
+ 1860  rivuletpy
+ 1861  sh quicktest.sh
+ 1862  ls
+ 1863  cd ..
+ 1864  ls
+ 1865  code rivuletpy
+ 1866* python "/Users/wonh/rivuletpy/rivuletpy/trace.py"
+ 1867  rivuletpy
+ 1868  sh quicktest.sh
+ 1869  ls
+ 1870  rivuletpy
+ 1871  ls
+ 1872  utils
+ 1873  ls
+ 1874  python3 operation.py
+ 1875* research
+ 1876* ls
+ 1877* nt_toolbox
+ 1878* cd ..
+ 1879* code nt_toolbox
+ 1880* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1881* ls
+ 1882* nt_toolbox
+ 1883* ls
+ 1884* python3 prac.py
+ 1885* python "/Users/wonh/research/nt_toolbox/tempCodeRunnerFile.py"
+ 1886* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1887* python "/Users/wonh/research/nt_toolbox/test.py"
+ 1888* source activate riv
+ 1889* python "/Users/wonh/research/nt_toolbox/test.py"
+ 1890* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1891* pythonw prac.py
+ 1892* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1893* pythonw prac.py
+ 1894* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1895* python "/Users/wonh/research/nt_toolbox/geopath.py"
+ 1896* python "/Users/wonh/research/nt_toolbox/solution.py"
+ 1897* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1898* pythonw prac.py
+ 1899* code rivuletpypython "/Users/wonh/rivuletpy/rivuletpy/utils/operation.py"
+ 1900* python "/Users/wonh/rivuletpy/rivuletpy/utils/operation.py"
+ 1901* source activate riv
+ 1902* python "/Users/wonh/rivuletpy/rivuletpy/utils/operation.py"
+ 1903  LS
+ 1904  git status
+ 1905  git add io.py
+ 1906  git commit -m "modified writeTiff3d" 
+ 1907  git push
+ 1908* python "/Users/wonh/rivuletpy/rivuletpy/utils/groupoperation.py"
+ 1909* python "/Users/wonh/rivuletpy/rivuletpy/utils/operation.py"
+ 1910* python "/Users/wonh/rivuletpy/rivuletpy/utils/tempCodeRunnerFile.py"
+ 1911* python "/Users/wonh/rivuletpy/rivuletpy/utils/operation.py"
+ 1912* pip install matplotlib
+ 1913* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1914* pythonw prac.py
+ 1915* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1916* pythonw prac.py
+ 1917* python
+ 1918  python3 -mpip install matplotlib
+ 1919  pip uninstall matplotlib
+ 1920  python3 -mpip install matplotlib
+ 1921* python "/Users/wonh/research/nt_toolbox/prac.py"
+ 1922  conda install python.app
+ 1923* pythonw prac.py
+ 1924* WHICH pythonw
+ 1925* which pythonw
+ 1926  source deactivate
+ 1927  conda create -n nriv python=python3.4
+ 1928  conda create -n nriv python=python3.5
+ 1929  history
