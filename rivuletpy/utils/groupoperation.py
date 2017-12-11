@@ -18,7 +18,7 @@ def operationcombine(folder, line, thresholdt, percentage):
         line.gettrace()
 
 readtif(folderpath)#read json files to get location information
-content = 'Path\tPrecision\tRecall\tF1'#content format of the compareswc
+content = 'path\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)\tprecision\trecall\tf1'#content format of the compareswc
 with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
     lines = f.readlines()#read every line
     for item in lines:
@@ -28,6 +28,8 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
             threshold=int(item.split('\t')[1])
             shapex=int(item.split('\t')[2])#the shape of tif in x dimension
             shapey=int(item.split('\t')[3])#the shape of tif in y dimension
+            shapez = int(item.split('\t')[4])
+            sizexyz = int(item.split('\t')[5])
             origintif=folderpath+filename
             cropx=100#the crop size of x dimension
             cropy=100#the crop size of y dimension
@@ -54,15 +56,18 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
                 print('small swcs are combined successfully!')
             try:
 
-                swc1 = loadswc(origintif.split('.')[0] + '.swc')
-                swc2 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')
+                swc2 = loadswc(origintif.split('.')[0] + '.swc')
+                swc1 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')
                 print(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')# name of the folder and swc
-                # precision_recall(swc1, swc2)
+                #precision_recall(swc1, swc2)
                 prf, swc_compare = precision_recall(swc1, swc2)
                 saveswc(origintif.split('.')[0] + '_gao_compare.swc', swc_compare)
-                content = content + '\n' + origintif + '\t%.2f\t%.2f\t%.2f' % prf
+                #content = content + '\n' + origintif + '\t%.2f\t%.2f\t%.2f' % prf
+                content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + '\t' + shapey + '\t' + shapez + '\t' + sizexyz + '\t%.2f\t%.2f\t%.2f' % prf
+                #content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + \
+                    #'\t' + shapey + '\t' + shapez + '\t' + sizexyz + '\t1.2\t2.3\t3.4'
             except (Exception):
-                print(origintif)
+                print('Exception!!!!! ' + origintif)
 lines = content.split('\n')
 
 with open(folderpath + 'gao_compare.csv', "w") as csv_file:

@@ -31,7 +31,7 @@ def readtif(jsonfilepath):
                     threshold=data['data'][Key][key]['misc']['threshold']
                     img = loadimg(jsonfilepath+filename)
                     x,y,z=img.shape
-                    print(img.shape) # print tif file original img shape
+                    #print(img.shape) # print tif file original img shape
                     d[filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)]=x*y*z
     #output files sorted by its size
     for item in sorted(d,key=d.get,reverse=True):

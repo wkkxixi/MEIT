@@ -37,7 +37,7 @@ def precision_recall(swc1, swc2, dist1=4, dist2=4):
     mindist2s=np.array(mindist2list)#no squeeze numpy
     mindist1=np.squeeze(mindist1s)
     mindist2=np.squeeze(mindist2s)
-    tp = (mindist1 < dist1).sum()
+    tp = (mindist1 < dist1).sum() # number of points similar to ground truth
     fp = swc1.shape[0] - tp
     fn = (mindist2 > dist2).sum()
     precision = tp / (tp + fp)
