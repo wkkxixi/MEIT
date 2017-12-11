@@ -45,12 +45,11 @@ def writetiff3d(filepath, block):
         os.remove(filepath)
     except OSError:
         pass
-
     # tiff = TIFF.open(filepath, mode='w')
     # block = np.swapaxes(block, 0, 1)
-    with tiff.TiffWriter(filepath, bigtiff=True) as tif:
-        for z in range(block.shape[0]):
-            tif.save(block[z], compress = 6)
+    with tiff.TiffWriter(filepath, bigtiff=False) as tif:
+        for z in range(block.shape[2]):
+            tif.save(np.flipud(block[:,:,z]), compress = 0)
 
     # for z in range(block.shape[2]):
     #     tiff.write_image(np.flipud(block[:, :, z]), compression=None)
