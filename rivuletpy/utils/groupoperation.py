@@ -6,6 +6,7 @@ from rivuletpy.utils.outputSmallSwc import *
 from rivuletpy.utils.compareswc import *
 import multiprocessing as mp
 import time
+from pathlib import Path
 folderpath = '/Users/wonh/Gold166-JSON/'
 def operationcombine(folder, line, thresholdt, percentage):
     if "_" in line:
@@ -18,7 +19,8 @@ def operationcombine(folder, line, thresholdt, percentage):
         line.gettrace()
 
 readtif(folderpath)#read json files to get location information
-content = 'path\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)\tprecision\trecall\tf1'#content format of the compareswc
+# content format of the compareswc
+content = 'path\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)\tcropVSgt_precision\tcropVSgt_recall\tcropVSgt_f1\tr2VSgt_precision\tr2VSgt_recall\tr2VSgt_f1\tf1:crop-r2'
 with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
     lines = f.readlines()#read every line
     for item in lines:
@@ -31,6 +33,7 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
             shapez = int(item.split('\t')[4])
             sizexyz = int(item.split('\t')[5])
             origintif=folderpath+filename
+            r2path = folderpath + filename.split('/')[0] + '/r2/' + filename.split('/')[1]+'.r2.swc'
             cropx=100#the crop size of x dimension
             cropy=100#the crop size of y dimension
             percentage=0.00005#only when (the color value / whole background value)>percentage, it will be recorded, otherwise, it will be discarded when producing swc
@@ -56,21 +59,36 @@ with open(folderpath+'jsoninfo/detailedinfo.txt') as f:
                 print('small swcs are combined successfully!')
             try:
 
-                swc2 = loadswc(origintif.split('.')[0] + '.swc')
-                swc1 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')
-                print(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')# name of the folder and swc
+                swc2 = loadswc(origintif.split('.')[0] + '.swc') # ground true
+                swc1 = loadswc(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc') # crop method
+                myfile = Path(r2path)
+                prf_1_2, swc_compare_1_2 = precision_recall(swc1, swc2)
+                saveswc(origintif.split('.')[0] + '_crop_compare_gt.swc', swc_compare_1_2)
+                if myfile.is_file():
+                    swc3 = loadswc(r2path)  # r2 method
+                    prf_3_2, swc_compare_3_2 = precision_recall(swc3, swc2)
+                    saveswc(origintif.split('.')[0] + '_r2_compare_gt.swc', swc_compare_3_2)
+                    content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + \
+                        '\t' + shapey + '\t' + shapez + '\t' + sizexyz + \
+                        '\t%.2f\t%.2f\t%.2f' % prf_1_2 + '\t%.2f\t%.2f\t%.2f' % prf_3_2 + \
+                        '\t%.2f' % (prf_1_2 - prf_3_2)
+                else:
+                    content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + \
+                        '\t' + shapey + '\t' + shapez + '\t' + sizexyz + \
+                        '\t%.2f\t%.2f\t%.2f' % prf_1_2 + '\tnull\tnull\tnull\tnull'
+                
+                #print(origintif.split('.')[0] + '_'+str(cropx)+'_'+str(cropy)+'.swc')# name of the folder and swc
                 #precision_recall(swc1, swc2)
-                prf, swc_compare = precision_recall(swc1, swc2)
-                saveswc(origintif.split('.')[0] + '_gao_compare.swc', swc_compare)
+                
                 #content = content + '\n' + origintif + '\t%.2f\t%.2f\t%.2f' % prf
-                content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + '\t' + shapey + '\t' + shapez + '\t' + sizexyz + '\t%.2f\t%.2f\t%.2f' % prf
+                #content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + '\t' + shapey + '\t' + shapez + '\t' + sizexyz + '\t%.2f\t%.2f\t%.2f' % prf_1_2
                 #content = content + '\n' + filename + '\t' + threshold + '\t' + shapex + \
                     #'\t' + shapey + '\t' + shapez + '\t' + sizexyz + '\t1.2\t2.3\t3.4'
             except (Exception):
                 print('Exception!!!!! ' + origintif)
 lines = content.split('\n')
 
-with open(folderpath + 'gao_compare.csv', "w") as csv_file:
+with open(folderpath + '_3_methods_compare.csv', "w") as csv_file:
     writer = csv.writer(csv_file)
     for line in lines:
         writer.writerow([line])
