@@ -4,11 +4,11 @@ from rivuletpy.utils.cropswc import *
 import multiprocessing as mp
 import time
 
-origintif="/Users/wonh/Gold166-JSON/silkmothutokyo/2.tif"
+origintif = "/Users/wonh/Gold166-JSON/FLY-JANELIA/17.tif"
 
 cropx=100
 cropy=100
-thresholdt=40
+thresholdt=54
 percentage=0.00005
 #folder: /Users/wonh/Gold166-JSON/silkmothutokyo/2  _100_100
 folder=origintif.split('.')[0]+'_'+str(cropx)+'_'+str(cropy)

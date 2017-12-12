@@ -49,8 +49,8 @@ def writetiff3d(filepath, block):
     # block = np.swapaxes(block, 0, 1)
     with tiff.TiffWriter(filepath, bigtiff=False) as tif:
         for z in range(block.shape[2]):
-            tif.save(np.flipud(block[:,:,z]), compress = 0)
-
+            # tif.save(np.flipud(block[:,:,z]), compress = 0)
+            tif.save((np.rot90(block[:, :, z])), compress=0)
     # for z in range(block.shape[2]):
     #     tiff.write_image(np.flipud(block[:, :, z]), compression=None)
     # tiff.close()
