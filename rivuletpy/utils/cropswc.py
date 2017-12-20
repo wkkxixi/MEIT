@@ -44,11 +44,12 @@ class getinfo:
             self.tracelabel = True
         return self.tracelabel
 
-    def gettrace(self):
+    def gettrace(self, predefined_soma):
         if self.tracelabel:
             # Run rivulet2 for the first time
             tracer = R2Tracer()
-            self.swc, soma = tracer.trace(self.matrix_3d, self.thresholdt)
+            self.swc, soma = tracer.trace(
+                self.matrix_3d, self.thresholdt, predefined_soma)
             tswc = self.swc._data.copy()
             x = int(self.name.split("_")[1]) - 1
             y = int(self.name.split("_")[0]) - 1
@@ -58,6 +59,23 @@ class getinfo:
         else:
             tswc = None
         return tswc
+
+    def gettrace_from_tips(self, predefined_soma, order):
+        if self.tracelabel:
+            # Run rivulet2 for the first time
+            tracer = R2Tracer()
+            self.swc, soma = tracer.trace(self.matrix_3d, self.thresholdt, predefined_soma)
+            tswc = self.swc._data.copy()
+            x = int(self.name.split("_")[1]) - 1
+            y = int(self.name.split("_")[0]) - 1
+            # 100 is the cropx we define when croping
+            tswc[:, 2] += self.cropx * x
+            # 100 is the cropy we define when croping
+            tswc[:, 3] += self.cropy * y
+            saveswc(self.folder + self.name + '_' + str(order) + '.swc', tswc)
+        else:
+            tswc = np.asarray([])
+        return tswc, self.name + '_' + str(order) + '.swc'
 
 
 
