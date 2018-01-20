@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-somasnakes
+somasnakes for crop 2
 ===========
 Original package is adjusted for soma detection by donghaozhang and siqiliu.
 
@@ -59,39 +59,40 @@ class Soma(object):
         self.centroid[1] = self.centroid[1] - crop_region[1, 0]
         self.centroid[2] = self.centroid[2] - crop_region[2, 0]
 
-    def detect(self, bimg, simple=False, silent=False):
+    def detect(self, bimg, predefined_soma=None, simple=False, silent=False):
         """
         Automatic detection of soma volume unless the iterations are given.
+        Or use predefined_soma info directly
         """
+        if predefined_soma is None:
+            # Smooth iterations
+            smoothing = 1
+            # A float number controls the weight of internal energy
+            lambda1 = 1
+            # A float number controls the weight of external energy
+            lambda2 = 1.5
+            # Manually set the number of iterations required for the soma
+            # The type of iterations is int
+            iterations = -1
+            bimg = bimg.astype('int')  # Segment
+            # Return the signed distance from the zero contour of the array bimg
+            # the voxel in the center has greater value => soma
+            dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT 
 
-        # Smooth iterations
-        smoothing = 1
-        # A float number controls the weight of internal energy
-        lambda1 = 1
-        # A float number controls the weight of external energy
-        lambda2 = 1.5
-        # Manually set the number of iterations required for the soma
-        # The type of iterations is int
-        iterations = -1
-        bimg = bimg.astype('int')  # Segment
-        # Return the signed distance from the zero contour of the array bimg
-        # the voxel in the center has greater value => soma
-        dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT 
+            # somaradius : the approximate value of
+            # soma radius estimated from distance transform
+            # the type of somaradius is float64
+            # somaradius is just a float number
+            somaradius = dt.max()
 
-        # somaradius : the approximate value of
-        # soma radius estimated from distance transform
-        # the type of somaradius is float64
-        # somaradius is just a float number
-        somaradius = dt.max()
-
-        # somapos : the coordinate of estimated soma centroid
-        # the type of somapos is int64
-        # the shape of somapos is (3,)
-        # somapos is array-like
-        somapos = np.asarray(np.unravel_index(dt.argmax(), dt.shape))
-        print('soma position is:')
-        print(somapos)
-        print('soma radius is: ' + str(somaradius))
+            # somapos : the coordinate of estimated soma centroid
+            # the type of somapos is int64
+            # the shape of somapos is (3,)
+            # somapos is array-like
+            somapos = np.asarray(np.unravel_index(dt.argmax(), dt.shape))
+        else:
+            somapos = np.asarray(predefined_soma[0:3])
+            somaradius = predefined_soma[3]
 
         # Soma detection is required
         if not simple:
@@ -231,6 +232,9 @@ class Soma(object):
             self.centroid = somapos
             self.radius = somaradius
             self.simple_mask(bimg)
+            # print('soma position is:')
+            # print(self.centroid)
+            # print('soma radius is: ' + str(somaradius))
 
 
 class Fcycle(object):

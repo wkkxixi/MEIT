@@ -1,20 +1,34 @@
+# swc.py for crop 2
 import numpy as np
 import math
 from random import random, randrange
 from collections import Counter
 from scipy.spatial.distance import cdist
 from .utils.io import saveswc
+import heapq
+from .tip import Tip
+
 
 class SWC(object):
-    def __init__(self, soma=None):
-        self._data = np.zeros((1,8)) 
+    def __init__(self, soma=None, starting_pt=None, tmap=None, cropx=None, cropy=None, img_xy=None):
+        self._data = np.zeros((1, 8))
+        self._tmap = tmap
+        self._source = starting_pt
+        self._cropx = cropx
+        self._cropy = cropy
+        self._empty_face = [0,0,0,0]
+        self._img_xy = img_xy
+        self._bimg_xy = np.asarray(
+            [starting_pt.xmax() - starting_pt.xmin(), starting_pt.ymax() - starting_pt.ymin()])
+
         if soma:
-            self._data[0, :] = np.asarray([0, 1, soma.centroid[0], soma.centroid[1], soma.centroid[2], soma.radius, -1, 1])
+            self._data[0, :] = np.asarray([0, 7, soma.centroid[0] + self._source.xmin(
+            ), soma.centroid[1] + self._source.ymin(), soma.centroid[2], soma.radius, -1, 1])
 
     # def add(self, swc_nodes):
     #     self._data = np.vstack((self._data, swc_nodes))
 
-    def add_branch(self, branch, pidx=None, random_color=True):
+    def add_branch(self, branch, pidx=None, random_color=False):
         '''
         Add a branch to swc.
         Note: This swc is special with N X 8 shape. The 8-th column is the online confidence
@@ -23,8 +37,10 @@ class SWC(object):
             rand_node_type = randrange(256)
 
         new_branch = np.zeros((len(branch.pts), 8))
-        id_start = 1 if self._data.shape[0] == 1 else self._data[:, 0].max() + 1
-
+        id_start = 1 if self._data.shape[0] == 1 else self._data[:, 0].max(
+        ) + 1
+        found_tips = []
+        # print('length of branch is : ' + str(len(branch.pts)))
         for i in range(len(branch.pts)):
             p, r, c = branch.pts[i], branch.radius[i], branch.conf[i]
             # print("points",p)
@@ -37,16 +53,78 @@ class SWC(object):
                 pid = self._data[pidx, 0] if pidx is not None else -2
                 if pid is not -2 and pid != 0 and self._data.shape[0] != 1:
                     # Its connected node is fork point
-                    self._data[self._data[:, 0] == pid, 1] = 5  
+                    self._data[self._data[:, 0] == pid, 1] = 5
             else:
                 pid = id_start + i + 1
                 if i == 0:
                     nodetype = 6  # Endpoint
+                    # print('endpoint')
 
             assert(pid != id)
+
+            x_of_img = p[0] + self._source.xmin()
+            y_of_img = p[1] + self._source.ymin()
             new_branch[i] = np.asarray([
                 id, rand_node_type
-                if random_color else nodetype, p[0], p[1], p[2], r, pid, c])
+                if random_color else nodetype, x_of_img, y_of_img, p[2], r, pid, c])
+            # To record tips
+            if nodetype == 6 and np.asarray(self._empty_face).sum() != 4:
+                my_boundary = np.asarray([0, 0, 0, 0])
+                if p[0] == 0:
+                    pos = 0  # left
+                    if self._empty_face[pos] != 0:
+                        continue
+                    my_boundary[0] = max(
+                        0, self._source.xmin() - self._cropx + 1)
+                    my_boundary[1] = self._source.xmin() + 1
+                    my_boundary[2] = self._source.ymin()
+                    my_boundary[3] = self._source.ymax()
+                elif p[0] == self._bimg_xy[0] - 1:
+                    pos = 1  # right
+                    if self._empty_face[pos] != 0:
+                        continue
+                    my_boundary[0] = self._source.xmax() - 1
+                    my_boundary[1] = min(
+                        self._img_xy[0], self._source.xmax() + self._cropx - 1)
+                    my_boundary[2] = self._source.ymin()
+                    my_boundary[3] = self._source.ymax()
+                elif p[1] == 0:
+                    pos = 2  # up
+                    if self._empty_face[pos] != 0:
+                        continue
+                    my_boundary[0] = self._source.xmin()
+                    my_boundary[1] = self._source.xmax()
+                    my_boundary[2] = max(
+                        0, self._source.ymin() - self._cropy + 1)
+                    my_boundary[3] = self._source.ymin() + 1
+                elif p[1] == self._bimg_xy[1] - 1:
+                    pos = 3  # down
+                    if self._empty_face[pos] != 0:
+                        continue
+                    my_boundary[0] = self._source.xmin()
+                    my_boundary[1] = self._source.xmax()
+                    my_boundary[2] = self._source.ymax() - 1
+                    my_boundary[3] = min(
+                        self._img_xy[1], self._source.ymax() + self._cropy - 1)
+                else:
+                    continue
+                
+                self._empty_face[pos] = 1
+                tvalue = self._tmap[p[0], p[1], p[2]] - self._tmap[self._source.xyz(
+                )[0], self._source.xyz()[1], self._source.xyz()[2]] + self._source.tvalue()
+                # print('found tip!!! ' + str(p) + ' on ' +
+                #       str(pos) + ' side ' + str(tvalue))
+                p_of_next_area = np.asarray([p[0], p[1], p[2]])
+                if pos == 0:
+                    p_of_next_area[0] = my_boundary[1] - 1 - my_boundary[0]
+                elif pos == 1:
+                    p_of_next_area[0] = 0
+                elif pos == 2:
+                    p_of_next_area[1] = my_boundary[3] - 1 - my_boundary[2]
+                else:
+                    p_of_next_area[1] = 0
+                tip = Tip(tvalue, my_boundary, r, p_of_next_area,pos)
+                found_tips.append(tip)
 
         # Check if any tail should be connected to its tail
         tail = new_branch[0]
@@ -55,14 +133,18 @@ class SWC(object):
             self._data[minidx, 6] = tail[0]
 
         self._data = np.vstack((self._data, new_branch))
+        # print('end of one branch tracing: ' + str(len(found_tips)))
+
+        return found_tips
 
     def _prune_leaves(self):
+        print('prune leaves')
         # Find all the leaves
         childctr = Counter(self._data[:, 6])
         leafidlist = [id for id in self._data[:, 0]
                       if id not in self._data[:, 6]]
         id2dump = []
-        rmean = self._data[:,5].mean() # Mean radius
+        rmean = self._data[:, 5].mean()  # Mean radius
 
         for leafid in leafidlist:  # Iterate each leaf node
             nodeid = leafid
@@ -93,14 +175,16 @@ class SWC(object):
         for nodeidx in range(self._data.shape[0]):
             if self._data[nodeidx, 0] not in id2dump:
                 cutted.append(self._data[nodeidx, :])
-
+        print('cutted lenght is ' + str(len(cutted)))
         cutted = np.squeeze(np.dstack(cutted)).T
+
         self._data = cutted
 
     def _prune_unreached(self):
         '''
         Only keep the largest connected component
         '''
+        print('prune unreached branch')
         swcdict = {}
         for n in self._data:  # Hash all the swc nodes
             swcdict[n[0]] = Node(n[0])
@@ -125,7 +209,8 @@ class SWC(object):
         maxidx = lenlist.index(max(lenlist))
         set2keep = groups[maxidx]
         id2keep = [n.id for n in set2keep]
-        self._data = self._data[np.in1d(self._data[:, 0], np.asarray(id2keep)), :]
+        self._data = self._data[np.in1d(
+            self._data[:, 0], np.asarray(id2keep)), :]
 
     def prune(self):
         self._prune_unreached()
@@ -148,7 +233,6 @@ class SWC(object):
 
     def get_id(self, idx):
         return self._data[idx, 0]
-
 
     def match(self, pos, radius):
         '''
@@ -176,25 +260,26 @@ class SWC(object):
         from rivuletpy.utils.rendering3 import Viewer3, Line3
 
         # Compute the center of mass
-        center = self._data[:,2:5].mean(axis=0)
-        translated = self._data[:,2:5] - np.tile(center, (self._data.shape[0], 1))
+        center = self._data[:, 2:5].mean(axis=0)
+        translated = self._data[:, 2:5] - \
+            np.tile(center, (self._data.shape[0], 1))
 
         # Init viewer
-        viewer = Viewer3(800,800,800)
+        viewer = Viewer3(800, 800, 800)
         viewer.set_bounds(self._data[:, 2].min(), self._data[:, 2].max(),
                           self._data[:, 3].min(), self._data[:, 3].max(),
                           self._data[:, 4].min(), self._data[:, 4].max())
-        lid = self._data[:,0]
+        lid = self._data[:, 0]
 
         line_color = [random(), random(), random()]
         for i in range(self._data.shape[0]):
-            # Change color if its a bifurcation 
+            # Change color if its a bifurcation
             if (self._data[i, 0] == self._data[:, -1]).sum() > 1:
                 line_color = [random(), random(), random()]
 
             # Draw a line between this node and its parent
-            if i < self._data.shape[0] - 1 and self._data[i, 0] == self._data[i+1, -1]:
-                l = Line3(translated[i, :], translated[i+1, :])
+            if i < self._data.shape[0] - 1 and self._data[i, 0] == self._data[i + 1, -1]:
+                l = Line3(translated[i, :], translated[i + 1, :])
                 l.set_color(*line_color)
                 viewer.add_geom(l)
             else:
@@ -229,8 +314,6 @@ def get_subtree_nodeids(swc, node):
             subtreeids = np.hstack((subtreeids, subids, node[0]))
 
     return subtreeids
-
-
 
 
 class Node(object):
