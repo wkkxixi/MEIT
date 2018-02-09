@@ -189,6 +189,7 @@ optional arguments:
 
 
 $ python3 meit_single.py -f example.tif -t 10 # Simple like this. Reconstruct a neuron in example.tif with a background threshold of 10
+$ python3 meit_single.py -f example.tif -b # Reconstruct a neuron in example.tif with the boundary frames also constructed
 $ python3 meit_single.py -f example.tif -t 10 -cx 200 -cy 200 -z 0.3 # Reconstruct a neuron in example.tif with a background threshold of 10, a cropping parameter of x axis of 200, a cropping parameter of y axis of 200, a zoom factor of 0.3
 $ python3 meit_single.py -f example.tif -t 10 --silent # No text will be displayed to the terminal
 $ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" # The output file name would be "myswc.swc"
@@ -222,12 +223,62 @@ The `python3 comparesingle.py` command outputs three numbers which are in order:
 
 precision, recall, f1-score
 
+and saves the comparison swc file.
 
 - Reconstruct a group of neuron files.
 
-$ groupoperation the operation of croping large tif into small tifs by cropimg,
---Gao Rong Code Usage:
-$python groupoperation.py
+Go into rivuletpy/rivuletpy/utils
+
+Run meit_group.py to start tracing a group of neuron files
+
+```bash
+$ python3 meit_group.py --help
+usage: meit_group.py [-h] --dataset DATASET [-cx CROPX] [-cy CROPY]
+                     [-z ZOOM_FACTOR] [-b] [--clean] [--no-clean]
+                     [--save-soma] [--no-save-soma] [--soma] [--no-soma]
+                     [--speed SPEED] [--quality] [--no-quality] [--silent]
+                     [--no-silent]
+
+Arguments to perform the MEIT tracing algorithm on a group of images.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --dataset DATASET     The absolute path of the dataset on processing. All
+                        images are categorised by species.
+  -cx CROPX, --cropx CROPX
+                        The cropping parameter cropx to crop the image.
+                        Default 100
+  -cy CROPY, --cropy CROPY
+                        The cropping parameter cropy to crop the image.
+                        Default 100
+  -z ZOOM_FACTOR, --zoom_factor ZOOM_FACTOR
+                        The factor to zoom the image to speed up the whole
+                        thing. Default 0.25
+  -b, --boundary        Construct boundary around each block
+  --clean               Remove the unconnected segments. It is relatively safe
+                        to do with the Rivulet2 algorithm
+  --no-clean            Keep the unconnected segments (default)
+  --save-soma           Save the automatically reconstructed soma volume along
+                        with the SWC.
+  --no-save-soma        Don't save the automatically reconstructed soma volume
+                        along with the SWC (default)
+  --soma                Use the morphological operator based soma detection
+  --no-soma             Don't use the morphological operator based soma
+                        detection (default)
+  --speed SPEED         The type of speed image to use (dt, ssm). dt(default)
+                        would work for most of the cases. ssm provides
+                        slightly better curves with extra computing time
+  --quality             Reconstruct the neuron with higher quality and
+                        slightly more computing time
+  --no-quality          Reconstruct the neuron with lower quality and slightly
+                        more computing time (default)
+  --silent              Omit the terminal outputs
+  --no-silent           Show the terminal outputs & the nice logo (default)
+  
+$ python3 meit_group.py --dataset Gold166-JSON  # Simple like this. Reconstruct a group of neuron files in dataset Gold166-JSON
+```
+
+Please note that the group operation is quite similar to the single operation except you have to defining the absolute path of your dataset rather than that of a single file.
 
 ## FAQ
 ### What if I see ```...version `GLIBCXX_3.4.21' not found...``` when I run `rtrace` under Anaconda?
