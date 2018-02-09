@@ -134,6 +134,7 @@ This will download a simple neuron image and perform a neuron tracing with rivul
 - Reconstruct single neuron file.
 
 Go into rivuletpy/rivuletpy/utils
+
 Run meit_single.py to start tracing of a single image file
 ```bash
 $ python3 meit_single.py --help
@@ -188,7 +189,7 @@ optional arguments:
 
 
 $ python3 meit_single.py -f example.tif -t 10 # Simple like this. Reconstruct a neuron in example.tif with a background threshold of 10
-python3 meit_single.py -f example.tif -t 10 -cx 200 -cy 200 -z 0.3 # Reconstruct a neuron in example.tif with a background threshold of 10, a cropping parameter of x axis of 200, a cropping parameter of y axis of 200, a zoom factor of 0.3
+$ python3 meit_single.py -f example.tif -t 10 -cx 200 -cy 200 -z 0.3 # Reconstruct a neuron in example.tif with a background threshold of 10, a cropping parameter of x axis of 200, a cropping parameter of y axis of 200, a zoom factor of 0.3
 $ python3 meit_single.py -f example.tif -t 10 --silent # No text will be displayed to the terminal
 $ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" # The output file name would be "myswc.swc"
 $ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" -v # Open a 3D swc viewer after reconstruction 
@@ -197,11 +198,14 @@ $ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" -v # Open a 3D swc 
 Please note that MEIT is powerful of tracing large-scale image with significantly less memory consumed.
 
 
-- Compare a swc reconstruction against the manual ground truth
+- Compare a swc reconstruction against the manual ground truth.
+
+Go into rivuletpy/rivuletpy/utils
+
+Run comparesingle.py to start comparing 2 swc files
 ```
-$ compareswc --help
-usage: compareswc [-h] --target TARGET --groundtruth GROUNDTRUTH
-                  [--sigma SIGMA]
+$ python3 comparesingle.py  --help
+usage: comparesingle.py [-h] --target TARGET --groundtruth GROUNDTRUTH
 
 Arguments for comparing two swc files.
 
@@ -210,15 +214,16 @@ optional arguments:
   --target TARGET       The input target swc file.
   --groundtruth GROUNDTRUTH
                         The input ground truth swc file.
-  --sigma SIGMA         The sigma value to use for the Gaussian function in
-                        NetMets.
 
-$ compareswc --target r2_tracing.swc --groundtruth hand_tracing.swc
-0.9970 0.8946 0.9865 1 3
+$ python3 comparesingle.py --target meit_tracing.swc --groundtruth hand_tracing.swc
+(0.95986696230598667, 0.99448656099241906, 0.97687013426604985)
 ```
-The `compareswc` command outputs five numbers which are in order: 
+The `python3 comparesingle.py` command outputs three numbers which are in order: 
 
-precision, recall, f1-score, No. connection error type A, No. connection error type B
+precision, recall, f1-score
+
+
+- Reconstruct a group of neuron files.
 
 $ groupoperation the operation of croping large tif into small tifs by cropimg,
 --Gao Rong Code Usage:
