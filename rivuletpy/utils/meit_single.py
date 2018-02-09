@@ -49,7 +49,7 @@ parser.add_argument(
         type=str,
         default=None,
         required=True,
-        help='The input file. A image file (*.tif, *.nii, *.mat).')
+        help='The input file. An image file (*.tif, *.nii, *.mat).')
 parser.add_argument(
         '-o',
         '--out',
@@ -89,9 +89,9 @@ parser.add_argument(
         help='Construct boundary around each block')
 
 parser.add_argument('--clean', dest='clean', action='store_true',
-    help="Remove the unconnected segments (default). It is relatively safe to do with the Rivulet2 algorithm")
+    help="Remove the unconnected segments. It is relatively safe to do with the Rivulet2 algorithm")
 parser.add_argument('--no-clean', dest='clean', action='store_false',
-    help="Keep the unconnected segments")
+    help="Keep the unconnected segments (default)")
 parser.set_defaults(clean=False)
 
 # Arguments for soma detection
@@ -111,12 +111,12 @@ parser.add_argument(
     '--speed',
     type=str,
     default='dt',
-    help='The type of speed image to use (dt, ssm). dt would work for most of the cases. ssm provides slightly better curves with extra computing time')
+    help='The type of speed image to use (dt, ssm). dt(default) would work for most of the cases. ssm provides slightly better curves with extra computing time')
 
 parser.add_argument('--quality', dest='quality', action='store_true',
     help="Reconstruct the neuron with higher quality and slightly more computing time")
 parser.add_argument('--no-quality', dest='quality', action='store_false',
-    help="Reconstruct the neuron with lower quality and slightly more computing time")
+    help="Reconstruct the neuron with lower quality and slightly more computing time (default)")
 parser.set_defaults(quality=False)
 # MISC
 parser.add_argument('--silent', dest='silent', action='store_true', help="Omit the terminal outputs")
@@ -124,8 +124,9 @@ parser.add_argument('--no-silent', dest='silent', action='store_false', help="Sh
 parser.set_defaults(silent=False)
 
 parser.add_argument('-v', '--view', dest='view', action='store_true',
-    help="View the reconstructed neuron when rtrace finishes")
-parser.add_argument('--no-view', dest='view', action='store_false')
+    help="View the reconstructed neuron when tracing finishes")
+parser.add_argument('--no-view', dest='view', action='store_false',
+    help="Does not display the reconstructed neuron when tracing finishes (default)")
 parser.set_defaults(view=False)
 
 args = parser.parse_args()
