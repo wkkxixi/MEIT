@@ -133,27 +133,40 @@ This will download a simple neuron image and perform a neuron tracing with rivul
 ## Usage
 - Reconstruct single neuron file.
 
-The script rtrace command will be installed
-```bash
-$ rtrace --help
-usage: rtrace [-h] -f FILE [-o OUT] [-t THRESHOLD] [-z ZOOM_FACTOR]
-              [--save-soma] [--no-save-soma] [--soma] [--no-soma]
-              [--speed SPEED] [--quality] [--no-quality] [--clean]
-              [--no-clean] [--silent] [--no-silent] [-v] [--no-view]
+Go into rivuletpy/rivuletpy/utils
 
-Arguments to perform the Rivulet2 tracing algorithm.
+Run meit_single.py to start tracing of a single image file
+```bash
+$ python3 meit_single.py --help
+usage: meit_single.py [-h] -f FILE [-o OUT] [-t THRESHOLD] [-z ZOOM_FACTOR]
+                      [-cx CROPX] [-cy CROPY] [-b] [--clean] [--no-clean]
+                      [--save-soma] [--no-save-soma] [--soma] [--no-soma]
+                      [--speed SPEED] [--quality] [--no-quality] [--silent]
+                      [--no-silent] [-v] [--no-view]
+
+Arguments to perform the MEIT tracing algorithm.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -f FILE, --file FILE  The input file. A image file (*.tif, *.nii, *.mat).
-  -o OUT, --out OUT     The name of the output file
+  -f FILE, --file FILE  The input file. An image file (*.tif, *.nii, *.mat).
+  -o OUT, --out OUT     The name of the output file. ie. file123.swc
   -t THRESHOLD, --threshold THRESHOLD
                         threshold to distinguish the foreground and
                         background. Defulat 0. If threshold<0, otsu will be
                         used.
   -z ZOOM_FACTOR, --zoom_factor ZOOM_FACTOR
                         The factor to zoom the image to speed up the whole
-                        thing. Default 1.
+                        thing. Default 0.25
+  -cx CROPX, --cropx CROPX
+                        The cropping parameter cropx to crop the image.
+                        Default 100
+  -cy CROPY, --cropy CROPY
+                        The cropping parameter cropy to crop the image.
+                        Default 100
+  -b, --boundary        Construct boundary around each block
+  --clean               Remove the unconnected segments. It is relatively safe
+                        to do with the Rivulet2 algorithm
+  --no-clean            Keep the unconnected segments (default)
   --save-soma           Save the automatically reconstructed soma volume along
                         with the SWC.
   --no-save-soma        Don't save the automatically reconstructed soma volume
@@ -161,34 +174,38 @@ optional arguments:
   --soma                Use the morphological operator based soma detection
   --no-soma             Don't use the morphological operator based soma
                         detection (default)
-  --speed SPEED         The type of speed image to use (dt, ssm). dt would
-                        work for most of the cases. ssm provides slightly
-                        better curves with extra computing time
+  --speed SPEED         The type of speed image to use (dt, ssm). dt(default)
+                        would work for most of the cases. ssm provides
+                        slightly better curves with extra computing time
   --quality             Reconstruct the neuron with higher quality and
                         slightly more computing time
   --no-quality          Reconstruct the neuron with lower quality and slightly
-                        more computing time
-  --clean               Remove the unconnected segments (default). It is
-                        relatively safe to do with the Rivulet2 algorithm
-  --no-clean            Keep the unconnected segments
+                        more computing time (default)
   --silent              Omit the terminal outputs
   --no-silent           Show the terminal outputs & the nice logo (default)
-  -v, --view            View the reconstructed neuron when rtrace finishes
-  --no-view
+  -v, --view            View the reconstructed neuron when tracing finishes
+  --no-view             Does not display the reconstructed neuron when tracing
+                        finishes (default)
 
 
-$ rtrace -f example.tif -t 10 # Simple like this. Reconstruct a neuron in example.tif with a background threshold of 10
-$ rtrace -f example.tif -t 10 --quality # Better results with longer running time
-$ rtrace -f example.tif -t 10 --quality -v # Open a 3D swc viewer after reconstruction 
+$ python3 meit_single.py -f example.tif -t 10 # Simple like this. Reconstruct a neuron in example.tif with a background threshold of 10
+$ python3 meit_single.py -f example.tif -t 10 -cx 200 -cy 200 -z 0.3 # Reconstruct a neuron in example.tif with a background threshold of 10, a cropping parameter of x axis of 200, a cropping parameter of y axis of 200, a zoom factor of 0.3
+$ python3 meit_single.py -f example.tif -t 10 --silent # No text will be displayed to the terminal
+$ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" # The output file name would be "myswc.swc"
+$ python3 meit_single.py -f example.tif -t 10 -o "myswc.swc" -v # Open a 3D swc viewer after reconstruction 
 ```
 
-Please note that Rivulet2 is powerful of handling the noises, a relatively low intensity threshold is preferred to include all the candidate voxels.
+Please note that MEIT is powerful of tracing large-scale image with significantly less memory consumed.
 
-- Compare a swc reconstruction against the manual ground truth
+
+- Compare a swc reconstruction against the manual ground truth.
+
+Go into rivuletpy/rivuletpy/utils
+
+Run comparesingle.py to start comparing 2 swc files
 ```
-$ compareswc --help
-usage: compareswc [-h] --target TARGET --groundtruth GROUNDTRUTH
-                  [--sigma SIGMA]
+$ python3 comparesingle.py  --help
+usage: comparesingle.py [-h] --target TARGET --groundtruth GROUNDTRUTH
 
 Arguments for comparing two swc files.
 
@@ -197,15 +214,16 @@ optional arguments:
   --target TARGET       The input target swc file.
   --groundtruth GROUNDTRUTH
                         The input ground truth swc file.
-  --sigma SIGMA         The sigma value to use for the Gaussian function in
-                        NetMets.
 
-$ compareswc --target r2_tracing.swc --groundtruth hand_tracing.swc
-0.9970 0.8946 0.9865 1 3
+$ python3 comparesingle.py --target meit_tracing.swc --groundtruth hand_tracing.swc
+(0.95986696230598667, 0.99448656099241906, 0.97687013426604985)
 ```
-The `compareswc` command outputs five numbers which are in order: 
+The `python3 comparesingle.py` command outputs three numbers which are in order: 
 
-precision, recall, f1-score, No. connection error type A, No. connection error type B
+precision, recall, f1-score
+
+
+- Reconstruct a group of neuron files.
 
 $ groupoperation the operation of croping large tif into small tifs by cropimg,
 --Gao Rong Code Usage:
