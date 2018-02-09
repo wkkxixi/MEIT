@@ -1,10 +1,10 @@
-# trace.py for crop 2
+"""
+Tracing in MEIT
+"""
 import math
 from tqdm import tqdm
 import numpy as np
 import skfmm
-#import msfm
-#import Image
 from scipy.interpolate import RegularGridInterpolator
 from scipy.ndimage.morphology import binary_dilation
 from filtering.morphology import ssm
@@ -29,7 +29,7 @@ class Tracer(object):
 
 class R2Tracer(Tracer):
 
-    def __init__(self, quality=False, silent=True, speed='dt', clean=False, img=None, cropx=None, cropy=None):
+    def __init__(self, quality=False, silent=True, speed='dt', clean=False, img=None, cropx=None, cropy=None, threshold=None):
         self._quality = quality
         self._img = img
         self._bimg = None
@@ -42,7 +42,7 @@ class R2Tracer(Tracer):
         self._tt = None  # The copy of the timemap
         self._grad = None
         self._coverage = 0.
-        self._soma = None  # soma
+        self._soma = None  # Soma
         self.somainfo = None
         self._silent = silent  # Disable all console outputs
         # Tracing stops when 98% of the foreground has been covered
@@ -56,38 +56,34 @@ class R2Tracer(Tracer):
         self._clean = clean
         self._eps = 1e-5
 
-        self._starting_pt = None
+        self._starting_pt = None # Source point of a block in each tracing iteration
 
-        self._empty_face = None # check when no tip on boundary
-        self._tforboundary = None
+        self._empty_face = None  # Check when no tip on boundary
+        self._tforboundary = None # For setting t-value of non-boundary-tip tips
 
-        self._threshold = 0
+        self._threshold = threshold # For filtering foreground and background
 
-        # Avoid track repeatedly
+        # Set traceability of each block
         self._check = None
         if img is not None:
-            self._check = np.zeros((img.shape[0], img.shape[1], img.shape[2]))
+            self._check = np.zeros((img.shape[0], img.shape[1], img.shape[2])) # Initially 0
 
-    
-        
-
-    def trace(self, starting_pt, threshold):
+    def trace(self, starting_pt):
         '''
-        The main entry for Rivulet2
+        The main entry for MEIT. Tracing of a block (cropx*cropy).
+        Input: Source point of this block
+        Return source points of neighbouring blocks and reconstruction of this block
         '''
-        self._threshold = threshold
-        self._empty_face = [True, True, True, True]
+        self._empty_face = [True, True, True, True] # All 4 faces initially not touched
         self._tforboundary = [
             starting_pt.tvalue(), starting_pt.tvalue(), starting_pt.tvalue(), starting_pt.tvalue()]
 
-        # To avoid trace the same block repeatedly
+        # Check the traceability of this block
         whole = (starting_pt.xmax() - starting_pt.xmin()) * \
             (starting_pt.ymax() - starting_pt.ymin()) * self._img.shape[2]
         sub = self._check[starting_pt.xmin():starting_pt.xmax(
         ), starting_pt.ymin():starting_pt.ymax(), :].sum()
-        print('whole: ' + str(whole) + ' sub: ' + str(sub))
         if sub / whole > 0.99:
-            print('%99 have been traced, no need to trace again')
             return None, None
         else:
             self._check[starting_pt.xmin():starting_pt.xmax(
@@ -95,11 +91,12 @@ class R2Tracer(Tracer):
 
         img = self._img[starting_pt.xmin():starting_pt.xmax(),
                         starting_pt.ymin():starting_pt.ymax(), :]
-        
-        self._bimg = (img > threshold).astype('int')  # Segment image
-        if self._bimg.sum()/img.shape[0]*img.shape[1]*img.shape[2] < 0.00005:
-            print('Foreground too little. Discard tracing process.')
+
+        self._bimg = (img > self._threshold).astype('int')  # Segment image
+        # Check the percentage of foreground points in this block
+        if self._bimg.sum() / img.shape[0] * img.shape[1] * img.shape[2] < 0.00005:
             return None, None
+
         self.somainfo = np.asarray(
             [starting_pt.xyz()[0], starting_pt.xyz()[1], starting_pt.xyz()[2], starting_pt.radius()])
 
@@ -109,18 +106,15 @@ class R2Tracer(Tracer):
         self._soma.detect(self._bimg, self.somainfo,
                           not self._quality, self._silent)
         self._prep()
-        # with open('/Users/wonh/Desktop/tmap/' + str(self._count) + '_tmap.txt', "w") as tx_file:
-        #     tx_file.write(str(self._tt))
 
 
         self._starting_pt = starting_pt
-        # Iterative Back Tracking with Erasing
         if not self._silent:
             print('(5) --Start Backtracking...')
         swc, tips = self._iterative_backtrack()
-        print('We have already traced all branches in this block')
-        print('Now we need to check empty face: ' + str(self._empty_face))
-        for i in range(0,4):
+
+        # Check for boundary face which has not been touched
+        for i in range(0, 4):
             my_boundary = np.asarray([0, 0, 0, 0])
             if i == 0 and self._empty_face[i]:
                 my_boundary[0] = max(0, starting_pt.xmin() - self._cropx + 1)
@@ -129,7 +123,8 @@ class R2Tracer(Tracer):
                 my_boundary[3] = starting_pt.ymax()
             elif i == 1 and self._empty_face[i]:
                 my_boundary[0] = starting_pt.xmax() - 1
-                my_boundary[1] = min(self._img.shape[0], starting_pt.xmax() + self._cropx - 1)
+                my_boundary[1] = min(self._img.shape[0],
+                                     starting_pt.xmax() + self._cropx - 1)
                 my_boundary[2] = starting_pt.ymin()
                 my_boundary[3] = starting_pt.ymax()
             elif i == 2 and self._empty_face[i]:
@@ -141,56 +136,52 @@ class R2Tracer(Tracer):
                 my_boundary[0] = starting_pt.xmin()
                 my_boundary[1] = starting_pt.xmax()
                 my_boundary[2] = starting_pt.ymax() - 1
-                my_boundary[3] = min(self._img.shape[1], starting_pt.ymax() + self._cropy - 1)
+                my_boundary[3] = min(self._img.shape[1],
+                                     starting_pt.ymax() + self._cropy - 1)
             else:
-                print("pos " +str(i) + ' do not need to do final check')
                 continue
-            print('pos ' + str(i) + ' needs to do final check')
-            print('the area needs to be checked is: ' + str(my_boundary))
-            tip = self._final_check(my_boundary,threshold,i)
+            tip = self._final_check(my_boundary, i)
             if tip is not None:
-                print('lucky tip appended! tvalue: ' + str(tip.tvalue()))
                 tips.append(tip)
 
-
-        if self._clean:  # True
+        if self._clean: # Always false since we do not provide any function to prune branches
             swc.prune()
 
         self._restore()
         return swc, tips
 
-    def _final_check(self, block, threshold, pos):
+    def _final_check(self, block, pos):
+        '''
+        Check whether this block worth tracing or not
+        Input: block coordinates and the position of it
+        Return the found tip which is closest to the boundary face of this block's predecessor
+        '''
 
-        bimg = (self._img[block[0]:block[1],block[2]:block[3],:] > threshold).astype('int')
+        bimg = (self._img[block[0]:block[1], block[2]
+                :block[3], :] > self._threshold).astype('int')
 
-        if bimg.sum()/bimg.shape[0]*bimg.shape[1]*bimg.shape[2] < 0.00005:
-            print('final check: foreground too rare. Discard this block.')
+        if bimg.sum() / bimg.shape[0] * bimg.shape[1] * bimg.shape[2] < 0.00005:
             return None
-        whole = bimg.shape[0]*bimg.shape[1]*bimg.shape[2]
+        whole = bimg.shape[0] * bimg.shape[1] * bimg.shape[2]
         sub = self._check[block[0]:block[1], block[2]:block[3], :].sum()
-        print('whole: ' + str(whole) + ' sub: ' + str(sub))
-        if sub / whole > 0.8:
-            print('final check: %80 have been traced, no need to trace this block')
+        if sub / whole > 0.99:
             return None
-        # else:
-            # self._check[block[0]:block[1], block[2]:block[3], :] = 1
-        print('final check: We need to put next area\'s soma to the stack')
         bimg = (self._img[block[0]:block[1], block[2]:block[3], :]
-                > threshold).astype('int')  # Segment image
+                > self._threshold).astype('int')  # Segment image
         soma_pos = None
         flag = 0
+        # Figure out the point closest to the boundary face
         if pos == 0:
-            for x in range(0,bimg.shape[0]):
+            for x in range(0, bimg.shape[0]):
                 if flag == 1:
                     break
-                x_t = bimg.shape[0]-x-1
-                for y in range(0,bimg.shape[1]):
+                x_t = bimg.shape[0] - x - 1
+                for y in range(0, bimg.shape[1]):
                     if flag == 1:
                         break
-                    for z in range(0,bimg.shape[2]):
+                    for z in range(0, bimg.shape[2]):
                         if bimg[x_t][y][z] == 1:
-                            print('-------the first foreground point found!')
-                            soma_pos = np.asarray([x_t,y, z])
+                            soma_pos = np.asarray([x_t, y, z])
                             flag = 1
                             break
         elif pos == 1:
@@ -202,11 +193,10 @@ class R2Tracer(Tracer):
                         break
                     for z in range(0, bimg.shape[2]):
                         if bimg[x][y][z] == 1:
-                            print('-------the first foreground point found!')
-                            soma_pos = np.asarray([x,y,z])
+                            soma_pos = np.asarray([x, y, z])
                             flag = 1
                             break
-        elif pos == 2:
+        elif pos == 3:
             for y in range(0, bimg.shape[1]):
                 if flag == 1:
                     break
@@ -215,35 +205,27 @@ class R2Tracer(Tracer):
                         break
                     for z in range(0, bimg.shape[2]):
                         if bimg[x][y][z] == 1:
-                            print('-------the first foreground point found!')
                             soma_pos = np.asarray([x, y, z])
                             flag = 1
                             break
-        elif pos == 3:
+        elif pos == 2:
             for y in range(0, bimg.shape[1]):
                 if flag == 1:
                     break
-                y_t = bimg.shape[1]-1-y
+                y_t = bimg.shape[1] - 1 - y
                 for x in range(0, bimg.shape[0]):
                     if flag == 1:
                         break
                     for z in range(0, bimg.shape[2]):
                         if bimg[x][y_t][z] == 1:
-                            print('-------the first foreground point found!')
                             soma_pos = np.asarray([x, y_t, z])
                             flag = 1
                             break
 
-
-        # soma = Soma()
-        # soma.detect(bimg, simple=True, silent=False)
-        # centroid = soma.centroid
-        
         self._tforboundary[pos] = max(self._tforboundary) + 1
-        r = estimate_radius(soma_pos, (self._img[block[0]:block[1],block[2]:block[3],:]>self._threshold).astype('int'))
+        r = estimate_radius(
+            soma_pos, (self._img[block[0]:block[1], block[2]:block[3], :] > self._threshold).astype('int'))
         tip = Tip(self._tforboundary[pos], block, r, soma_pos, pos)
-        print('in this block, our soma pos: ' +
-              str(soma_pos) + ' radius: ' + str(r))
 
         return tip
 
@@ -395,18 +377,6 @@ class R2Tracer(Tracer):
         # Initialise swc with the soma centroid
         swc = SWC(self._soma, self._starting_pt, self._t, self._cropx,
                   self._cropy, self._img.shape[0:2])
-        # print("before-----")
-        # print(swc._data)
-        # swc.add(np.reshape(
-        #     np.asarray([
-        #         0, 1, self._soma.centroid[0], self._soma.centroid[1], self._soma.centroid[2],
-        #         self._soma.radius, -1, 1.
-        #     ]), (1, 8)))
-
-        # print("after-----")
-        # print(swc._data)
-
-        # swc.size() now is just 1
 
         if not self._silent:
             self._pbar = tqdm(total=math.floor(
@@ -418,72 +388,33 @@ class R2Tracer(Tracer):
         count = 0
         prev_coverage = -1
         while self._coverage < self._target_coverage:
-            
-            # print('self._coverage is ' + str(self._coverage))
+
             self._update_coverage()
             if prev_coverage != -1:
                 if self._coverage == prev_coverage:
-                    print('-----------------------------------------coverage doesn\'t change!')
                     return swc, found_tips
             prev_coverage = self._coverage
-            # print('coverage: ' + str(self._coverage))
-            # traced_0 = (self._tt <= 0).astype('int').sum()
-            # traced = (self._tt < 0).astype('int').sum()
-            # allfort = self._tt.shape[0]*self._tt.shape[1]*self._tt.shape[2]
-            # print('traced<=0: ' + str(traced_0) + ' all: ' + str(allfort))
-            # print('traced<0: ' + str(traced) + ' all: ' + str(allfort))
-            # print('coverage: ' + str(self._coverage))
-            # print('_cover_ctr_new: ' + str(self._cover_ctr_new) + ' foreground: ' + str(self._nforeground))
-            # print('self.coverage is: ' + str(self._coverage))
-            # Find the geodesic furthest point on foreground time-crossing-map
-            # max_t = self._tt.argmax()
-            # print('self._tt.argmax: ' + str(max_t))
-            # a = self._tt.ravel()
-            # print('ravel self._tt and the value on position max_t is: ' + str(a[max_t]))
+           
             srcpt = np.asarray(np.unravel_index(
                 self._tt.argmax(), self._tt.shape)).astype('float64')
             if prev_srcpt is not None:
                 if srcpt[0] == prev_srcpt[0] and srcpt[1] == prev_srcpt[1] and srcpt[2] == prev_srcpt[2]:
-                    print('-----------------------------------------rare but happened!')
                     return swc, found_tips
             prev_srcpt = srcpt
-            # print('srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0], srcpt[1], srcpt[2]]))
-            # print('srcpt floor: ' + str([math.floor(srcpt[0]), math.floor(
-            #     srcpt[1]), math.floor(srcpt[2])]) + 'tvalue: ' + str(self._tt[math.floor(srcpt[0]), math.floor(
-            #         srcpt[1]), math.floor(srcpt[2])]))
-            # if math.floor(srcpt[0]) == 0 and math.floor(srcpt[1])==0 and math.floor(srcpt[2]) == 50:
-                
-            #     with open('/Users/wonh/Desktop/tmap/' + str(self._count) + '_tmap_stuuck.txt', "w") as tx_file:
-            #         tx_file.write(str(self._tt>0))
-            #     with open('/Users/wonh/Desktop/tmap/' + str(self._count) + '.txt', "w") as text_file:
-            #         sub_xmin = max(0, srcpt[0] - 5)
-            #         sub_xmax = min(srcpt[0] + 5, self._bimg.shape[0])
-            #         sub_ymin = max(0, srcpt[1]-5)
-            #         sub_ymax = min(srcpt[1] + 5, self._bimg.shape[1])
-            #         sub_zmin = max(0, srcpt[2]-5)
-            #         sub_zmax = min(srcpt[2] + 5, self._bimg.shape[2])
-            #         sub_t = self._tt[sub_xmin:sub_xmax,sub_ymin:sub_ymax,sub_zmin:sub_zmax]
-            #         text_file.write(str(sub_t))
+           
 
             branch = R2Branch()
             branch.add(srcpt, 1., 1.)
 
             # Erase the source point just in case
-            # print('erase the source point => -2')
             self._tt[math.floor(srcpt[0]), math.floor(
                 srcpt[1]), math.floor(srcpt[2])] = -2
-            # print('srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],
-            #                                                           srcpt[1], srcpt[2]]))
-            # print('srcpt floor: ' + str([math.floor(srcpt[0]), math.floor(
-            #     srcpt[1]), math.floor(srcpt[2])]) + 'tvalue: ' + str(self._tt[math.floor(srcpt[0]), math.floor(
-            #         srcpt[1]), math.floor(srcpt[2])]))
+            
             keep = True
 
             # Loop for 1 back-tracking iteration
             while True:
-                # print('1 back-tracking iteration starting :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0], srcpt[1], srcpt[2]]))
                 self._step(branch)
-                # print(branch.pts)
                 head = branch.pts[-1]
                 tt_head = self._tt[math.floor(head[0]), math.floor(
                     head[1]), math.floor(head[2])]
@@ -491,39 +422,27 @@ class R2Tracer(Tracer):
                 # 1. Check out of bound
                 if not inbound(head, self._bimg.shape):
                     branch.slice(0, -1)
-                    # print('break from iteration')
-                    # print('1 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                     break
 
                 # 2. Check for the large gap criterion
                 if branch.gap > np.asarray(branch.radius).mean() * 8:
-                    # print('break from iteration')
-                    # print('2.1 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
-
                     break
                 else:
                     branch.reset_gap()
-                    # print('2.2 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
 
                 # 3. Check if Soma has been reached
                 if tt_head == -3:
                     keep = True if branch.branchlen > self._soma.radius * 3 else False
                     branch.reached_soma = True
-                    # print('break from iteration')
-                    # print('3 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                     break
 
                 # 4. Check if not moved for 15 iterations
                 if branch.is_stucked():
-                    # print('break from iteration')
-                    # print('4 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                     break
 
                 # 5. Check for low online confidence
                 if branch.low_conf:
                     keep = False
-                    # print('break from iteration')
-                    # print('5 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                     break
 
                 # 6. Check for branch merge
@@ -533,33 +452,19 @@ class R2Tracer(Tracer):
                 if tt_head == -1:
                     branch.touched = True
                     if swc.size() == 1:
-                        # print('break from iteration')
-                        # print('6.0 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                         break
 
                     matched, matched_idx = swc.match(head, branch.radius[-1])
                     if matched > 0:
                         branch.touch_idx = matched_idx
-                        # print('break from iteration')
-                        # print('6.1:srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                         break
 
                     if branch.steps_after_reach > 200:
-                        # print('break from iteration')
-                        # print('6.2 :srcpt: ' + str(srcpt) + 'tvalue: ' + str(self._tt[srcpt[0],srcpt[1], srcpt[2]]))
                         break
 
             self._erase(branch)
-            # print('erase this branch :srcpt: ' + str(srcpt) +
-            #       'tvalue: ' + str(self._tt[srcpt[0], srcpt[1], srcpt[2]]))
-            # # erase the source point posterase
-            # self._tt[math.floor(srcpt[0]), math.floor(
-            #     srcpt[1]), math.floor(srcpt[2])] = -2
-            # print('erase source point again :srcpt: ' + str(srcpt) +
-            #       'tvalue: ' + str(self._tt[srcpt[0], srcpt[1], srcpt[2]]))
-
+    
             # Add to SWC if it was decided to be kept
-
             if keep:
                 pidx = None
                 if branch.reached_soma:
@@ -567,11 +472,10 @@ class R2Tracer(Tracer):
                 elif branch.touch_idx >= 0:
                     pidx = branch.touch_idx
                 tips = swc.add_branch(branch, pidx)
-                
-                for tip in tips:                    
+
+                for tip in tips:
                     if self._empty_face[tip.pos()] is True:
                         found_tips.append(tip)
-                        print(str(count) + '(4): append tip of pos ' + str(tip.pos()))
                         count += 1
                         self._empty_face[tip.pos()] = False
                         self._tforboundary[tip.pos()] = tip.tvalue()
@@ -650,7 +554,8 @@ class R2Branch(Branch):
         eps = 1e-5
         head = self.pts[-1]
         velocity = np.asarray(pt) - np.asarray(head)
-        self.stepsz = np.linalg.norm(velocity) # the distance between the new pt and the current head
+        # the distance between the new pt and the current head
+        self.stepsz = np.linalg.norm(velocity)
         self.branchlen += self.stepsz
         b = dilated_bimg[math.floor(pt[0]), math.floor(
             pt[1]), math.floor(pt[2])]
@@ -781,5 +686,3 @@ def constrain_range(min, max, minlimit, maxlimit):
     return list(
         range(min if min > minlimit else minlimit, max
               if max < maxlimit else maxlimit))
-
-

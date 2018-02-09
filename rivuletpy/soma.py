@@ -232,9 +232,6 @@ class Soma(object):
             self.centroid = somapos
             self.radius = somaradius
             self.simple_mask(bimg)
-            # print('soma position is:')
-            # print(self.centroid)
-            # print('soma radius is: ' + str(somaradius))
 
 
 class Fcycle(object):

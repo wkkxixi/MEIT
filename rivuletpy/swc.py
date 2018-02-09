@@ -16,17 +16,15 @@ class SWC(object):
         self._source = starting_pt
         self._cropx = cropx
         self._cropy = cropy
-        self._empty_face = [0,0,0,0]
+        self._empty_face = [0, 0, 0, 0]
         self._img_xy = img_xy
-        self._bimg_xy = np.asarray(
-            [starting_pt.xmax() - starting_pt.xmin(), starting_pt.ymax() - starting_pt.ymin()])
+        if starting_pt:
+            self._bimg_xy = np.asarray(
+                [starting_pt.xmax() - starting_pt.xmin(), starting_pt.ymax() - starting_pt.ymin()])
 
         if soma:
             self._data[0, :] = np.asarray([0, 7, soma.centroid[0] + self._source.xmin(
             ), soma.centroid[1] + self._source.ymin(), soma.centroid[2], soma.radius, -1, 1])
-
-    # def add(self, swc_nodes):
-    #     self._data = np.vstack((self._data, swc_nodes))
 
     def add_branch(self, branch, pidx=None, random_color=False):
         '''
@@ -40,10 +38,8 @@ class SWC(object):
         id_start = 1 if self._data.shape[0] == 1 else self._data[:, 0].max(
         ) + 1
         found_tips = []
-        # print('length of branch is : ' + str(len(branch.pts)))
         for i in range(len(branch.pts)):
             p, r, c = branch.pts[i], branch.radius[i], branch.conf[i]
-            # print("points",p)
             id = id_start + i
             # 3 for basal dendrite; 4 for apical dendrite;
             # However now we cannot differentiate them automatically
@@ -58,7 +54,6 @@ class SWC(object):
                 pid = id_start + i + 1
                 if i == 0:
                     nodetype = 6  # Endpoint
-                    # print('endpoint')
 
             assert(pid != id)
 
@@ -108,12 +103,12 @@ class SWC(object):
                         self._img_xy[1], self._source.ymax() + self._cropy - 1)
                 else:
                     continue
-                
+
                 self._empty_face[pos] = 1
+
                 tvalue = self._tmap[p[0], p[1], p[2]] - self._tmap[self._source.xyz(
                 )[0], self._source.xyz()[1], self._source.xyz()[2]] + self._source.tvalue()
-                # print('found tip!!! ' + str(p) + ' on ' +
-                #       str(pos) + ' side ' + str(tvalue))
+                
                 p_of_next_area = np.asarray([p[0], p[1], p[2]])
                 if pos == 0:
                     p_of_next_area[0] = my_boundary[1] - 1 - my_boundary[0]
@@ -123,7 +118,7 @@ class SWC(object):
                     p_of_next_area[1] = my_boundary[3] - 1 - my_boundary[2]
                 else:
                     p_of_next_area[1] = 0
-                tip = Tip(tvalue, my_boundary, r, p_of_next_area,pos)
+                tip = Tip(tvalue, my_boundary, r, p_of_next_area, pos)
                 found_tips.append(tip)
 
         # Check if any tail should be connected to its tail
@@ -133,7 +128,6 @@ class SWC(object):
             self._data[minidx, 6] = tail[0]
 
         self._data = np.vstack((self._data, new_branch))
-        # print('end of one branch tracing: ' + str(len(found_tips)))
 
         return found_tips
 

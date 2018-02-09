@@ -33,6 +33,8 @@ def boundary(x0, x1, y0, y1, z0, z1, f):
 def cropimg(cropx,cropy,origintif):
     #The savefile consists of cropx_cropy eg: 2_3.tif
     img=loadimg(origintif)
+    print('img shape is: ' + str(img.shape))
+    print('cropx is : ' + str(cropx) + ' cropy is : ' + str(cropy))
     savepath = origintif.split(".")[0] + "_"+str(cropx)+"_"+str(cropy)+"/"
     if os.path.exists(savepath):
         shutil.rmtree(savepath)
@@ -46,8 +48,10 @@ def cropimg(cropx,cropy,origintif):
 
     # print(shapex,shapey,shapez)
     if shapey< cropy:
+        print('shapey < cropy')
         for j in range(cropx,shapex,cropx):
             oneitem=img[j-cropx:j,:,:]
+            
             loc="1_"+str(int(j/cropx))
             locinfo=locinfo+"\n"+loc
             writetiff3d(savepath+loc+".tif", oneitem)
@@ -148,7 +152,7 @@ def combined(directory):
             wholepart = np.concatenate((wholepart, liney), axis=0)
     writetiff3d(directory + "/wholepart.tif",wholepart)
 
-def combinedswc(path):
+def combinedswc(path, path2):
     savepath = os.path.abspath(os.path.join(path, os.pardir))
     swcname=path.split('/')[-1]
     count = 0
@@ -156,16 +160,32 @@ def combinedswc(path):
     for swc in glob.glob(os.path.join(path, '*.swc')):
         a = loadswc(swc)
         tswc = a.copy()
+        
         tswc[:, 0] += count  # change the order
         tswc[:, -1] += count
         count = a.shape[0] + count + 2#The follow three lines are for checking errors
-        # saveswc(swc.split('.')[0]+'copy.swc',tswc)
-        # print(swc,tswc[0, 0],tswc[0,-1])
-        # print(swc,tswc[-1,0],tswc[-1,-1])
+
         if container[0, 2] == 0:
             container = tswc
         else:
             container = np.vstack((container, tswc))
-    saveswc(savepath+'/'+swcname+'.swc', container)
+    if path2:
+        saveswc(savepath+'/'+path2, container)
+    else:
+        saveswc(savepath+'/'+swcname+'.swc', container)
 
+def simplecombine(path):
+    savepath = os.path.abspath(os.path.join(path, os.pardir))
+    swcname = path.split('/')[-1]
+    count = 0
+    container = np.zeros(shape=(1, 7))  # Initialize the default container
+    for swc in glob.glob(os.path.join(path, '*.swc')):
+        a = loadswc(swc)
+        tswc = a.copy()
 
+        
+        if container[0, 2] == 0:
+            container = tswc
+        else:
+            container = np.vstack((container, tswc))
+    saveswc(savepath + '/' + swcname + '.swc', container)
