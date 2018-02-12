@@ -28,7 +28,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  -->
 
-# Rivuletpy
+# MEIT
 
 Large scale 3D Neuron Tracing/Neuron reconstruction in Python for 3D microscopic images powered by the Rivulet2 algorithm. Pain-free Install & Use in 5 mins.
 
@@ -45,22 +45,6 @@ Siqi Liu, Donghao Zhang, Sidong Liu, Dagan Feng, Hanchuan Peng, Weidong Cai,
 Neuroinformatics, Vol.14, Issue 4, pp387-401, 2016.
 
 A C++ implementation of the Rivulet2 algorithm is also available in the lastest [Vaa3D](https://github.com/Vaa3D) sources under the [Rivulet Plugin](https://github.com/Vaa3D/vaa3d_tools/tree/master/released_plugins/v3d_plugins/bigneuron_siqi_rivuletv3d) (Not yet available in the released build). However you can build Vaa3D easily on Mac/Linux following the [Vaa3D wiki](https://github.com/Vaa3D/Vaa3D_Wiki/wiki/Build-Vaa3D-on-Linux) carefully.
-
-## Issues / questions / pull requests
-
-Issues should be reported to the
-[Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
-The ability and speed with which issues can be resolved depends on how complete and
-succinct the report is. For this reason, it is recommended that reports be accompanied
-with a minimal but self-contained code sample that reproduces the issue, the observed and
-expected output, and if possible, the commit ID of the version used. If reporting a
-regression, the commit ID of the change that introduced the problem is also extremely valuable
-information.
-
-Questions are also welcomed in the [Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
-If you put on a `question` label. We consider every question as an issue since it means we should have made things clearer/easier for the users.
-
-Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
 
 
 
@@ -82,8 +66,21 @@ activated. We will see three ways to install `Rivuletpy`
 $ virtualenv -p python3 riv
 $ . riv/bin/activate
 ```
+### 1. Clone the repository for MEIT
 
-### 1. Setup the dependencies
+```
+(riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
+(riv)$ cd rivuletpy
+(riv)$ pip3 install -e .
+```
+
+This installs `Rivuletpy` into your `virtualenv` in "editable" mode. That means changes
+made to the source code are seen by the installation. To install in read-only mode, omit
+the `-e`.
+
+Files in folder `scikit` are downloaded from https://anaconda.org/pranathi/scikit-fmm. You need to mannually put these files into your virtualenv `riv/lib/python3.4/site-packages`.
+
+### 2. Setup the dependencies
 To install rivuletpy with pip, you need to install the following packages manually beforehand since some dependencies of rivuletpy uses them in their setup scripts
 * `numpy-1.14.0`
 * `scipy-1.0.0`
@@ -105,29 +102,6 @@ To install rivuletpy with pip, you need to install the following packages manual
 (riv)$ pip install pyglet
 (riv)$ pip install Pillow
 ```
-### 2A. Install Rivuletpy from the Pypi (Recommended)
-
-```
-(riv)$ pip3 install rivuletpy
-```
-If you are using Anaconda
-```
-(riv)$ pip install rivuletpy # The pip should be correspnded to python3
-```
-
-### 2B. Install Rivuletpy from source (Optional)
-Optionally you can install Rivuletpy from the source files
-
-```
-(riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
-(riv)$ cd rivuletpy
-(riv)$ pip3 install -e .
-```
-
-This installs `Rivuletpy` into your `virtualenv` in "editable" mode. That means changes
-made to the source code are seen by the installation. To install in read-only mode, omit
-the `-e`.
-
 
 
 
@@ -313,3 +287,20 @@ The build-time and runtime dependencies of Rivuletpy are:
 * [matplotlib](http://www.matplotlib.org/)
 * [tqdm](https://github.com/noamraph/tqdm)
 * [nibabel](http://nipy.org/nibabel/)
+
+
+## Issues / questions / pull requests
+
+Issues should be reported to the
+[Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
+The ability and speed with which issues can be resolved depends on how complete and
+succinct the report is. For this reason, it is recommended that reports be accompanied
+with a minimal but self-contained code sample that reproduces the issue, the observed and
+expected output, and if possible, the commit ID of the version used. If reporting a
+regression, the commit ID of the change that introduced the problem is also extremely valuable
+information.
+
+Questions are also welcomed in the [Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
+If you put on a `question` label. We consider every question as an issue since it means we should have made things clearer/easier for the users.
+
+Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
