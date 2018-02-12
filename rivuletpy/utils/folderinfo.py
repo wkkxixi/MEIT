@@ -1,5 +1,5 @@
-from rivuletpy.utils.io import *
-from rivuletpy.utils.outputSmallSwc import *
+from io import *
+from outputSmallSwc import *
 import os, glob
 import shutil
 #This is for croping origin tif into pieces of size(cropx*cropy*z)

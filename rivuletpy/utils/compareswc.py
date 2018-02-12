@@ -1,7 +1,7 @@
 from collections import deque
 import numpy as np
 from scipy.spatial.distance import cdist
-from rivuletpy.utils.io import *
+from io import *
 from os.path import join
 import csv
 from glob import glob

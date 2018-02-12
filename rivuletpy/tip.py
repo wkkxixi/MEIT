@@ -19,20 +19,27 @@ class Tip(object):
         self._radius = radius
         self._xyz = xyz
         self._pos = pos
-        
+
     def xmin(self):
         return self._xmin
+
     def xmax(self):
         return self._xmax
+
     def ymin(self):
         return self._ymin
+
     def ymax(self):
         return self._ymax
+
     def radius(self):
         return self._radius
+
     def tvalue(self):
         return self._tvalue
+
     def xyz(self):
         return self._xyz
+
     def pos(self):
         return self._pos

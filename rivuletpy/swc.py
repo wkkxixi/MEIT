@@ -4,9 +4,9 @@ import math
 from random import random, randrange
 from collections import Counter
 from scipy.spatial.distance import cdist
-from .utils.io import saveswc
+from utils.io import saveswc
 import heapq
-from .tip import Tip
+from tip import Tip
 
 
 class SWC(object):

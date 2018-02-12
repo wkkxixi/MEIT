@@ -4,13 +4,15 @@ from collections import defaultdict
 import multiprocessing as mp
 import shutil
 import csv
-from rivuletpy.utils.io import *
-#jsonfilepath='/home/rong/Desktop/Gold166-JSON/'
-
-
+from io import *
 
 
 def readtif(jsonfilepath):
+    '''
+    Read jsoninfo file inside a dataset to grab information of all images inside this dataset
+    Input: Dataset folder name
+    Generates .csv and .txt files 
+    '''
     container = 'filename\tthreshold\tdimx\tdimy\tdimz\tsize(x*y*z)'#the first line of file to indicate the type of the content
     if os.path.exists(jsonfilepath + "jsoninfo"):#if there is a folder, rewrite it. If not, create it.
         # delete a directory and all its contents
@@ -31,7 +33,6 @@ def readtif(jsonfilepath):
                     threshold=data['data'][Key][key]['misc']['threshold']
                     img = loadimg(jsonfilepath+filename)
                     x,y,z=img.shape
-                    #print(img.shape) # print tif file original img shape
                     d[filename+'\t'+str(threshold)+'\t'+str(x)+'\t'+str(y)+'\t'+str(z)]=x*y*z
     #output files sorted by its size
     for item in sorted(d,key=d.get,reverse=True):
