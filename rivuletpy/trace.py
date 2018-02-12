@@ -9,10 +9,10 @@ from scipy.interpolate import RegularGridInterpolator
 from scipy.ndimage.morphology import binary_dilation
 from filtering.morphology import ssm
 from skimage.filters import threshold_otsu
-from soma import Soma
-from swc import SWC
-from tip import Tip
-from utils.io import *
+from .soma import Soma
+from .swc import SWC
+from .tip import Tip
+from .utils.io import *
 
 
 class Tracer(object):

@@ -1,7 +1,7 @@
-from io import *
-from outputSmallSwc import *
+from .io import *
 import os, glob
 import shutil
+import numpy as np
 #This is for croping origin tif into pieces of size(cropx*cropy*z)
 def boundary(x0, x1, y0, y1, z0, z1, f):
     swc = np.zeros((1, 7))

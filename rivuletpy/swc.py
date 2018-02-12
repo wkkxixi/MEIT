@@ -4,9 +4,9 @@ import math
 from random import random, randrange
 from collections import Counter
 from scipy.spatial.distance import cdist
-from utils.io import saveswc
+from .utils.io import saveswc
 import heapq
-from tip import Tip
+from .tip import Tip
 
 
 class SWC(object):
@@ -251,7 +251,7 @@ class SWC(object):
         saveswc(fname, self._data)
 
     def view(self):
-        from rivuletpy.utils.rendering3 import Viewer3, Line3
+        from .utils.rendering3 import Viewer3, Line3
 
         # Compute the center of mass
         center = self._data[:, 2:5].mean(axis=0)

@@ -4,7 +4,7 @@ from scipy.ndimage.filters import laplace
 try:
     from skimage import filters
 except ImportError:
-    from skimage import filter as filters
+    from skimage import filters as filters
 from tqdm import tqdm
 from functools import reduce
 from scipy.interpolate import RegularGridInterpolator
