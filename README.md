@@ -62,7 +62,7 @@ If you put on a `question` label. We consider every question as an issue since i
 
 Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
 
-![logo](https://github.com/lsqshr/Rivulet-Neuron-Tracing-Toolbox/blob/master/Rivulet_resources/Rivulet-Logo2.png)
+
 
 ## Installation
 note: 3B means the option B for the third step
@@ -85,18 +85,25 @@ $ . riv/bin/activate
 
 ### 1. Setup the dependencies
 To install rivuletpy with pip, you need to install the following packages manually beforehand since some dependencies of rivuletpy uses them in their setup scripts
-* `numpy>=1.8.0`
-* `scipy>=0.17.0`
-* `Cython>=0.25.1`
-* `tqdm-dev`
-* `libtiff-dev`
+* `numpy-1.14.0`
+* `scipy-1.0.0`
+* `matplotlib-2.1.2`
+* `cython-0.27.3`
+* `tqdm-4.19.5-py`
+* `tifffile-0.9.0-np111py34_0`
+* `PyWavelets-0.5.2`
+* `pyglet-1.3.1`
+* `Pillow-5.0.0`
+
 
 ```
 (riv)$ pip install --upgrade pip
-(riv)$ pip install numpy scipy matplotlib cython git+https://github.com/tqdm/tqdm.git@a379e330d013cf5f7cec8e9460d1d5e03b543444#egg=tqdm 
+(riv)$ pip install numpy scipy matplotlib cython 
+(riv)$ conda install -c conda-forge tqdm 
 (riv)$ conda install tifffile -c conda-forge
-(riv)$ conda install -c pranathi scikit-fmm #for python3.4
-(riv)$ conda install -c anaconda scikit-fmm #only for python2.7
+(riv)$ pip install PyWavelets
+(riv)$ pip install pyglet
+(riv)$ pip install Pillow
 ```
 ### 2A. Install Rivuletpy from the Pypi (Recommended)
 
@@ -112,9 +119,8 @@ If you are using Anaconda
 Optionally you can install Rivuletpy from the source files
 
 ```
-(riv)$ git clone https://github.com/RivuletStudio/rivuletpy.git
+(riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
 (riv)$ cd rivuletpy
-(riv)$ python setup.py develop # Needed since we use the fast-forward 'tqdm' and 'pylibtiff'; Need to remove 'dependency_links'
 (riv)$ pip3 install -e .
 ```
 
@@ -134,7 +140,7 @@ This will download a simple neuron image and perform a neuron tracing with rivul
 ## Usage
 - Reconstruct single neuron file.
 
-Go into rivuletpy/rivuletpy/utils
+Go into rivuletpy
 
 Run meit_single.py to start tracing of a single image file
 ```bash
@@ -202,7 +208,7 @@ Please note that MEIT is powerful of tracing large-scale image with significantl
 
 - Compare a swc reconstruction against the manual ground truth.
 
-Go into rivuletpy/rivuletpy/utils
+Go into rivuletpy
 
 Run comparesingle.py to start comparing 2 swc files
 ```
@@ -228,7 +234,7 @@ and saves the comparison swc file.
 
 - Reconstruct a group of neuron files.
 
-Go into rivuletpy/rivuletpy/utils
+Go into rivuletpy
 
 Run meit_group.py to start tracing a group of neuron files
 
