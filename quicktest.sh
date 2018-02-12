@@ -12,12 +12,6 @@ then
   unzip $TESTIMGZIP -d ./test_data;
 fi
 
-python3 apps/rtrace --threshold 0 --file $TESTIMG  --out $OUT -v;
-if [ -z ${V3DPATH+x} ]; then 
-	echo "V3DPATH is unset"; 
-else 
-	$V3DPATH/vaa3d -v -i $OUT;
-	echo "V3DPATH is set to '$V3DPATH'"; 
-fi
+python3 meit_single.py --file $TESTIMG   -v;
 
 echo "== Done =="
