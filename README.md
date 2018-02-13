@@ -34,69 +34,41 @@ Large scale 3D Neuron Tracing/Neuron reconstruction in Python for 3D microscopic
 
 Rivuletpy is a Python3 toolkit for automatically reconstructing single neuron models from 3D microscopic image stacks. It is actively maintained by the RivuletStudio @ University of Sydney, AU. The project was initiated in the [BigNeuron project](https://alleninstitute.org/bigneuron/about/)
 
-The `rtrace` command is powered by the latest neuron tracing algorithm Rivulet2 (Preprint hosted on BioArxiv):
-
-Siqi Liu, Donghao Zhang, Yang Song, Hanchuan Peng, Weidong Cai, "Automated 3D Neuron Tracing with Precise Branch Erasing and Confidence Controlled Back-Tracking", bioRxiv 109892; doi: https://doi.org/10.1101/109892
-
-The predecessor Rivulet1 was published on Neuroinformatics:
-
-Siqi Liu, Donghao Zhang, Sidong Liu, Dagan Feng, Hanchuan Peng, Weidong Cai, 
-"Rivulet: 3D Neuron Morphology Tracing with Iterative Back-Tracking", 
-Neuroinformatics, Vol.14, Issue 4, pp387-401, 2016.
-
-A C++ implementation of the Rivulet2 algorithm is also available in the lastest [Vaa3D](https://github.com/Vaa3D) sources under the [Rivulet Plugin](https://github.com/Vaa3D/vaa3d_tools/tree/master/released_plugins/v3d_plugins/bigneuron_siqi_rivuletv3d) (Not yet available in the released build). However you can build Vaa3D easily on Mac/Linux following the [Vaa3D wiki](https://github.com/Vaa3D/Vaa3D_Wiki/wiki/Build-Vaa3D-on-Linux) carefully.
-
-
 
 ## Installation
-note: 3B means the option B for the third step
 
-Before 0A, you should firstly install Anaconda or virtuaulenv on your computer
-### 0A. Setup the Anaconda environment (Easy)
+Before 0, you should firstly install Anaconda on your computer
+### 0. Setup the Anaconda environment (Easy)
 ```
 $ conda create -n riv python=3.4
 $ source activate riv
 ```
-### 0B. Setup the virtualenv (Alternative)
-It is recommended that you use [`pip`](https://pip.pypa.io/en/stable/) to install
-`Rivuletpy` into a [`virtualenv`](https://virtualenv.pypa.io/en/stable/). The following
-assumes a `virtualenv` named `riv` has been set up and
-activated. We will see three ways to install `Rivuletpy`
-```
-$ virtualenv -p python3 riv
-$ . riv/bin/activate
-```
 
 
-### 2. Setup the dependencies
-To install rivuletpy with pip, you need to install the following packages manually beforehand since some dependencies of rivuletpy uses them in their setup scripts
-* `numpy-1.14.0`
-* `scipy-1.0.0`
-* `matplotlib-2.1.2`
-* `cython-0.27.3`
+### 1. Setup the dependencies
+To run MEIT, you need to install the following packages manually beforehand
+
+* `pip-9.0.1`
 * `tqdm-4.19.5-py`
-* `tifffile-0.9.0-np111py34_0`
 * `scikit-image-0.12.3`
 * `scikit-fmm-0.0.9`
+* `tifffile-0.9.0`
 * `PyWavelets-0.5.2`
 * `pyglet-1.3.1`
-* `Pillow-5.0.0`
-
-
+* `cython-0.27.3`
 ```
-(riv)$ pip install --upgrade pip
-(riv)$ pip install numpy scipy matplotlib cython 
-(riv)$ conda install -c conda-forge tqdm 
-(riv)$ conda install tifffile -c conda-forge
-(riv)$ conda install scikit-image
-(riv)$ pip install scikit-fmm
-(riv)$ pip install PyWavelets
-(riv)$ pip install pyglet
-(riv)$ pip install Pillow
+(riv)$ pip install --upgrade pip==9.0.1
+(riv)$ conda install -c conda-forge tqdm=4.19.5
+(riv)$ conda install scikit-image=0.12.3
+(riv)$ pip install scikit-fmm==0.0.9
+(riv)$ conda install -c conda-forge tifffile=0.9.0 
+(riv)$ pip install PyWavelets==0.5.2
+(riv)$ pip install pyglet==1.3.1
+(riv)$ pip install cython==0.27.3
 ```
 
 
-### 1. Clone the repository for MEIT
+### 2. Clone the repository for MEIT
 
 ```
 (riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
@@ -108,7 +80,7 @@ To install rivuletpy with pip, you need to install the following packages manual
 In ./rivuletpy/
 `sh quicktest.sh`
 
-This will download a simple neuron image and perform a neuron tracing with rivulet2 algorithm. If you encountered any issues while installing Rivuletpy, you are welcome to raise an issue for the developers in the [issue tracker](https://github.com/RivuletStudio/rivuletpy/issues)
+This will download a simple neuron image and perform a neuron tracing with rivulet2 algorithm. If you encountered any issues while installing Rivuletpy, you are welcome to raise an issue for the developers in the [issue tracker](https://github.com/wkkxixi/rivuletpy/issues)
 
 ## Usage
 - Reconstruct single neuron file.
@@ -276,16 +248,16 @@ Try to get rid of the mkl in your conda, it has been reported to cause many issu
 
 ## Dependencies
 
-The build-time and runtime dependencies of Rivuletpy are:
+The build-time and runtime dependencies of MEIT are:
 
-* [numpy](http://www.numpy.org/)
-* [scipy](http://www.scipy.org/)
+
 * [Cython](http://cython.org/)
 * [scikit-fmm](https://github.com/scikit-fmm)
 * [scikit-image](https://github.com/scikit-image)
-* [matplotlib](http://www.matplotlib.org/)
 * [tqdm](https://github.com/noamraph/tqdm)
-* [nibabel](http://nipy.org/nibabel/)
+* [pyglet](https://pypi.python.org/pypi/pyglet/)
+* [PyWavelets](https://pypi.python.org/pypi/PyWavelets/)
+* [tifffile](https://pypi.python.org/pypi/tifffile/)
 
 
 ## Issues / questions / pull requests
@@ -303,3 +275,18 @@ Questions are also welcomed in the [MEIT github repository issue tracker](https:
 If you put on a `question` label. We consider every question as an issue since it means we should have made things clearer/easier for the users.
 
 Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
+
+
+## Rivulet2
+
+
+The `rtrace` command is powered by the latest neuron tracing algorithm Rivulet2 (Preprint hosted on BioArxiv):
+
+Siqi Liu, Donghao Zhang, Yang Song, Hanchuan Peng, Weidong Cai, "Automated 3D Neuron Tracing with Precise Branch Erasing and Confidence Controlled Back-Tracking", bioRxiv 109892; doi: https://doi.org/10.1101/109892
+
+The predecessor Rivulet1 was published on Neuroinformatics:
+
+Siqi Liu, Donghao Zhang, Sidong Liu, Dagan Feng, Hanchuan Peng, Weidong Cai, 
+"Rivulet: 3D Neuron Morphology Tracing with Iterative Back-Tracking", 
+Neuroinformatics, Vol.14, Issue 4, pp387-401, 2016.
+
