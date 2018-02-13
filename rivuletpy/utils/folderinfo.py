@@ -170,7 +170,7 @@ def combinedswc(path, path2):
         else:
             container = np.vstack((container, tswc))
     if path2:
-        saveswc(savepath+'/'+path2, container)
+        saveswc(path2, container)
     else:
         saveswc(savepath+'/'+swcname+'.swc', container)
 

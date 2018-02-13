@@ -211,7 +211,7 @@ combinedswc(directory, args.out)
 if not args.silent:
     print('combined successfully!')
 
-outpath = os.path.abspath(os.path.join(directory, os.pardir)) + '/' + directory + '.swc'
+outpath = args.out if args.out else os.path.abspath(os.path.join(directory, os.pardir)) + '/' + directory + '.swc'
 if  args.view:  
         from rivuletpy.utils.io import loadswc
         from rivuletpy.swc import SWC
