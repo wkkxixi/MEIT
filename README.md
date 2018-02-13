@@ -291,7 +291,7 @@ The build-time and runtime dependencies of Rivuletpy are:
 ## Issues / questions / pull requests
 
 Issues should be reported to the
-[Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
+[MEIT github repository issue tracker](https://github.com/wkkxixi/rivuletpy/issues).
 The ability and speed with which issues can be resolved depends on how complete and
 succinct the report is. For this reason, it is recommended that reports be accompanied
 with a minimal but self-contained code sample that reproduces the issue, the observed and
@@ -299,7 +299,7 @@ expected output, and if possible, the commit ID of the version used. If reportin
 regression, the commit ID of the change that introduced the problem is also extremely valuable
 information.
 
-Questions are also welcomed in the [Rivuletpy github repository issue tracker](https://github.com/RivuletStudio/rivuletpy/issues).
+Questions are also welcomed in the [MEIT github repository issue tracker](https://github.com/wkkxixi/rivuletpy/issues).
 If you put on a `question` label. We consider every question as an issue since it means we should have made things clearer/easier for the users.
 
 Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
