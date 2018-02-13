@@ -66,19 +66,7 @@ activated. We will see three ways to install `Rivuletpy`
 $ virtualenv -p python3 riv
 $ . riv/bin/activate
 ```
-### 1. Clone the repository for MEIT
 
-```
-(riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
-(riv)$ cd rivuletpy
-(riv)$ pip3 install -e .
-```
-
-This installs `Rivuletpy` into your `virtualenv` in "editable" mode. That means changes
-made to the source code are seen by the installation. To install in read-only mode, omit
-the `-e`.
-
-Files in folder `scikit` are downloaded from https://anaconda.org/pranathi/scikit-fmm. You need to mannually put these files into your virtualenv `riv/lib/python3.4/site-packages`.
 
 ### 2. Setup the dependencies
 To install rivuletpy with pip, you need to install the following packages manually beforehand since some dependencies of rivuletpy uses them in their setup scripts
@@ -88,6 +76,8 @@ To install rivuletpy with pip, you need to install the following packages manual
 * `cython-0.27.3`
 * `tqdm-4.19.5-py`
 * `tifffile-0.9.0-np111py34_0`
+* `scikit-image-0.12.3`
+* `scikit-fmm-0.0.9`
 * `PyWavelets-0.5.2`
 * `pyglet-1.3.1`
 * `Pillow-5.0.0`
@@ -98,11 +88,20 @@ To install rivuletpy with pip, you need to install the following packages manual
 (riv)$ pip install numpy scipy matplotlib cython 
 (riv)$ conda install -c conda-forge tqdm 
 (riv)$ conda install tifffile -c conda-forge
+(riv)$ conda install scikit-image
+(riv)$ pip install scikit-fmm
 (riv)$ pip install PyWavelets
 (riv)$ pip install pyglet
 (riv)$ pip install Pillow
 ```
 
+
+### 1. Clone the repository for MEIT
+
+```
+(riv)$ git clone https://github.com/wkkxixi/rivuletpy.git
+(riv)$ cd rivuletpy
+```
 
 
 ## Test Installation
