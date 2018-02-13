@@ -81,16 +81,16 @@ class R2Tracer(Tracer):
         # Check the traceability of this block
         whole = (starting_pt.xmax() - starting_pt.xmin()) * \
             (starting_pt.ymax() - starting_pt.ymin()) * self._img.shape[2]
-        sub = self._check[starting_pt.xmin():starting_pt.xmax(
-        ), starting_pt.ymin():starting_pt.ymax(), :].sum()
+        sub = self._check[int(starting_pt.xmin()):int(starting_pt.xmax(
+        )), int(starting_pt.ymin()):int(starting_pt.ymax()), :].sum()
         if sub / whole > 0.99:
             return None, None
         else:
-            self._check[starting_pt.xmin():starting_pt.xmax(
-            ), starting_pt.ymin():starting_pt.ymax(), :] = 1
+            self._check[int(starting_pt.xmin()):int(starting_pt.xmax(
+            )), int(starting_pt.ymin()):int(starting_pt.ymax()), :] = 1
 
-        img = self._img[starting_pt.xmin():starting_pt.xmax(),
-                        starting_pt.ymin():starting_pt.ymax(), :]
+        img = self._img[int(starting_pt.xmin()):int(starting_pt.xmax(
+        )), int(starting_pt.ymin()):int(starting_pt.ymax()), :]
 
         self._bimg = (img > self._threshold).astype('int')  # Segment image
         # Check the percentage of foreground points in this block
@@ -262,8 +262,8 @@ class R2Tracer(Tracer):
             self._tt < 0, self._bimg > 0).sum()
 
         self._coverage = self._cover_ctr_new / self._nforeground
-        if not self._silent:
-            self._pbar.update(self._cover_ctr_new - self._cover_ctr_old)
+        # if not self._silent:
+        #     self._pbar.update(self._cover_ctr_new - self._cover_ctr_old)
         self._cover_ctr_old = self._cover_ctr_new
 
     def _make_grad(self):
@@ -300,8 +300,8 @@ class R2Tracer(Tracer):
         else:
             #if not self._silent: print('--FM...')
             marchmap = np.ones(self._bimg.shape)
-            marchmap[self._soma.centroid[0],
-                     self._soma.centroid[1], self._soma.centroid[2]] = -1
+            marchmap[int(self._soma.centroid[0]),
+                     int(self._soma.centroid[1]), int(self._soma.centroid[2])] = -1
             self._t = skfmm.travel_time(marchmap, speed, dx=5e-3)
 
     def _make_speed(self, dt):
@@ -378,9 +378,9 @@ class R2Tracer(Tracer):
         swc = SWC(self._soma, self._starting_pt, self._t, self._cropx,
                   self._cropy, self._img.shape[0:2])
 
-        if not self._silent:
-            self._pbar = tqdm(total=math.floor(
-                self._nforeground * self._target_coverage))
+        # if not self._silent:
+        #     self._pbar = tqdm(total=math.floor(
+        #         self._nforeground * self._target_coverage))
 
         # Loop for all branches
         found_tips = []
@@ -394,14 +394,14 @@ class R2Tracer(Tracer):
                 if self._coverage == prev_coverage:
                     return swc, found_tips
             prev_coverage = self._coverage
-           
+
             srcpt = np.asarray(np.unravel_index(
                 self._tt.argmax(), self._tt.shape)).astype('float64')
             if prev_srcpt is not None:
                 if srcpt[0] == prev_srcpt[0] and srcpt[1] == prev_srcpt[1] and srcpt[2] == prev_srcpt[2]:
                     return swc, found_tips
             prev_srcpt = srcpt
-           
+
 
             branch = R2Branch()
             branch.add(srcpt, 1., 1.)
@@ -409,7 +409,7 @@ class R2Tracer(Tracer):
             # Erase the source point just in case
             self._tt[math.floor(srcpt[0]), math.floor(
                 srcpt[1]), math.floor(srcpt[2])] = -2
-            
+
             keep = True
 
             # Loop for 1 back-tracking iteration
@@ -463,7 +463,7 @@ class R2Tracer(Tracer):
                         break
 
             self._erase(branch)
-    
+
             # Add to SWC if it was decided to be kept
             if keep:
                 pidx = None

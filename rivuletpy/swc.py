@@ -106,9 +106,9 @@ class SWC(object):
 
                 self._empty_face[pos] = 1
 
-                tvalue = self._tmap[p[0], p[1], p[2]] - self._tmap[self._source.xyz(
-                )[0], self._source.xyz()[1], self._source.xyz()[2]] + self._source.tvalue()
-                
+                tvalue = self._tmap[int(p[0]), int(p[1]), int(p[2])] - self._tmap[int(self._source.xyz(
+                )[0]), int(self._source.xyz()[1]), int(self._source.xyz()[2])] + self._source.tvalue()
+
                 p_of_next_area = np.asarray([p[0], p[1], p[2]])
                 if pos == 0:
                     p_of_next_area[0] = my_boundary[1] - 1 - my_boundary[0]
@@ -230,7 +230,7 @@ class SWC(object):
 
     def match(self, pos, radius):
         '''
-        Find the closest ground truth node 
+        Find the closest ground truth node
         '''
 
         nodes = self._data[:, 2:5]

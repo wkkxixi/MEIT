@@ -33,7 +33,7 @@ import skfmm
 class Soma(object):
     def __init__(self):
         self.centroid = None
-        self.radius = 0 
+        self.radius = 0
         self.mask = None
 
     def simple_mask(self, bimg):
@@ -44,7 +44,7 @@ class Soma(object):
 
         # Make a ball like mask with 2 X somaradius
         ballvolume = np.zeros(bimg.shape)
-        ballvolume[self.centroid[0], self.centroid[1], self.centroid[2]] = 1
+        ballvolume[int(self.centroid[0]), int(self.centroid[1]), int(self.centroid[2])] = 1
         stt = generate_binary_structure(3, 1)
         for i in range(math.ceil(self.radius * 2.5)):
             ballvolume = binary_dilation(ballvolume, structure=stt)
@@ -77,7 +77,7 @@ class Soma(object):
             bimg = bimg.astype('int')  # Segment
             # Return the signed distance from the zero contour of the array bimg
             # the voxel in the center has greater value => soma
-            dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT 
+            dt = skfmm.distance(bimg, dx=1.1)  # Boundary DT
 
             # somaradius : the approximate value of
             # soma radius estimated from distance transform
