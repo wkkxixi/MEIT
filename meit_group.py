@@ -7,8 +7,7 @@ from pathlib import Path
 import traceback
 from scipy.ndimage.interpolation import zoom
 import argparse
-import warnings
-warnings.filterwarnings("ignore")
+
 
 parser = argparse.ArgumentParser(description='Arguments to perform the MEIT tracing algorithm on a group of images.')
 parser.add_argument(

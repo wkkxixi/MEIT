@@ -7,8 +7,7 @@ from rivuletpy.tip import Tip
 from rivuletpy.utils.folderinfo import *
 from scipy.ndimage.interpolation import zoom
 import argparse
-import warnings
-warnings.filterwarnings("ignore")
+
 
 def boundary_constructor(x0, x1, y0, y1, z0, z1, f):
 
