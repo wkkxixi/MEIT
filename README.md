@@ -44,7 +44,7 @@ $ conda create -n riv python=3.4
 $ source activate riv
 ```
 
-### 0B. Setup the Anaconda environment (HPC)
+### 0B. Setup the environment (HPC)
 ```
 $ module load python3/3.4.3
 $ pyvenv riv python=python3
@@ -74,6 +74,7 @@ To run MEIT, you need to install the following packages manually beforehand
 ```
 
 ### 1B. Setup the dependencies (HPC)
+```
 (riv)$ pip3 install --upgrade pip==9.0.1
 (riv)$ pip3 install tqdm==4.19.5
 (riv)$ pip3 install scikit-image==0.12.3
@@ -82,6 +83,7 @@ To run MEIT, you need to install the following packages manually beforehand
 (riv)$ pip3 install PyWavelets==0.5.2
 (riv)$ pip3 install pyglet==1.3.1
 (riv)$ pip3 install cython==0.27.3
+```
 
 ### 2. Clone the repository for MEIT
 
