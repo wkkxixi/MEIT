@@ -5,6 +5,7 @@ import fnmatch
 import multiprocessing as mp
 import shutil
 import h5py
+
 def loadimg(file):
     if file.endswith('.mat'):
         filecont = sio.loadmat(file)
@@ -104,7 +105,7 @@ with open('/Volumes/dh/heng_wang/RES(853x537x153)/info.txt', 'a') as f:
     writetiff3d('/Volumes/dh/heng_wang/RES(853x537x153)/0_1_2_3_combine.tif', img4)
 
 '''
-'''
+
 def cropz_worker(folder, y, x):
     crop_z = os.listdir(folder+y+'/'+x)
     img_z = None
@@ -127,8 +128,9 @@ def cropz_worker(folder, y, x):
     #         f.write(folder+y+'/'+x+'/' + x + '_z.tif\n')
     print(folder+y+'/'+x+'/' + x + '_z.tif Done!' )
 
-def cropz(resolution):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+def cropz(folder, resolution):
+
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     for y in crop_y:
         if len(y) != 6:
@@ -139,15 +141,15 @@ def cropz(resolution):
             print(str(x))
             if len(x) != 13:
                 continue
-            # if os.path.exists(folder+y+'/'+x+'/' + x + '_z.tif'):
-            #     continue
-            print('constructing: '+folder+y+'/'+x+'/' + x + '_z.tif')
+            if os.path.exists(folder+y+'/'+x+'/' + x + '_z.tif'):
+                continue
             pool.apply_async(cropz_worker, args=(folder, y, x))
         pool.close()
         pool.join()
-'''     
-def cropz(resolution):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+
+'''
+def cropz(folder, resolution):
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     for y in crop_y:
         if len(y) != 6:
@@ -177,8 +179,8 @@ def cropz(resolution):
                     f.write(folder+y+'/'+x+'\n')
             else:
                 writetiff3d(folder+y+'/'+x+'/' + x + '_z.tif',img_z)
+'''
 
-'''     
 def cropx_worker(folder, y):
     crop_x = os.listdir(folder+y)
     img_x = None
@@ -202,8 +204,8 @@ def cropx_worker(folder, y):
     writetiff3d(folder+y+'/'+ y + '_x.tif',img_x) 
     print(folder+y+'/'+ y + '_x.tif')  
 
-def cropx(resolution):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+def cropx(folder, resolution):
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     pool = mp.Pool()
     for y in crop_y:
@@ -217,9 +219,10 @@ def cropx(resolution):
     pool.close()
     pool.join()
 
+
 '''
-def cropx(resolution):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+def cropx(folder, resolution):
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     for y in crop_y:
         if len(y) != 6:
@@ -248,11 +251,11 @@ def cropx(resolution):
                         img_x = np.append(img_x, tmp, axis=0)
             f.write('-------\n'+str(img_x.shape) + '\n')
         writetiff3d(folder+y+'/'+ y + '_x.tif',img_x)
-
+'''
         
 
-def cropy(resolution):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+def cropy(folder, resolution):
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     img = None
     count = 0
@@ -310,8 +313,8 @@ def cropy(resolution):
 #     pool.close()   
 #     pool.join()
 
-def checkz(resolution, val):
-    folder = '/Volumes/dh/heng_wang/' + resolution + '/'
+def checkz(folder, resolution, val):
+    folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     with open(folder + 'check_abnormal_tif_file2.txt', 'w') as f:
         for y in crop_y:
@@ -336,6 +339,7 @@ def checkz(resolution, val):
 
 
 
+
 def cropy_batch(resolution, batch):
     folder = '/Volumes/dh/heng_wang/' + resolution + '/'
     crop_y = os.listdir(folder)
@@ -347,10 +351,23 @@ def cropy_batch(resolution, batch):
                 continue
             print(str(count) + ': ' + y)  
             crop_x = os.listdir(folder+y)
+
+def cropy_batch(folder, resolution, batch):
+    folder = folder + resolution + '/'
+    crop_y = os.listdir(folder)
+    img = None
+    count = 1
+    with open(folder + '_info.txt', 'a') as f:
+        for y in crop_y:
+            if len(y) != 6:
+                continue
+            print(str(count) + ': ' + y)
+            crop_x = os.listdir(folder + y)
             for x in crop_x:
                 if not fnmatch.fnmatch(x, y + '_x.tif'):
                     continue
                 print(x)
+
                 tmp = loadimg(folder+y+'/'+y + '_x.tif')
                 f.write(str(tmp.shape) + '\n')
                 if img is not None:
@@ -364,18 +381,39 @@ def cropy_batch(resolution, batch):
                 f.write('and the shape is ' + str(img.shape) + '\n-----\n')
             count += 1
         
-    
+                tmp = loadimg(folder + y + '/' + y + '_x.tif')
+                f.write(str(tmp.shape) + '\n')
+                if img is not None:
+                    img = np.append(tmp, img, axis=1)
+                else:
+                    img = tmp
+            if count % batch == 0:
+                writetiff3d(folder + resolution + '_whole_' + str(count/batch) + '.tif', img)
+                img = None
+                f.write('-----\nbatch ' + str(count / batch) + ': ' + folder + resolution + '_whole_' + str(
+                    count / batch) + '.tif has been saved\n')
+                f.write('and the shape is ' + str(img.shape) + '\n-----\n')
+            count += 1
+        if img is not None:
+            writetiff3d(folder + resolution + '_whole_lucky' + '.tif', img)
+            f.write('-----the last lucky one: ' + folder + resolution + '_whole_lucky' + '.tif has been saved\n')
+            f.write('and the shape is ' + str(img.shape) + '\n-----\n')
 
 def group_files(folder, resolution):
     folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
     count = 1
+
     new_folder = '/Users/wonh/Desktop/' + resolution + '_y'
+
+    new_folder = folder +'pieces_on_y'
+
     os.makedirs(new_folder)
     for y in crop_y:
         if len(y) != 6:
             continue
         print(str(count) + ': ' + y)
+
         # crop_x = os.listdir(folder + y)
         # for x in crop_x:
         #     if fnmatch.fnmatch(x, y + '_x.tif'):
@@ -447,3 +485,18 @@ def sober(folder, resolution):
 # checkz('RES(3412x2150x615)', 205)
 # cropx('RES(6825x4301x1230)')
 group_files('/Volumes/dh/heng_wang/', 'RES(6825x4301x1230)')
+
+        crop_x = os.listdir(folder + y)
+        for x in crop_x:
+            if fnmatch.fnmatch(x, y + '_x.tif'):
+                shutil.copy(folder + y + '/' +x, new_folder)
+                print(str(count) + ': ' + x)
+                break
+        count += 1
+
+
+group_files('/media/siqi/dh/heng_wang/', 'RES(6825x4301x1230)')
+# checkz('RES(3412x2150x615)', 205)
+# cropx('RES(6825x4301x1230)')
+# '/media/siqi/dh/heng_wang/'
+
