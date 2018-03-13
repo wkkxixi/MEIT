@@ -399,6 +399,35 @@ def cropy_batch(folder, resolution, batch):
             f.write('-----the last lucky one: ' + folder + resolution + '_whole_lucky' + '.tif has been saved\n')
             f.write('and the shape is ' + str(img.shape) + '\n-----\n')
 
+def make_room_hd(folder, resolution):
+    folder = folder + resolution + '/'
+    crop_y = os.listdir(folder)
+
+    for y in crop_y:   
+        if len(y) != 6:
+            continue  
+        print(y)
+        crop_x = os.listdir(folder+y)
+        for x in crop_x:
+            if fnmatch.fnmatch(x, '*_x.tif') or fnmatch.fnmatch(x, '*_info.txt'):
+                os.remove(folder+y+'/' + x)
+                print('delete ' + folder+y+'/' + x)
+                continue
+            if len(x) != 13:
+                continue
+            print(x)
+            crop_z = os.listdir(folder+y+'/'+x)
+            for z in crop_z:
+                if fnmatch.fnmatch(z, '*.tif') and len(z) == 24:
+                    os.remove(folder+y+'/' + x + '/' + z)
+                    continue
+                if fnmatch.fnmatch(z, '*_info.txt'):
+                    os.remove(folder+y+'/' + x + '/' + z)
+                    print('delete ' + folder+y+'/' + x + '/' + z)
+                    continue
+                
+
+
 def group_files(folder, resolution):
     folder = folder + resolution + '/'
     crop_y = os.listdir(folder)
