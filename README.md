@@ -299,7 +299,7 @@ Pull requests are definitely welcomed! Before you make a pull requests, please k
 
 The `rtrace` command is powered by the latest neuron tracing algorithm Rivulet2 (Preprint hosted on BioArxiv):
 
-Siqi Liu, Donghao Zhang, Yang Song, Hanchuan Peng, Weidong Cai, "Automated 3D Neuron Tracing with Precise Branch Erasing and Confidence Controlled Back-Tracking", bioRxiv 109892; doi: https://doi.org/10.1101/109892
+Siqi Liu, Donghao Zhang, Yang Song, Hanchuan Peng, Weidong Cai, "Automated 3D Neuron Tracing with Precise Branch Erasing and Confidence Controlled Back-Tracking", IEEE Transactions on Medical Imaging, doi: 10.1109/TMI.2018.2833420
 
 The predecessor Rivulet1 was published on Neuroinformatics:
 
