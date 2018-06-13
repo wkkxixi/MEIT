@@ -5,6 +5,7 @@ import multiprocessing as mp
 import shutil
 import csv
 from io import *
+import os
 
 
 def readtif(jsonfilepath):
