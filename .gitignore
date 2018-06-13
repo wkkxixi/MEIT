@@ -13,3 +13,4 @@ scripts/recon_my_tif.sh*
 src/*
 *.swc
 *.tif
+.idea/
