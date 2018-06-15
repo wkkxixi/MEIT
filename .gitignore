@@ -14,3 +14,4 @@ src/*
 *.swc
 *.tif
 .idea/
+neutube_accuracy.txt
