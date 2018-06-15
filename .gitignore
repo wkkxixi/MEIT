@@ -15,3 +15,5 @@ src/*
 *.tif
 .idea/
 neutube_accuracy.txt
+TreMap_accuracy.txt
+MOST_accuracy.txt

@@ -32,13 +32,33 @@ with open(goldenfolderpath + 'jsoninfo/detailedinfo.txt') as f:
 			neutubecmd = vaa3dpath + " -x neuTube -f neutube_trace -i " + img_path
 			counter_im = counter_im + 1
 			snakecmd = vaa3dpath + " -x snake -f snake_trace -i " + img_path
-			TreMapcmd = vaa3dpath + " -x TReMap -f trace_mip -i " + img_path + " -p 0 1 " + str(threshold) + " 0 1 0 5"
+			TreMapcmd = vaa3dpath + " -x TReMap -f trace_mip -i " + img_path + " -p 0 1 " + str(threshold) + " 0 0 1 2"
+			MOSTcmd = vaa3dpath + " -x MOST -f MOST_trace -i " + img_path + " -p 1 " + str(threshold)
+			APP2cmd = vaa3dpath + " -x MOST -f MOST_trace -i "
 			# os.system(neutubecmd)
 			# os.system(snakecmd)
 			# os.system(TreMapcmd)
+			# os.system(MOSTcmd)
 			gtswcpath = goldenfolderpath + os.path.splitext(filename)[0] + '.swc'
 			neutubeswcpath = goldenfolderpath + filename + '_neutube.swc'
-			gtswc = loadswc(gtswcpath)
-			neutubeswc = loadswc(neutubeswcpath)
-			prf_accuracy, swc_compare_3_2 = precision_recall(neutubeswc, gtswc)
-			print(filename, prf_accuracy[0], prf_accuracy[1], prf_accuracy[2])
+			TreMapswcpath = goldenfolderpath + filename + '_XY_3D_TreMap.swc'
+			MOSTswcpath = goldenfolderpath + filename + '_MOST.swc'
+
+			# gtswc = loadswc(gtswcpath)
+			# neutubeswc = loadswc(neutubeswcpath)
+
+			# print(filename)
+			# TreMapswc = loadswc(TreMapswcpath)
+			if filename == 'fruitflylarvae/7.tif':
+				print(filename)
+			elif filename == 'zebrafishlarveRGC/1.tif':
+				print(filename)
+			else:
+				MOSTswc = loadswc(MOSTswcpath)
+				gtswc = loadswc(gtswcpath)
+				MOST_accuracy, _ = precision_recall(MOSTswc, gtswc)
+				print(filename, MOST_accuracy[0], MOST_accuracy[1], MOST_accuracy[2])
+			# print(TreMapswc.shape)
+			# neutube_accuracy, _ = precision_recall(neutubeswc, gtswc)
+			# TreMap_accuracy, _ = precision_recall(TreMapswc, gtswc)
+			# print(filename, TreMap_accuracy[0], TreMap_accuracy[1], TreMap_accuracy[2])
