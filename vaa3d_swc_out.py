@@ -48,16 +48,23 @@ with open(goldenfolderpath + 'jsoninfo/detailedinfo.txt') as f:
 			# neutubeswc = loadswc(neutubeswcpath)
 
 			# print(filename)
-			# TreMapswc = loadswc(TreMapswcpath)
-			if filename == 'fruitflylarvae/7.tif':
-				print(filename)
-			elif filename == 'zebrafishlarveRGC/1.tif':
-				print(filename)
-			else:
-				MOSTswc = loadswc(MOSTswcpath)
-				gtswc = loadswc(gtswcpath)
-				MOST_accuracy, _ = precision_recall(MOSTswc, gtswc)
-				print(filename, MOST_accuracy[0], MOST_accuracy[1], MOST_accuracy[2])
+			TreMapswc = loadswc(TreMapswcpath)
+			# print('the shape of TreMapswc is : ', TreMapswc.shape[0])
+			if TreMapswc.shape[0] == 0:
+				# print('we found the problemed file')
+				TreMapcmd = vaa3dpath + " -x TReMap -f trace_mip -i " + img_path + " -p 0 1 " + '10' + " 0 0 1 0"
+				# os.system(TreMapcmd)
+				TreMapswc = loadswc(TreMapswcpath)
+				print(TreMapswc.shape)
+			# if filename == 'fruitflylarvae/7.tif':
+			# 	print(filename)
+			# elif filename == 'zebrafishlarveRGC/1.tif':
+			# 	print(filename)
+			# else:
+			# 	MOSTswc = loadswc(MOSTswcpath)
+			# 	gtswc = loadswc(gtswcpath)
+			# 	MOST_accuracy, _ = precision_recall(MOSTswc, gtswc)
+			# 	print(filename, MOST_accuracy[0], MOST_accuracy[1], MOST_accuracy[2])
 			# print(TreMapswc.shape)
 			# neutube_accuracy, _ = precision_recall(neutubeswc, gtswc)
 			# TreMap_accuracy, _ = precision_recall(TreMapswc, gtswc)
