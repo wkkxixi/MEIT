@@ -31,43 +31,42 @@ with open(goldenfolderpath + 'jsoninfo/detailedinfo.txt') as f:
 			imgid = os.path.splitext(imgname)[0]
 # 			threshold = int(item.split('\t')[1])
 # 			img_path = goldenfolderpath + filename
-# 			neutubecmd = vaa3dpath + " -x neuTube -f neutube_trace -i " + img_path
 # 			counter_im = counter_im + 1
+			# neutube command generation
+# 			neutubecmd = vaa3dpath + " -x neuTube -f neutube_trace -i " + img_path
+			# os.system(neutubecmd)
+			# neutubeswcpath = goldenfolderpath + filename + '_neutube.swc'
+			# neutubeswc = loadswc(neutubeswcpath)
+			# gtswcpath = goldenfolderpath + os.path.splitext(filename)[0] + '.swc'
+			# gtswc = loadswc(gtswcpath)
+
+			# snake comparison is not completed due to large memory consumption
 # 			snakecmd = vaa3dpath + " -x snake -f snake_trace -i " + img_path
+			# os.system(snakecmd)
+
 # 			TreMapcmd = vaa3dpath + " -x TReMap -f trace_mip -i " + img_path + " -p 0 1 " + str(threshold) + " 0 0 1 2"
 # 			MOSTcmd = vaa3dpath + " -x MOST -f MOST_trace -i " + img_path + " -p 1 " + str(threshold)
 # 			APP2swcpath = goldenfolderpath + filename + '_APP2.swc'
 # 			APP2cmd = vaa3dpath + " -x vn2 -f app2 -i " + img_path + " -p NULL 0 " + str(threshold) + " 1 1 1 0 5" + " -o " + APP2swcpath
 # 			APP2rmcmd = "rm " + img_path + ".swc"
 # 			APP2rmcmd = "rm " + img_path + "_ini.swc"
-# 			# os.system(neutubecmd)
-# 			# os.system(snakecmd)
 # 			# os.system(TreMapcmd)
 # 			# os.system(MOSTcmd)
 # 			# os.system(APP2cmd)
 # 			# os.system(APP2rmcmd)
 			gtswcpath = goldenfolderpath + os.path.splitext(filename)[0] + '.swc'
-# 			neutubeswcpath = goldenfolderpath + filename + '_neutube.swc'
 # 			TreMapswcpath = goldenfolderpath + filename + '_XY_3D_TreMap.swc'
 # 			MOSTswcpath = goldenfolderpath + filename + '_MOST.swc'
 			APP2swcpath_option1 = goldenfolderpath + os.path.dirname(filename) + '/app2/' + imgname +'.app2.swc'
 			APP2swcpath_option2 = goldenfolderpath + os.path.dirname(filename) + '/app2/' + imgname + '_APP2.swc'
-			# print('filename: ', filename)
-			# print('os.path.dirname(filename): ', os.path.dirname(filename))
-			# print('basename: ', os.path.basename(filename))
-			# print('imgid is ', imgid)
-			gtswc = loadswc(gtswcpath)
+
 			if os.path.exists(APP2swcpath_option1):
 				APP2swc = loadswc(APP2swcpath_option1)
-				# print('option1 has been called')
 			elif os.path.exists(APP2swcpath_option2):
 				APP2swc = loadswc(APP2swcpath_option2)
-				# print('option2 has been called')
 			smartswcpath_option1 = goldenfolderpath + os.path.dirname(filename) + '/smart/' + imgname + '.app2.swc'
 			smartswcpath_option2 = goldenfolderpath + os.path.dirname(filename) + '/smart/' + imgname + '.app2.swc'
 
-# 			# neutubeswc = loadswc(neutubeswcpath)
-# 			# print(filename)
 # 			# TreMapswc = loadswc(TreMapswcpath)
 # 			# print('the shape of TreMapswc is : ', TreMapswc.shape[0])
 # 			# if TreMapswc.shape[0] == 0:
@@ -94,12 +93,6 @@ with open(goldenfolderpath + 'jsoninfo/detailedinfo.txt') as f:
 			print(filename, APP2_accuracy[0], APP2_accuracy[1], APP2_accuracy[2])
 # 			# print(filename, TreMap_accuracy[0], TreMap_accuracy[1], TreMap_accuracy[2])
 
-#janeliafly2 smart
-# for i in range(3, 13):
-# 	# img_path = goldenfolderpath + 'janeliafly2/' + str(i) +'.tif'
-# 	img_path = goldenfolderpath + 'fruitflylarvae/' + str(i) + '.tif'
-# 	smartcmd = vaa3dpath + " -x smartTrace -f smartTrace -i " + img_path
-# 	os.system(smartcmd)
 
 # friutflylarvae_threshold = [76, 46, 71, 34, 107, 43, 77,  91, 16, 109, 50, 126]
 # friutflylarvae_order =     [1,  2,  3,  4,   5,  6,  7,   8,  9,  10, 11, 12]
@@ -119,4 +112,9 @@ with open(goldenfolderpath + 'jsoninfo/detailedinfo.txt') as f:
 # app2cmd = vaa3dpath + " -x vn2 -f app2 -i " + img_path + " -p NULL 0 " + str(app2_threshold) + " 1 1 1 0 2" + " -o " + APP2swcpath
 # os.system(app2cmd)
 
-
+#janeliafly2 smart
+# for i in range(3, 13):
+# 	# img_path = goldenfolderpath + 'janeliafly2/' + str(i) +'.tif'
+# 	img_path = goldenfolderpath + 'fruitflylarvae/' + str(i) + '.tif'
+# 	smartcmd = vaa3dpath + " -x smartTrace -f smartTrace -i " + img_path
+# 	os.system(smartcmd)
