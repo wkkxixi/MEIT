@@ -31,7 +31,7 @@
 # MEIT
 Memory and Time Efficient 3D Neuron Morphology Tracing in Large-scale Images
 
-Heng Wang, Donghao Zhang, Yang Song, Siqi Liu, Rong Gao,Hanchuan Peng, Weidong Cai
+Heng Wang, Donghao Zhang, Yang Song, Siqi Liu, Rong Gao, Hanchuan Peng, Weidong Cai
 
 Accepted to be appeared on Digital Image Computing: Techniques and Applications (DICTA 2018)
 
