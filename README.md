@@ -29,10 +29,13 @@
  -->
 
 # MEIT
+Memory and Time Efficient 3D Neuron Morphology Tracing in Large-scale Images
 
-Large scale 3D Neuron Tracing/Neuron reconstruction in Python for 3D microscopic images powered by the Rivulet2 algorithm. Pain-free Install & Use in 5 mins.
+Heng Wang, Donghao Zhang, Yang Song, Siqi Liu, Rong Gao,Hanchuan Peng, Weidong Cai
 
-Rivuletpy is a Python3 toolkit for automatically reconstructing single neuron models from 3D microscopic image stacks. It is actively maintained by the RivuletStudio @ University of Sydney, AU. The project was initiated in the [BigNeuron project](https://alleninstitute.org/bigneuron/about/)
+Accepted to be appeared on Digital Image Computing: Techniques and Applications (DICTA 2018)
+
+Large scale 3D Neuron Tracing/Neuron reconstruction in Python for 3D microscopic images.
 
 
 ## Installation
@@ -294,8 +297,9 @@ If you put on a `question` label. We consider every question as an issue since i
 Pull requests are definitely welcomed! Before you make a pull requests, please kindly create an issue first to discuss the optimal solution.
 
 
-## Rivulet2
+## Rivulet
 
+[Rivuletpy](https://github.com/RivuletStudio/rivuletpy) is a Python3 toolkit for automatically reconstructing single neuron models from 3D microscopic image stacks. It is actively maintained by the RivuletStudio @ University of Sydney, AU. The project was initiated in the [BigNeuron project](https://alleninstitute.org/bigneuron/about/)
 
 The `rtrace` command is powered by the latest neuron tracing algorithm Rivulet2 (Preprint hosted on BioArxiv):
 
